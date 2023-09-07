@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 
 @RestController
-public class git PeopleController {
+public class PeopleController {
 
     // Note that there is only ONE instance of PeopleController in 
     // Springboot system.
@@ -36,6 +36,7 @@ public class git PeopleController {
     // Note: To LIST, we use the GET method
     @GetMapping("/people")
     public @ResponseBody HashMap<String,Person> getAllPersons() {
+
         return peopleList;
     }
 
