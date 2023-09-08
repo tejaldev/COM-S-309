@@ -15,6 +15,6 @@ class WelcomeController {
     @GetMapping("/")
     public String welcome() {
 
-        return "Hello people and welcome to Globe Gathered";
+        return "Hello people and welcome to Globe Gatherer!";
     }
 }

@@ -1,72 +1,64 @@
 package coms309.people;
 
-
 /**
  * Provides the Definition/Structure for the people row
  *
  * @author Vivek Bengre
  */
-
 public class Person {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String telephone;
-    public Person(){
-        
-    }
-    public Person(String firstName, String lastName, String address, String telephone){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.telephone = telephone;
+    private String fullName;
+    private String country;
+    private String state;
+    private String zipCode;
+
+    public Person() {
+
     }
 
-    public String getFirstName() {
-
-        return this.firstName;
+    public Person(String fullName, String country, String state, String zipCode) {
+        this.fullName = fullName;
+        this.country = country;
+        this.state = state;
+        this.zipCode = zipCode;
     }
 
-    public void setFirstName(String firstName) {
-
-        this.firstName = firstName;
+    public String getFullName() {
+        return this.fullName;
     }
 
-    public String getLastName() {
-
-        return this.lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public void setLastName(String lastName) {
-
-        this.lastName = lastName;
+    public String getCountry() {
+        return this.country;
     }
 
-    public String getAddress() {
-
-        return this.address;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public void setAddress(String address) {
-
-        this.address = address;
+    public String getState() {
+        return this.state;
     }
 
-    public String getTelephone() {
-
-        return this.telephone;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setTelephone(String telephone) {
+    public String getZipCode() {
+        return this.zipCode;
+    }
 
-        this.telephone = telephone;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     @Override
     public String toString() {
-        return firstName + " " 
-               + lastName + " "
-               + address + " "
-               + telephone;
+        return fullName + " "
+                + country + " "
+                + state + " "
+                + zipCode;
     }
 }
