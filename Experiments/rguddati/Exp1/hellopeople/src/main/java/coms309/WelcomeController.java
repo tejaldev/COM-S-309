@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Simple Hello World Controller to display the string returned
  *
- * @author Vivek Bengre
+ * @author Raghuram Guddati
  */
 
 @RestController
@@ -15,6 +15,6 @@ class WelcomeController {
     @GetMapping("/")
     public String welcome() {
 
-        return "Hello people and welcome to COMS 309";
+        return "Hello people and welcome to Globe Gathered";
     }
 }
