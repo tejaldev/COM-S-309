@@ -25,6 +25,20 @@ public class PeopleController {
     // Springboot system.
     HashMap<String, Person> peopleList = new  HashMap<>();
 
+    //constructor to initialize and add 4 team members
+    public PeopleController() {
+        Person Ella = new Person("Ella", "Cook", "123 Apple Rd", "123-456-7890");
+        Person Raghu = new Person("Raghuram", "Guddati", "456 Bakers Ln", "111-222-3333");
+        Person Tanvi = new Person("Tanvi", "Mehetre", "789 Chef cir", "112-233-4455");
+        Person Tejal = new Person("Tejal", "Deveshetwar", "012 Decorators Drive", "123-456-7889");
+
+        peopleList.put(Ella.getFirstName(), Ella);
+        peopleList.put(Raghu.getFirstName(), Raghu);
+        peopleList.put(Tanvi.getFirstName(), Tanvi);
+        peopleList.put(Tejal.getFirstName(), Tejal);
+    }
+
+
     //CRUDL (create/read/update/delete/list)
     // use POST, GET, PUT, DELETE, GET methods for CRUDL
 
