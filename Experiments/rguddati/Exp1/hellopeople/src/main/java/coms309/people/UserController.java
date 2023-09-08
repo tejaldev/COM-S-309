@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/users")
     public @ResponseBody String pp() {
 
-        return "Go to http://localhost:8080/users/all instead";
+        return "To view all Users: go to http://localhost:8080/users/all instead";
     }
 
     @GetMapping("/users/all")
