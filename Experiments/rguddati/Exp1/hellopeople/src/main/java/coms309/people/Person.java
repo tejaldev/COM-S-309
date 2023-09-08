@@ -3,7 +3,7 @@ package coms309.people;
 /**
  * Provides the Definition/Structure for the people row
  *
- * @author Vivek Bengre
+ * @author Raghuram Guddati
  */
 public class Person {
     private String fullName;

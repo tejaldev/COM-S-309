@@ -50,7 +50,7 @@ public class PeopleController {
     @PostMapping("/users/add/")
     public @ResponseBody String createPerson(@RequestBody Person person) {
         System.out.println(person);
-        peopleList.put(person.getFullName(), person); // Change to getFullName()
+        peopleList.put(person.getFullName(), person);
         return "New user " + person.getFullName() + " Added!";
     }
 
