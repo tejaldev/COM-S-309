@@ -1,4 +1,4 @@
-package coms309.people;
+package coms309.users;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
