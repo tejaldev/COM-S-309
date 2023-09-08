@@ -18,8 +18,8 @@ import java.util.HashMap;
  */
 
 @RestController
-public class PeopleController {
-    HashMap<String, Person> peopleList = new  HashMap<>();
+public class UserController {
+    HashMap<String, User> userList = new  HashMap<>();
 
     // CRUDL (create/read/update/delete/list)
     // Use POST, GET, PUT, DELETE, GET methods for CRUDL
@@ -43,14 +43,15 @@ public class PeopleController {
     }
 
     @GetMapping("/users/all/")
-    public @ResponseBody HashMap<String, Person> getAllPersons() {
-        return peopleList;
+    public @ResponseBody HashMap<String, User> getAllPersons() {
+
+        return userList;
     }
 
     @PostMapping("/users/add/")
-    public @ResponseBody String createPerson(@RequestBody Person person) {
+    public @ResponseBody String createPerson(@RequestBody User person) {
         System.out.println(person);
-        peopleList.put(person.getFullName(), person);
+        userList.put(person.getFullName(), person);
         return "New user " + person.getFullName() + " Added!";
     }
 
@@ -61,8 +62,8 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
     @GetMapping("/users/{fullName}")
-    public @ResponseBody Person getPerson(@PathVariable String fullName) {
-        Person p = peopleList.get(fullName);
+    public @ResponseBody User getPerson(@PathVariable String fullName) {
+        User p = userList.get(fullName);
         return p;
     }
 
@@ -74,9 +75,9 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
     @PutMapping("/users/update/{fullName}")
-    public @ResponseBody Person updatePerson(@PathVariable String fullName, @RequestBody Person p) {
-        peopleList.replace(fullName, p);
-        return peopleList.get(fullName);
+    public @ResponseBody User updatePerson(@PathVariable String fullName, @RequestBody User p) {
+        userList.replace(fullName, p);
+        return userList.get(fullName);
     }
 
     // DELETE Operation (DELETE)
@@ -85,8 +86,8 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To DELETE we use DELETE method
     @DeleteMapping("/users/delete/{fullName}")
-    public @ResponseBody HashMap<String, Person> deletePerson(@PathVariable String fullName) {
-        peopleList.remove(fullName);
-        return peopleList;
+    public @ResponseBody HashMap<String, User> deletePerson(@PathVariable String fullName) {
+        userList.remove(fullName);
+        return userList;
     }
 }
