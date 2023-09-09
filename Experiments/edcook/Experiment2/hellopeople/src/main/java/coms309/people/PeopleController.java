@@ -1,16 +1,11 @@
 package coms309.people;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Controller used to showcase Create and Read from a LIST
@@ -66,6 +61,23 @@ public class PeopleController {
         return "New person "+ person.getFirstName() + " Saved";
     }
 
+    @GetMapping("/people/last-name/{lastName}")
+    public @ResponseBody Person getPersonLast(@PathVariable String lastName) {
+        System.out.println("Searching for last name: " + lastName);
+
+        for (Person person : peopleList.values()){
+            if (person.getLastName().equalsIgnoreCase(lastName)){
+                System.out.println("Found: " + person);
+                return person;
+            }
+        }
+
+        System.out.println("Person not found for last name: " + lastName);
+        return null;
+    }
+
+
+
     // THIS IS THE READ OPERATION
     // Springboot gets the PATHVARIABLE from the URL
     // We extract the person from the HashMap.
@@ -73,7 +85,7 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
     @GetMapping("/people/{firstName}")
-    public @ResponseBody Person getPerson(@PathVariable String firstName) {
+    public @ResponseBody Person getPersonFirst(@PathVariable String firstName) {
         Person p = peopleList.get(firstName);
         return p;
     }
