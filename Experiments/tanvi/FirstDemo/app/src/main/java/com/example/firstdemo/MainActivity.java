@@ -29,14 +29,15 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Username.getText().toString().equals("user") && Password.getText().toString().equals("1234"))
-                {
-                    Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this, "Failed Log in", Toast.LENGTH_SHORT).show();
-                }
+//                if(Username.getText().toString().equals("user") && Password.getText().toString().equals("1234"))
+//                {
+//                    Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//                    Toast.makeText(MainActivity.this, "Failed Log in", Toast.LENGTH_SHORT).show();
+//                }
+                openActivitylogin();
             }
         });
         SignUpText.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
+    }
+
+    public void openActivitylogin(){
+        Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
     }
     public void openActivity2(){
         Intent intent = new Intent(this, Activity2_login_next.class);
