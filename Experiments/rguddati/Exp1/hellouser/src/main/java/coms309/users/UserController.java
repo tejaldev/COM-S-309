@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import java.util.HashMap;
 
@@ -34,18 +38,32 @@ public class UserController {
     }
 
     @PostMapping("/users/add")
-    public @ResponseBody String createUser(@RequestBody User person) {
-        System.out.println(person);
-        userList.put(person.getFullName(), person);
-        return "New user " + person.getFullName() + " Added!";
+    public @ResponseBody String createUser(@RequestBody User user) {
+        System.out.println(user);
+        userList.put(user.getFullName(), user);
+        return "New user " + user.getFullName() + " Added!";
     }
 
 
-    @GetMapping("/users/{fullName}")
-    public @ResponseBody User getUser(@PathVariable String fullName) {
+    @GetMapping("/users/search/{fullName}")
+    public @ResponseBody User getUserFull(@PathVariable String fullName) {
         User p = userList.get(fullName);
         return p;
     }
+    @GetMapping("/users/search/country/{country}")
+    public @ResponseBody List<User> getUsersByCountry(@PathVariable String country) {
+        List<User> usersWithCountry = new ArrayList<>();
+
+        for (Map.Entry<String, User> entry : userList.entrySet()) {
+            User user = entry.getValue();
+            if (user.getCountry().equals(country)) {
+                usersWithCountry.add(user);
+            }
+        }
+
+        return usersWithCountry;
+    }
+
 
 
     @PutMapping("/users/update/{fullName}")
