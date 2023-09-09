@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:padding="24dp"/>
+        android:padding="24dp">
     
     <TextView
         android:layout_width="match_parent"
@@ -48,8 +48,51 @@
         android:layout_marginTop="40dp"/>
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/Password"
+        android:background="@drawable/custom_editing"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="8dp"
+        android:hint="Password"
+        android:padding="8dp"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/cardview_dark_background"
+        android:layout_marginTop="40dp"/>
 
-</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/loginButton"
+        android:text="Login"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/black"
+        app:cornerRadius = "20dp"/>
+
+
+
+
+
+    </LinearLayout>
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Sign Up Now!"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:id="@+id/SignUpText"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
 
 
 
