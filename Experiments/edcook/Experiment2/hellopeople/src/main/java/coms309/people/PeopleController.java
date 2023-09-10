@@ -66,19 +66,15 @@ public class PeopleController {
    }
 
    @GetMapping("/people/uid/{personUid}/friends")
-   public ResponseEntity<List<Person>> getFriends(@PathVariable String personUid){
+   public @ResponseBody List<Person> getFriends(@PathVariable String personUid){
+        List<Person> friends = new ArrayList<>();
         Person person = peopleList.get(personUid);
 
         if(person != null){
-            List<Person> friends = person.getFriends();
-            if(!friends.isEmpty()){
-                return ResponseEntity.ok(friends);
-            }
-            else{
-                return ResponseEntity.noContent().build();
-            }
+            friends = person.getFriends();
         }
-        return ResponseEntity.notFound().build();
+
+        return friends;
    }
 
     @PostMapping("/people/{personUid}/add-visited-places")
