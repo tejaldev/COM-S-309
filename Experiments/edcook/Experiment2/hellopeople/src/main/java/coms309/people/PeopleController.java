@@ -6,10 +6,8 @@ import org.springframework.http.ResponseEntity;
 
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
+
 import coms309.people.Place;
 
 /**
@@ -28,9 +26,10 @@ public class PeopleController {
     //constructor to initialize and add 4 team members
     public PeopleController() {
         Person Ella = new Person("ae11fab7","Ella", "Cook", "123 Apple Rd", "123-456-7890");
-        Ella.addVisitedPlace(new Place("New York", "USA", "10001", "40.7128° N, 74.0060° W", LocalDate.of(2022, 1, 15)));
-        Ella.addPlaceToTravel(new Place("Paris", "France", "75001", "48.8566° N, 2.3522° E", LocalDate.of(2023, 5, 20)));
-
+        Ella.addVisitedPlace(new Place("0c75a098","New York", "USA", "10001", "40.7128° N, 74.0060° W", LocalDate.of(2022, 1, 15)));
+        Ella.addPlaceToTravel(new Place("d04898ed","Paris", "France", "75001", "48.8566° N, 2.3522° E", LocalDate.of(2023, 5, 20)));
+        Ella.addPlaceToTravel(new Place("933f8674","Sydney", "Australia", "2000", "33.8688° S, 151.2093° E", LocalDate.of(2023, 12, 16)));
+        Ella.addVisitedPlace(new Place("76e26f9c","Sydney", "Australia", "2000", "33.8688° S, 151.2093° E", LocalDate.of(2023, 12, 6)));
 
         Person Raghu = new Person("e0bbc4ae","Raghuram", "Guddati", "456 Bakers Ln", "111-222-3333");
 //        Raghu.addVisitedPlace(new Place("San Francisco", "USA", "94102", "37.7749° N, 122.4194° W", LocalDate.of(2021, 7, 10)));
@@ -39,7 +38,6 @@ public class PeopleController {
         Person Tanvi = new Person("13666999","Tanvi", "Mehetre", "789 Chef cir", "112-233-4455");
 //        Tanvi.addVisitedPlace(new Place("Dublin", "Ireland", "N/A", "53.3498° N, 6.2603° W", LocalDate.of(2022, 2, 21)));
 //        Tanvi.addPlaceToTravel(new Place("Chicago", "USA", "60007", "41.8781° N, 87.6298° W", LocalDate.of(2024, 1, 1)));
-        Tanvi.addFriend(Ella);
 
         Person Tejal = new Person("6d494194","Tejal", "Deveshetwar", "012 Decorators Drive", "123-456-7889");
 //        Tejal.addVisitedPlace(new Place("Denver", "USA", "80014", "39.7392° N, 104.9903° W", LocalDate.of(2020, 9, 18)));
@@ -49,6 +47,10 @@ public class PeopleController {
         peopleList.put(Raghu.getFirstName(), Raghu);
         peopleList.put(Tanvi.getFirstName(), Tanvi);
         peopleList.put(Tejal.getFirstName(), Tejal);
+
+        Tanvi.addFriend(Ella);
+        Tanvi.addFriend(Tejal);
+//        Tanvi.removeFriend(Ella);
     }
 
    @GetMapping("/people/uid/{personUid}")
@@ -67,69 +69,120 @@ public class PeopleController {
 
    @GetMapping("/people/uid/{personUid}/friends")
    public @ResponseBody List<Person> getFriends(@PathVariable String personUid){
-        List<Person> friends = new ArrayList<>();
-        Person person = peopleList.get(personUid);
 
-        if(person != null){
-            friends = person.getFriends();
-        }
-
-        return friends;
+       for(Person person : peopleList.values()){
+           if(person.getUid().equalsIgnoreCase(personUid)){
+               Person p = person;
+               List<Person> friends = new ArrayList<>(p.getFriends());
+               return friends;
+           }
+       }
+     return Collections.emptyList();
    }
 
-    @PostMapping("/people/{personUid}/add-visited-places")
-    public ResponseEntity<Void> addVisitedPlace(@PathVariable String personUid, @RequestBody Place place){
-        Person person = peopleList.get(personUid);
-        if(person != null){
-            person.addVisitedPlace(place);
-            return ResponseEntity.ok().build();
+    @GetMapping("/people/uid/{personUid}/visited-places")
+    public @ResponseBody List<Place> getVisitedPlaces(@PathVariable String personUid)
+    {
+        for (Person person : peopleList.values())
+        {
+            if (person.getUid().equalsIgnoreCase(personUid))
+            {
+                Person p = person;
+                List<Place> visitedPlaces = new ArrayList<>(p.getVisitedPlaces());
+                return visitedPlaces;
+            }
         }
-        else{
-            return ResponseEntity.notFound().build();
+        return Collections.emptyList();
+    }
+
+    @PostMapping("/people/uid/{personUid}/add-visited-place")
+    public @ResponseBody List<Place> addVisitedPlace(@PathVariable String personUid, @PathVariable String placeID){
+        for (Person person : peopleList.values())
+        {
+            if (person.getUid().equalsIgnoreCase(personUid))
+            {
+                Person p = person;
+                List<Place> visitedPlaces = new ArrayList<>(p.getVisitedPlaces());
+                for(Place place : visitedPlaces){
+                    if(!place.getPlaceID().equalsIgnoreCase(placeID)){
+                        visitedPlaces.add(place);
+                    }
+                }
+                return visitedPlaces;
+            }
         }
+        return Collections.emptyList();
+    }
+
+
+    @DeleteMapping("/people/uid/{personUid}/remove-visited-place/{placeID}")
+    public @ResponseBody List<Place> deleteVisitedPlace(@PathVariable String personUid, @PathVariable String placeID){
+        for (Person person : peopleList.values())
+        {
+            if (person.getUid().equalsIgnoreCase(personUid))
+            {
+                Person p = person;
+                List<Place> visitedPlaces = new ArrayList<>(p.getVisitedPlaces());
+                for(Place place : visitedPlaces){
+                    if(place.getPlaceID().equalsIgnoreCase(placeID)){
+                        visitedPlaces.remove(place);
+                        return visitedPlaces;
+                    }
+                }
+            }
+        }
+        return Collections.emptyList();
+    }
+
+    @GetMapping("/people/uid/{personUid}/places-to-travel")
+    public @ResponseBody List<Place> getPlacesToTravel(@PathVariable String personUid){
+        for (Person person : peopleList.values()) {
+            if (person.getUid().equalsIgnoreCase(personUid)) {
+                Person p = person;
+                List<Place> placesToTravel = new ArrayList<>(p.getPlacesToTravel());
+                return placesToTravel;
+            }
+        }
+        return Collections.emptyList();
     }
 
     @PostMapping("/people/{personUid}/add-places-to-travel")
-    public ResponseEntity<Void> addPlaceToTravel(@PathVariable String personUid, @RequestBody Place place){
-        Person person = peopleList.get(personUid);
-        if(person != null){
-            person.addPlaceToTravel(place);
-            return ResponseEntity.ok().build();
-        }
-        else{
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/people/uid/{personUid}/visited-places")
-    public ResponseEntity<List<Place>> getVisitedPlaces(@PathVariable String personUid){
-        Person person = peopleList.get(personUid);
-        if(person != null){
-            List<Place> visitedPlaces = person.getVisitedPlaces();
-
-            if(!visitedPlaces.isEmpty()) {
-                return ResponseEntity.ok(person.getVisitedPlaces());
-            }
-            else{
-                return ResponseEntity.noContent().build();
+    public @ResponseBody List<Place> addPlaceToTravel(@PathVariable String personUid, @PathVariable String placeID){
+        for (Person person : peopleList.values())
+        {
+            if (person.getUid().equalsIgnoreCase(personUid))
+            {
+                Person p = person;
+                List<Place> placesToTravel = new ArrayList<>(p.getPlacesToTravel());
+                for(Place place : placesToTravel){
+                    if(!place.getPlaceID().equalsIgnoreCase(placeID)){
+                        placesToTravel.add(place);
+                    }
+                }
+                return placesToTravel;
             }
         }
-        else{
-            return ResponseEntity.noContent().build();
-        }
+        return Collections.emptyList();
     }
 
-    @PostMapping("/people/uid/{personUid}/places-to-travel")
-    public ResponseEntity<List<Place>> getPlacesToTravel(@PathVariable String personUid){
-        Person person = peopleList.get(personUid);
-        if(person != null){
-            return ResponseEntity.ok(person.getPlacesToTravel());
+    @DeleteMapping("/people/uid/{personUid}/remove-place-to-travel/{placeID}")
+    public @ResponseBody List<Place> deletePlaceToTravel(@PathVariable String personUid, @PathVariable String placeID){
+        for (Person person : peopleList.values())
+        {
+            if (person.getUid().equalsIgnoreCase(personUid))
+            {
+                Person p = person;
+                List<Place> placesToTravel = new ArrayList<>(p.getPlacesToTravel());
+                for(Place place : placesToTravel){
+                    if(place.getPlaceID().equalsIgnoreCase(placeID)){
+                        placesToTravel.remove(place);
+                        return placesToTravel;
+                    }
+                }
+            }
         }
-        else{
-            return ResponseEntity.notFound().build();
-        }
+        return Collections.emptyList();
     }
-
 
     //CRUDL (create/read/update/delete/list)
     // use POST, GET, PUT, DELETE, GET methods for CRUDL
@@ -173,8 +226,6 @@ public class PeopleController {
         return null;
     }
 
-
-
     // THIS IS THE READ OPERATION
     // Springboot gets the PATHVARIABLE from the URL
     // We extract the person from the HashMap.
@@ -211,5 +262,6 @@ public class PeopleController {
         peopleList.remove(firstName);
         return peopleList;
     }
+
 }
 
