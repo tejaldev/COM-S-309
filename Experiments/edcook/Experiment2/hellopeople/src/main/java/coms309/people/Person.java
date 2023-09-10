@@ -3,6 +3,7 @@ package coms309.people;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Provides the Definition/Structure for the people row
@@ -20,7 +21,19 @@ public class Person {
     private List<Place> placesToTravel;
 
     public Person(String firstName, String lastName, String address, String telephone){
-        this.uid = UIDGenerator.generateUID();
+        this.uid = UUID.randomUUID().toString();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.telephone = telephone;
+        this.visitedPlaces = new ArrayList<>();
+        this.placesToTravel = new ArrayList<>();
+    }
+
+    // Constructor that allows specifying the UID
+    public Person(String uid, String firstName, String lastName, String address, String telephone) {
+        // Use the provided UID or generate a random one if null
+        this.uid = (uid != null) ? uid : UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -33,10 +46,10 @@ public class Person {
         return uid;
     }
 
-    // don't think this will be necessary with UIDGenerator
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+    // don't think this will be necessary with UUID
+//    public void setUid(String uid) {
+//        this.uid = uid;
+//    }
 
     public List<Place> getVisitedPlaces() {
         return this.visitedPlaces;
@@ -88,11 +101,11 @@ public class Person {
 
     @Override
     public String toString() {
-        return firstName + " " 
+        return uid + " "
+                + firstName + " "
                + lastName + " "
                + address + " "
                + telephone + " "
-                + uid + " "
                 + visitedPlaces + " "
                 + placesToTravel;
     }

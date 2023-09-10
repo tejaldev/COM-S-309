@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 import coms309.people.Place;
 
@@ -26,19 +27,19 @@ public class PeopleController {
 
     //constructor to initialize and add 4 team members
     public PeopleController() {
-        Person Ella = new Person("Ella", "Cook", "123 Apple Rd", "123-456-7890");
-//        Ella.addVisitedPlace(new Place("New York", "USA", "10001", "40.7128° N, 74.0060° W", LocalDate.of(2022, 1, 15)));
-//        Ella.addPlaceToTravel(new Place("Paris", "France", "75001", "48.8566° N, 2.3522° E", LocalDate.of(2023, 5, 20)));
+        Person Ella = new Person("ae11fab7","Ella", "Cook", "123 Apple Rd", "123-456-7890");
+        Ella.addVisitedPlace(new Place("New York", "USA", "10001", "40.7128° N, 74.0060° W", LocalDate.of(2022, 1, 15)));
+        Ella.addPlaceToTravel(new Place("Paris", "France", "75001", "48.8566° N, 2.3522° E", LocalDate.of(2023, 5, 20)));
 
-        Person Raghu = new Person("Raghuram", "Guddati", "456 Bakers Ln", "111-222-3333");
+        Person Raghu = new Person("e0bbc4ae","Raghuram", "Guddati", "456 Bakers Ln", "111-222-3333");
 //        Raghu.addVisitedPlace(new Place("San Francisco", "USA", "94102", "37.7749° N, 122.4194° W", LocalDate.of(2021, 7, 10)));
 //        Raghu.addPlaceToTravel(new Place("Tokyo", "Japan", "100-0001", "35.6762° N, 139.6503° E", LocalDate.of(2023, 8, 5)));
 
-        Person Tanvi = new Person("Tanvi", "Mehetre", "789 Chef cir", "112-233-4455");
+        Person Tanvi = new Person("13666999","Tanvi", "Mehetre", "789 Chef cir", "112-233-4455");
 //        Tanvi.addVisitedPlace(new Place("Dublin", "Ireland", "N/A", "53.3498° N, 6.2603° W", LocalDate.of(2022, 2, 21)));
 //        Tanvi.addPlaceToTravel(new Place("Chicago", "USA", "60007", "41.8781° N, 87.6298° W", LocalDate.of(2024, 1, 1)));
 
-        Person Tejal = new Person("Tejal", "Deveshetwar", "012 Decorators Drive", "123-456-7889");
+        Person Tejal = new Person("6d494194","Tejal", "Deveshetwar", "012 Decorators Drive", "123-456-7889");
 //        Tejal.addVisitedPlace(new Place("Denver", "USA", "80014", "39.7392° N, 104.9903° W", LocalDate.of(2020, 9, 18)));
 //        Tejal.addPlaceToTravel(new Place("Miami", "USA", "33101", "25.7617° N, 80.1918° W", LocalDate.of(2023, 12, 15)));
 
@@ -48,52 +49,70 @@ public class PeopleController {
         peopleList.put(Tejal.getFirstName(), Tejal);
     }
 
-   @GetMapping("/{personUid}")
-   public Person getPersonByUid(@PathVariable String personUid){
-        Person person = peopleList.get(personUid);
-        if(person != null){
-            return ResponseEntity.ok(person).getBody();
-        }
-        else{
-            return (Person) ResponseEntity.notFound(); //not sure about if this will work ...
-        }
+   @GetMapping("/people/uid/{personUid}")
+   public @ResponseBody Person getPersonUid(@PathVariable String personUid){
+        System.out.println("Searching for person with UID " + personUid);
+
+       for(Person person : peopleList.values()){
+           if(person.getUid().equalsIgnoreCase(personUid)){
+               System.out.println("Found: " + person);
+               return person;
+           }
+       }
+       System.out.println("Person not found for uid: " + personUid);
+       return null;
    }
 
-    @PostMapping("/{personUid}/add-visited-places")
-    public void addVisitedPlace(@PathVariable String personUid, @RequestBody Place place){
+    @PostMapping("/people/{personUid}/add-visited-places")
+    public ResponseEntity<Void> addVisitedPlace(@PathVariable String personUid, @RequestBody Place place){
         Person person = peopleList.get(personUid);
         if(person != null){
             person.addVisitedPlace(place);
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("{personUid}/add-places-to-travel")
-    public void addPlaceToTravel(@PathVariable String personUid, @RequestBody Place place){
+    @PostMapping("/people/{personUid}/add-places-to-travel")
+    public ResponseEntity<Void> addPlaceToTravel(@PathVariable String personUid, @RequestBody Place place){
         Person person = peopleList.get(personUid);
         if(person != null){
             person.addPlaceToTravel(place);
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("{personUid}/visited-places")
-    public List<Place> getPlacesTraveled(@PathVariable String personUid){
+    @GetMapping("/people/uid/{personUid}/visited-places")
+    public ResponseEntity<List<Place>> getVisitedPlaces(@PathVariable String personUid){
         Person person = peopleList.get(personUid);
         if(person != null){
-            return person.getVisitedPlaces();
+            List<Place> visitedPlaces = person.getVisitedPlaces();
+
+            if(!visitedPlaces.isEmpty()) {
+                return ResponseEntity.ok(person.getVisitedPlaces());
+            }
+            else{
+                return ResponseEntity.noContent().build();
+            }
         }
         else{
-            return null;
+            return ResponseEntity.noContent().build();
         }
     }
 
-    @PostMapping("{personUid}/places-to-travel")
-    public List<Place> getPlacesToTravel(@PathVariable String personUid){
+    @PostMapping("/people/uid/{personUid}/places-to-travel")
+    public ResponseEntity<List<Place>> getPlacesToTravel(@PathVariable String personUid){
         Person person = peopleList.get(personUid);
         if(person != null){
-            return person.getPlacesToTravel();
+            return ResponseEntity.ok(person.getPlacesToTravel());
         }
         else{
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -148,7 +167,7 @@ public class PeopleController {
     // springboot automatically converts Person to JSON format when we return it
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
-    @GetMapping("/people/{firstName}")
+    @GetMapping("/people/first-name/{firstName}")
     public @ResponseBody Person getPersonFirst(@PathVariable String firstName) {
         Person p = peopleList.get(firstName);
         return p;
@@ -161,7 +180,7 @@ public class PeopleController {
     // Here we are returning what we sent to the method
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
-    @PutMapping("/people/{firstName}")
+    @PutMapping("/people/update-by-first/{firstName}")
     public @ResponseBody Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
         peopleList.replace(firstName, p);
         return peopleList.get(firstName);
@@ -173,7 +192,7 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
     
-    @DeleteMapping("/people/{firstName}")
+    @DeleteMapping("/people/remove-by-first/{firstName}")
     public @ResponseBody HashMap<String, Person> deletePerson(@PathVariable String firstName) {
         peopleList.remove(firstName);
         return peopleList;

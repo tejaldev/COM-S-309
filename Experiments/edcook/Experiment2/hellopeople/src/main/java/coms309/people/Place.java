@@ -16,4 +16,20 @@ public class Place {
         this.coordinates = coordinates;
         this.dateTraveled = dateTraveled;
     }
+
+    public String getCity(){
+        return city;
+    }
+
+    public String getCountry(){
+        return country;
+    }
+
+    public String getZipcode(){
+        return zipcode;
+    }
+
+    public LocalDate getDateTraveled(){
+        return dateTraveled;
+    }
 }
