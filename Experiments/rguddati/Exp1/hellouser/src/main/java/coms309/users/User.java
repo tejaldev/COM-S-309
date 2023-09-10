@@ -10,15 +10,20 @@ public class User {
     private String country;
     private String state;
     private String zipCode;
+    private String email;
+    private String contactInfo;
 
     public User() {
     }
 
-    public User(String fullName, String country, String state, String zipCode) {
+    public User(String fullName, String country, String state, String zipCode, String email,
+                String contactInfo) {
         this.fullName = fullName;
         this.country = country;
         this.state = state;
         this.zipCode = zipCode;
+        this.email = email;
+        this.contactInfo = contactInfo;
     }
 
     public String getFullName() {
@@ -53,11 +58,29 @@ public class User {
         this.zipCode = zipCode;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContactInfo() {
+        return this.contactInfo;
+    }
+
+    public void setContactInfo() {
+        this.contactInfo = contactInfo;
+    }
+
     @Override
     public String toString() {
         return fullName + " "
                 + country + " "
                 + state + " "
-                + zipCode;
+                + zipCode + " "
+                + email + " "
+                + contactInfo;
     }
 }
