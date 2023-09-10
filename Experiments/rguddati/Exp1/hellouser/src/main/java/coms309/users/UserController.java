@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/users")
     public @ResponseBody String pp() {
 
-        return "To view all Users: go to http://localhost:8080/users/all instead";
+        return "To view all Users : <button><a href=\"http://localhost:8080/users/all\"> click here</a></button>";
     }
 
     @GetMapping("/users/all")
@@ -51,7 +51,7 @@ public class UserController {
         return p;
     }
     @GetMapping("/users/search/country/{country}")
-    public @ResponseBody List<User> getUsersByCountry(@PathVariable String country) {
+    public @ResponseBody Map<String, Object> getUsersByCountry(@PathVariable String country) {
         List<User> usersWithCountry = new ArrayList<>();
 
         for (Map.Entry<String, User> entry : userList.entrySet()) {
@@ -61,8 +61,50 @@ public class UserController {
             }
         }
 
-        return usersWithCountry;
+        Map<String, Object> result = new HashMap<>();
+        result.put("users", usersWithCountry);
+        result.put("Number of people in this country", usersWithCountry.size());
+
+        return result;
     }
+
+    @GetMapping("/users/search/state/{state}")
+    public @ResponseBody Map<String, Object> getUsersByState(@PathVariable String state) {
+        List<User> usersWithState = new ArrayList<>();
+
+        for (Map.Entry<String, User> entry : userList.entrySet()) {
+            User user = entry.getValue();
+            if (user.getState().equals(state)) {
+                usersWithState.add(user);
+            }
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("users", usersWithState);
+        result.put("Number of people in this state", usersWithState.size());
+
+        return result;
+    }
+
+    @GetMapping("/users/search/zip/{zipCode}")
+    public @ResponseBody Map<String, Object> getUsersByZipCode(@PathVariable String zipCode) {
+        List<User> usersWithZipCode = new ArrayList<>();
+
+        for (Map.Entry<String, User> entry : userList.entrySet()) {
+            User user = entry.getValue();
+            if (user.getZipCode().equals(zipCode)) {
+                usersWithZipCode.add(user);
+            }
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("users", usersWithZipCode);
+        result.put("Number of people in this zipCode", usersWithZipCode.size());
+
+        return result;
+    }
+
+
 
 
 
