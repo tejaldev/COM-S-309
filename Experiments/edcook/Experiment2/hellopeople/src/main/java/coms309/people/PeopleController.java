@@ -31,6 +31,7 @@ public class PeopleController {
         Ella.addVisitedPlace(new Place("New York", "USA", "10001", "40.7128° N, 74.0060° W", LocalDate.of(2022, 1, 15)));
         Ella.addPlaceToTravel(new Place("Paris", "France", "75001", "48.8566° N, 2.3522° E", LocalDate.of(2023, 5, 20)));
 
+
         Person Raghu = new Person("e0bbc4ae","Raghuram", "Guddati", "456 Bakers Ln", "111-222-3333");
 //        Raghu.addVisitedPlace(new Place("San Francisco", "USA", "94102", "37.7749° N, 122.4194° W", LocalDate.of(2021, 7, 10)));
 //        Raghu.addPlaceToTravel(new Place("Tokyo", "Japan", "100-0001", "35.6762° N, 139.6503° E", LocalDate.of(2023, 8, 5)));
@@ -38,6 +39,7 @@ public class PeopleController {
         Person Tanvi = new Person("13666999","Tanvi", "Mehetre", "789 Chef cir", "112-233-4455");
 //        Tanvi.addVisitedPlace(new Place("Dublin", "Ireland", "N/A", "53.3498° N, 6.2603° W", LocalDate.of(2022, 2, 21)));
 //        Tanvi.addPlaceToTravel(new Place("Chicago", "USA", "60007", "41.8781° N, 87.6298° W", LocalDate.of(2024, 1, 1)));
+        Tanvi.addFriend(Ella);
 
         Person Tejal = new Person("6d494194","Tejal", "Deveshetwar", "012 Decorators Drive", "123-456-7889");
 //        Tejal.addVisitedPlace(new Place("Denver", "USA", "80014", "39.7392° N, 104.9903° W", LocalDate.of(2020, 9, 18)));
@@ -61,6 +63,22 @@ public class PeopleController {
        }
        System.out.println("Person not found for uid: " + personUid);
        return null;
+   }
+
+   @GetMapping("/people/uid/{personUid}/friends")
+   public ResponseEntity<List<Person>> getFriends(@PathVariable String personUid){
+        Person person = peopleList.get(personUid);
+
+        if(person != null){
+            List<Person> friends = person.getFriends();
+            if(!friends.isEmpty()){
+                return ResponseEntity.ok(friends);
+            }
+            else{
+                return ResponseEntity.noContent().build();
+            }
+        }
+        return ResponseEntity.notFound().build();
    }
 
     @PostMapping("/people/{personUid}/add-visited-places")

@@ -19,6 +19,7 @@ public class Person {
     private String telephone;
     private List<Place> visitedPlaces;
     private List<Place> placesToTravel;
+    private List<Person> friends;
 
     public Person(String firstName, String lastName, String address, String telephone){
         this.uid = UUID.randomUUID().toString();
@@ -28,6 +29,7 @@ public class Person {
         this.telephone = telephone;
         this.visitedPlaces = new ArrayList<>();
         this.placesToTravel = new ArrayList<>();
+        this.friends = new ArrayList<>();
     }
 
     // Constructor that allows specifying the UID
@@ -40,6 +42,19 @@ public class Person {
         this.telephone = telephone;
         this.visitedPlaces = new ArrayList<>();
         this.placesToTravel = new ArrayList<>();
+        this.friends = new ArrayList<>();
+    }
+
+    public List<Person> getFriends(){
+        return friends;
+    }
+
+    public void addFriend(Person friend){
+        friends.add(friend);
+    }
+
+    public void removeFriend(Person friend){
+        friends.remove(friend);
     }
 
     public String getUid() {
