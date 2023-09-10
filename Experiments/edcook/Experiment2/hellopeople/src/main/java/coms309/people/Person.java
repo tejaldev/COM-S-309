@@ -22,7 +22,7 @@ public class Person {
     private List<Person> friends;
 
     public Person(String firstName, String lastName, String address, String telephone){
-        this.uid = UUID.randomUUID().toString();
+//        this.uid = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -49,6 +49,10 @@ public class Person {
         return friends;
     }
 
+    public void setFriends(List<Person> friends){
+        this.friends = friends;
+    }
+
     public void addFriend(Person friend){
         friends.add(friend);
     }
@@ -61,10 +65,7 @@ public class Person {
         return uid;
     }
 
-    // don't think this will be necessary with UUID
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
+
 
     public List<Place> getVisitedPlaces() {
         return this.visitedPlaces;
@@ -81,6 +82,8 @@ public class Person {
     public void addPlaceToTravel(Place place) {
         placesToTravel.add(place);
     }
+
+
 
     public String getFirstName() {
         return this.firstName;
@@ -122,6 +125,7 @@ public class Person {
                + address + " "
                + telephone + " "
                 + visitedPlaces + " "
-                + placesToTravel;
+                + placesToTravel + " "
+                + friends;
     }
 }
