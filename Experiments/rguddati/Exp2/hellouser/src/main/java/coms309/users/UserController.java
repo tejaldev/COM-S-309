@@ -105,9 +105,6 @@ public class UserController {
     }
 
 
-
-
-
     @PutMapping("/users/update/{fullName}")
     public @ResponseBody User updateUser(@PathVariable String fullName, @RequestBody User p) {
         userList.replace(fullName, p);
