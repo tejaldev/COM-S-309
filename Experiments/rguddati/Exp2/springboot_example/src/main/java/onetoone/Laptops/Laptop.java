@@ -12,7 +12,7 @@ import onetoone.Users.User;
 
 /**
  * 
- * @author Vivek Bengre
+ * @author Raghuram Guddati
  */ 
 
 @Entity
