@@ -38,9 +38,9 @@ class Main {
             User user1 = new User("John", "john@somemail.com");
             User user2 = new User("Jane", "jane@somemail.com");
             User user3 = new User("Justin", "justin@somemail.com");
-            Laptop laptop1 = new Laptop( 2.5, 4, 8, "Lenovo", 300);
-            Laptop laptop2 = new Laptop( 4.1, 8, 16, "Hp", 800);
-            Laptop laptop3 = new Laptop( 3.5, 32, 32, "Dell", 2300);  
+            Laptop laptop1 = new Laptop( "void", "Japan", "Tokyo", "sema", 60015);
+            Laptop laptop2 = new Laptop( "dera", "United States", "Iowa", "Ames", 50014);
+            Laptop laptop3 = new Laptop( "feals", "United States", "New York", "apple", 75642);
             user1.setLaptop(laptop1);
             user2.setLaptop(laptop2);
             user3.setLaptop(laptop3);            
