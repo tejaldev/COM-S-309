@@ -2,6 +2,7 @@ package onetoone.Users;
 
 import java.util.List;
 
+import onetoone.Locations.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import onetoone.Laptops.Laptop;
-import onetoone.Laptops.LaptopRepository;
+import onetoone.Locations.Location;
+import onetoone.Locations.LocationRepository;
 
 /**
  * 
@@ -28,7 +29,7 @@ public class UserController {
     UserRepository userRepository;
 
     @Autowired
-    LaptopRepository laptopRepository;
+    LocationRepository locationRepository;
 
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
@@ -61,13 +62,13 @@ public class UserController {
     }   
     
     @PutMapping("/users/{userId}/laptops/{laptopId}")
-    String assignLaptopToUser(@PathVariable int userId,@PathVariable int laptopId){
+    String assignLaptopToUser(@PathVariable int userId,@PathVariable int locationId){
         User user = userRepository.findById(userId);
-        Laptop laptop = laptopRepository.findById(laptopId);
-        if(user == null || laptop == null)
+        Location location = locationRepository.findById(locationId);
+        if(user == null || location == null)
             return failure;
-        laptop.setUser(user);
-        user.setLaptop(laptop);
+        location.setUser(user);
+        user.setLocation(location);
         userRepository.save(user);
         return success;
     }

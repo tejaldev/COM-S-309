@@ -1,4 +1,4 @@
-package onetoone.Laptops;
+package onetoone.Locations;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import onetoone.Users.User;
  */ 
 
 @Entity
-public class Laptop {
+public class Location {
     
     /* 
      * The annotation @ID marks the field below as the primary key for the table created by springboot
@@ -39,7 +39,7 @@ public class Laptop {
     @JsonIgnore
     private User user;
 
-    public Laptop(String placeName, String country, String state, String city, int zipcode) {
+    public Location(String placeName, String country, String state, String city, int zipcode) {
         this.placeName = placeName;
         this.country = country;
         this.state = state;
@@ -47,7 +47,7 @@ public class Laptop {
         this.zipcode = zipcode;
     }
 
-    public Laptop() {
+    public Location() {
     }
 
     // =============================== Getters and Setters for each field ================================== //

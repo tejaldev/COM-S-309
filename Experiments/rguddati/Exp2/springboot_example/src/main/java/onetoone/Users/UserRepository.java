@@ -16,5 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     void deleteById(int id);
 
-    User findByLaptop_Id(int id);
+    User findByLocation_Id(int id);
 }

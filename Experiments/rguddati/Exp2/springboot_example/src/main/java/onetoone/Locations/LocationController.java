@@ -1,4 +1,4 @@
-package onetoone.Laptops;
+package onetoone.Locations;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import onetoone.Users.UserRepository;
  */ 
 
 @RestController
-public class LaptopController {
+public class LocationController {
 
     @Autowired
-    LaptopRepository laptopRepository;
+    LocationRepository locationRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -33,43 +33,43 @@ public class LaptopController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/laptops/all")
-    List<Laptop> getAllLaptops(){
-        return laptopRepository.findAll();
+    @GetMapping(path = "/locations/all")
+    List<Location> getAllLocations(){
+        return locationRepository.findAll();
     }
 
-    @GetMapping(path = "/laptops/{id}")
-    Laptop getLaptopById(@PathVariable int id){
-        return laptopRepository.findById(id);
+    @GetMapping(path = "/locations/{id}")
+    Location getLocationById(@PathVariable int id){
+        return locationRepository.findById(id);
     }
 
-    @PostMapping(path = "/laptops/add")
-    String createLaptop(@RequestBody Laptop Laptop){
+    @PostMapping(path = "/locations/add")
+    String createLocation(@RequestBody Location Laptop){
         if (Laptop == null)
             return failure;
-        laptopRepository.save(Laptop);
+        locationRepository.save(Laptop);
         return success;
     }
 
-    @PutMapping(path = "/laptops/update/{id}")
-    Laptop updateLaptop(@PathVariable int id, @RequestBody Laptop request){
-        Laptop laptop = laptopRepository.findById(id);
+    @PutMapping(path = "/locations/update/{id}")
+    Location updateLocation(@PathVariable int id, @RequestBody Location request){
+        Location laptop = locationRepository.findById(id);
         if(laptop == null)
             return null;
-        laptopRepository.save(request);
-        return laptopRepository.findById(id);
+        locationRepository.save(request);
+        return locationRepository.findById(id);
     }
 
-    @DeleteMapping(path = "/laptops/delete/{id}")
-    String deleteLaptop(@PathVariable int id){
+    @DeleteMapping(path = "/locations/delete/{id}")
+    String deleteLocation(@PathVariable int id){
 
         // Check if there is an object depending on user and then remove the dependency
-        User user = userRepository.findByLaptop_Id(id);
-        user.setLaptop(null);
+        User user = userRepository.findByLocation_Id(id);
+        user.setLocation(null);
         userRepository.save(user);
 
         // delete the laptop if the changes have not been reflected by the above statement
-        laptopRepository.deleteById(id);
+        locationRepository.deleteById(id);
         return success;
     }
 }
