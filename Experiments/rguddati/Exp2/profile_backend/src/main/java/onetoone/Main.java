@@ -35,9 +35,9 @@ class Main {
     @Bean
     CommandLineRunner initUser(UserRepository userRepository, LocationRepository locationRepository) {
         return args -> {
-            User user1 = new User("John", "john@somemail.com");
-            User user2 = new User("Jane", "jane@somemail.com");
-            User user3 = new User("Justin", "justin@somemail.com");
+            User user1 = new User("John", "123", "I am a Java developer");
+            User user2 = new User("Jane", "456", "I am a C++ developer");
+            User user3 = new User("Justin", "789", "I am a Python developer");
             Location location1 = new Location( "void", "Japan", "Tokyo", "sema", 60015);
             Location location2 = new Location( "dera", "United States", "Iowa", "Ames", 50014);
             Location location3 = new Location( "feals", "United States", "New York", "apple", 75642);

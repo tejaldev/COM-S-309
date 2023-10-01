@@ -27,8 +27,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String emailId;
-    private boolean ifActive;
+    private String contact;
+    private String aboutMe;
 
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
@@ -40,10 +40,10 @@ public class User {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    public User(String name, String emailId) {
+    public User(String name, String contact, String aboutMe) {
         this.name = name;
-        this.emailId = emailId;
-        this.ifActive = true;
+        this.contact = contact;
+        this.aboutMe = aboutMe;
     }
 
     public User() {
@@ -67,20 +67,20 @@ public class User {
         this.name = name;
     }
 
-    public String getEmailId(){
-        return emailId;
+    public String getContact(){
+        return contact;
     }
 
-    public void setEmailId(String emailId){
-        this.emailId = emailId;
+    public void setContact(String emailId){
+        this.contact = emailId;
     }
 
-    public boolean getIsActive(){
-        return ifActive;
+    public String getAboutMe(){
+        return aboutMe;
     }
 
-    public void setIfActive(boolean ifActive){
-        this.ifActive = ifActive;
+    public void setAboutMe(String aboutMe){
+        this.aboutMe = aboutMe;
     }
 
     public Location getLocation(){
