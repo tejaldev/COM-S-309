@@ -4,20 +4,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import onetoone.Locations.Location;
-import onetoone.Locations.LocationRepository;
+import onetoone.Laptops.Laptop;
+import onetoone.Laptops.LaptopRepository;
 import onetoone.Users.User;
 import onetoone.Users.UserRepository;
 
 /**
  * 
- * @author Raghuram Guddati
+ * @author Vivek Bengre
  * 
  */ 
 
 @SpringBootApplication
-//@EnableJpaRepositories
+@EnableJpaRepositories
 class Main {
 
     public static void main(String[] args) {
@@ -28,22 +29,22 @@ class Main {
     /**
      * 
      * @param userRepository repository for the User entity
-     * @param locationRepository repository for the Laptop entity
+     * @param laptopRepository repository for the Laptop entity
      * Creates a commandLine runner to enter dummy data into the database
      * As mentioned in User.java just associating the Laptop object with the User will save it into the database because of the CascadeType
      */
     @Bean
-    CommandLineRunner initUser(UserRepository userRepository, LocationRepository locationRepository) {
+    CommandLineRunner initUser(UserRepository userRepository, LaptopRepository laptopRepository) {
         return args -> {
-            User user1 = new User("John", "123", "I am a Java developer");
-            User user2 = new User("Jane", "456", "I am a C++ developer");
-            User user3 = new User("Justin", "789", "I am a Python developer");
-            Location location1 = new Location( "void", "Japan", "Tokyo", "sema", 60015);
-            Location location2 = new Location( "dera", "United States", "Iowa", "Ames", 50014);
-            Location location3 = new Location( "feals", "United States", "New York", "apple", 75642);
-            user1.setLocation(location1);
-            user2.setLocation(location2);
-            user3.setLocation(location3);
+            User user1 = new User("John", "john@somemail.com");
+            User user2 = new User("Jane", "jane@somemail.com");
+            User user3 = new User("Justin", "justin@somemail.com");
+            Laptop laptop1 = new Laptop( 2.5, 4, 8, "Lenovo", 300);
+            Laptop laptop2 = new Laptop( 4.1, 8, 16, "Hp", 800);
+            Laptop laptop3 = new Laptop( 3.5, 32, 32, "Dell", 2300);  
+            user1.setLaptop(laptop1);
+            user2.setLaptop(laptop2);
+            user3.setLaptop(laptop3);            
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);

@@ -1,4 +1,4 @@
-package onetoone.Locations;
+package onetoone.Laptops;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +12,11 @@ import onetoone.Users.User;
 
 /**
  * 
- * @author Raghuram Guddati
+ * @author Vivek Bengre
  */ 
 
 @Entity
-public class Location {
+public class Laptop {
     
     /* 
      * The annotation @ID marks the field below as the primary key for the table created by springboot
@@ -25,11 +25,11 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String placeName;
-    private String country;
-    private String state;
-    private String city;
-    private int zipcode;
+    private double cpuClock;
+    private int cpuCores;
+    private int ram;
+    private String manufacturer;
+    private int cost;
 
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
@@ -39,15 +39,15 @@ public class Location {
     @JsonIgnore
     private User user;
 
-    public Location(String placeName, String country, String state, String city, int zipcode) {
-        this.placeName = placeName;
-        this.country = country;
-        this.state = state;
-        this.city = city;
-        this.zipcode = zipcode;
+    public Laptop( double cpuClock, int cpuCores, int ram, String manufacturer, int cost) {
+        this.cpuClock = cpuClock;
+        this.cpuCores = cpuCores;
+        this.ram = ram;
+        this.manufacturer = manufacturer;
+        this.cost = cost;
     }
 
-    public Location() {
+    public Laptop() {
     }
 
     // =============================== Getters and Setters for each field ================================== //
@@ -60,36 +60,36 @@ public class Location {
         this.id = id;
     }
 
-    public String getPlaceName(){
-        return placeName;
+    public double getCpuClock(){
+        return cpuClock;
     }
 
-    public void setPlaceName(String placeName){
-        this.placeName = placeName;
+    public void setCpuClock(double cpuClock){
+        this.cpuClock = cpuClock;
     }
 
-    public String getCountry(){
-        return country;
+    public int getCpuCores(){
+        return cpuCores;
     }
 
-    public void setCountry(String country){
-        this.country = country;
+    public void setCpuCores(int cpuCores){
+        this.cpuCores = cpuCores;
     }
 
-    public String getCity(){
-        return city;
+    public String getManufacturer(){
+        return manufacturer;
     }
 
-    public void setCity(String city){
-        this.city = city;
+    public void setManufacturer(String manufacturer){
+        this.manufacturer = manufacturer;
     }
 
-    public int getZipcode(){
-        return zipcode;
+    public int getCost(){
+        return cost;
     }
 
-    public void setZipcode(int zipcode){
-        this.zipcode = zipcode;
+    public void setCost(int cost){
+        this.cost = cost;
     }
 
     public User getUser(){
@@ -100,12 +100,12 @@ public class Location {
         this.user = user;
     }
 
-    public String getState(){
-        return state;
+    public int getRam(){
+        return ram;
     }
 
-    public void setState(String state){
-        this.state = state;
+    public void setRam(int ram){
+        this.ram = ram;
     }
 
 }

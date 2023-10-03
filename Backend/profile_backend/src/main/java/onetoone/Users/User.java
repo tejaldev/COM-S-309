@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import onetoone.Locations.Location;
+import onetoone.Laptops.Laptop;
 
 /**
  * 
- * @author Raghuram Guddati
+ * @author Vivek Bengre
  * 
  */ 
 
@@ -26,9 +26,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
-    private String contact;
-    private String aboutMe;
+    private String name;
+    private String emailId;
+    private boolean ifActive;
 
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
@@ -37,13 +37,13 @@ public class User {
      * @JoinColumn defines the ownership of the foreign key i.e. the user table will have a field called laptop_id
      */
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @JoinColumn(name = "laptop_id")
+    private Laptop laptop;
 
-    public User(String userName, String contact, String aboutMe) {
-        this.userName = userName;
-        this.contact = contact;
-        this.aboutMe = aboutMe;
+    public User(String name, String emailId) {
+        this.name = name;
+        this.emailId = emailId;
+        this.ifActive = true;
     }
 
     public User() {
@@ -59,36 +59,36 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName(){
-        return userName;
+    public String getName(){
+        return name;
     }
 
-    public void setUserName(String name){
-        this.userName = name;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public String getContact(){
-        return contact;
+    public String getEmailId(){
+        return emailId;
     }
 
-    public void setContact(String emailId){
-        this.contact = emailId;
+    public void setEmailId(String emailId){
+        this.emailId = emailId;
     }
 
-    public String getAboutMe(){
-        return aboutMe;
+    public boolean getIsActive(){
+        return ifActive;
     }
 
-    public void setAboutMe(String aboutMe){
-        this.aboutMe = aboutMe;
+    public void setIfActive(boolean ifActive){
+        this.ifActive = ifActive;
     }
 
-    public Location getLocation(){
-        return location;
+    public Laptop getLaptop(){
+        return laptop;
     }
 
-    public void setLocation(Location location){
-        this.location = location;
+    public void setLaptop(Laptop laptop){
+        this.laptop = laptop;
     }
     
 }
