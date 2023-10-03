@@ -6,23 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="b0f7411e-cadf-4212-87c9-141d76e03c84" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../../../Backend/profile_backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Backend/profile_backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/LocationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/LocationRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../profile_backend/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Locations/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Locations/LocationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Locations/LocationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Users/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Users/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/onetoone/Users/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot_example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot_example/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/src/main/resources/application.properties" afterDir="false" />
@@ -44,25 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "50-profile-page-backend",
-    "last_opened_file_path": "C:/Users/rguddati/Desktop/Coms309/ip_107/Experiments/rguddati/Exp2/profile_backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "759e8a9473e88555237f17b16104fb16",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;50-profile-page-backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rguddati/Desktop/Coms309/ip_107/Backend/profile_backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;759e8a9473e88555237f17b16104fb16&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="onetoone" />
@@ -87,9 +86,8 @@
       <workItem from="1695774330886" duration="94000" />
       <workItem from="1695774510327" duration="939000" />
       <workItem from="1695858138461" duration="505000" />
-      <workItem from="1696193141684" duration="87000" />
-      <workItem from="1696260901035" duration="123000" />
-      <workItem from="1696365656561" duration="259000" />
+      <workItem from="1696193229576" duration="3676000" />
+      <workItem from="1696365917012" duration="378000" />
     </task>
     <servers />
   </component>
