@@ -32,7 +32,7 @@ public class UserController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/users/all")
     List<User> getAllUsers(){
         return userRepository.findAll();
     }
@@ -42,7 +42,7 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    @PostMapping(path = "/users")
+    @PostMapping(path = "/users/add")
     String createUser(@RequestBody User user){
         if (user == null)
             return failure;
@@ -50,7 +50,7 @@ public class UserController {
         return success;
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/users/update/{id}")
     User updateUser(@PathVariable int id, @RequestBody User request){
         User user = userRepository.findById(id);
         if(user == null)
@@ -71,7 +71,7 @@ public class UserController {
         return success;
     }
 
-    @DeleteMapping(path = "/users/{id}")
+    @DeleteMapping(path = "/users/delete{id}")
     String deleteUser(@PathVariable int id){
         userRepository.deleteById(id);
         return success;
