@@ -1,4 +1,4 @@
-package onetoone.Users;
+package onetoone.Persons;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import onetoone.Laptops.Laptop;
+import onetoone.Friends.Friend;
 
 /**
  * 
@@ -17,7 +17,7 @@ import onetoone.Laptops.Laptop;
  */ 
 
 @Entity
-public class User {
+public class Person {
 
      /* 
      * The annotation @ID marks the field below as the primary key for the table created by springboot
@@ -37,16 +37,16 @@ public class User {
      * @JoinColumn defines the ownership of the foreign key i.e. the user table will have a field called laptop_id
      */
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "laptop_id")
-    private Laptop laptop;
+    @JoinColumn(name = "friend_id")
+    private Friend friend;
 
-    public User(String name, String emailId) {
+    public Person(String name, String emailId) {
         this.name = name;
         this.emailId = emailId;
         this.ifActive = true;
     }
 
-    public User() {
+    public Person() {
     }
 
     // =============================== Getters and Setters for each field ================================== //
@@ -83,12 +83,12 @@ public class User {
         this.ifActive = ifActive;
     }
 
-    public Laptop getLaptop(){
-        return laptop;
+    public Friend getFriend(){
+        return friend;
     }
 
-    public void setLaptop(Laptop laptop){
-        this.laptop = laptop;
+    public void setFriend(Friend friend){
+        this.friend = friend;
     }
     
 }
