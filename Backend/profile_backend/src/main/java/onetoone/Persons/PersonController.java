@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import onetoone.Friends.Friend;
 import onetoone.Friends.FriendRepository;
+import onetoone.Profile.Description;
+import onetoone.Profile.DescriptionRepository;
 
 /**
  * 
@@ -28,6 +30,9 @@ public class PersonController {
 
     @Autowired
     FriendRepository friendRepository;
+
+    @Autowired
+    DescriptionRepository descriptionRepository;
 
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";

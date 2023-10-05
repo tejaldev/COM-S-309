@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import onetoone.Friends.Friend;
+import onetoone.Profile.Description;
 
 /**
  * 
@@ -28,7 +29,6 @@ public class Person {
     private int id;
     private String name;
     private String emailId;
-    private boolean ifActive;
 
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
@@ -40,10 +40,14 @@ public class Person {
     @JoinColumn(name = "friend_id")
     private Friend friend;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "description_id")
+    private Description description;
+
+
     public Person(String name, String emailId) {
         this.name = name;
         this.emailId = emailId;
-        this.ifActive = true;
     }
 
     public Person() {
@@ -75,20 +79,20 @@ public class Person {
         this.emailId = emailId;
     }
 
-    public boolean getIsActive(){
-        return ifActive;
-    }
-
-    public void setIfActive(boolean ifActive){
-        this.ifActive = ifActive;
-    }
-
     public Friend getFriend(){
         return friend;
     }
 
     public void setFriend(Friend friend){
         this.friend = friend;
+    }
+
+    public Description getDescription(){
+        return description;
+    }
+
+    public void setDescription(Description description){
+        this.description = description;
     }
     
 }

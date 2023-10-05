@@ -37,10 +37,10 @@ public class FriendController {
     }
 
     @PostMapping(path = "/friends/add")
-    String createFriend(@RequestBody Friend Laptop){
-        if (Laptop == null)
+    String createFriend(@RequestBody Friend Friend){
+        if (Friend == null)
             return failure;
-        friendRepository.save(Laptop);
+        friendRepository.save(Friend);
         return success;
     }
 

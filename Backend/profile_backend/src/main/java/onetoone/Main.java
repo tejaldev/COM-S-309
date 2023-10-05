@@ -10,6 +10,8 @@ import onetoone.Friends.Friend;
 import onetoone.Friends.FriendRepository;
 import onetoone.Persons.Person;
 import onetoone.Persons.PersonRepository;
+import onetoone.Profile.Description;
+import onetoone.Profile.DescriptionRepository;
 
 /**
  * 
@@ -34,17 +36,29 @@ class Main {
      * As mentioned in User.java just associating the Laptop object with the User will save it into the database because of the CascadeType
      */
     @Bean
-    CommandLineRunner initUser(PersonRepository personRepository, FriendRepository friendRepository) {
+    CommandLineRunner initUser(PersonRepository personRepository, FriendRepository friendRepository, DescriptionRepository descriptionRepository) {
         return args -> {
             Person person1 = new Person("Raghu", "raghu@somemail.com");
             Person person2 = new Person("Ella", "ella@somemail.com");
             Person person3 = new Person("Tejal", "tejal@somemail.com");
+
+
             Friend friend1 = new Friend("Robert");
             Friend friend2 = new Friend( "Sam");
             Friend friend3 = new Friend( "Tony");
             person1.setFriend(friend1);
             person2.setFriend(friend2);
             person3.setFriend(friend3);
+            personRepository.save(person1);
+            personRepository.save(person2);
+            personRepository.save(person3);
+
+            Description description1 = new Description("I am a java developer");
+            Description description2 = new Description("I am a C developer");
+            Description description3 = new Description("I am a python developer");
+            person1.setDescription(description1);
+            person2.setDescription(description2);
+            person3.setDescription(description3);
             personRepository.save(person1);
             personRepository.save(person2);
             personRepository.save(person3);
