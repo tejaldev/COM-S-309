@@ -18,7 +18,7 @@ public class PhoneController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/phones")
+    @GetMapping(path = "/phones/all")
     List<Phone> getAllPhones(){
         return phoneRepository.findAll();
     }
@@ -28,7 +28,7 @@ public class PhoneController {
         return phoneRepository.findById(id);
     }
 
-    @PostMapping(path = "/phones")
+    @PostMapping(path = "/phones/add")
     String createPhone(Phone phone){
         if (phone == null)
             return failure;
@@ -36,7 +36,7 @@ public class PhoneController {
         return success;
     }
 
-    @PutMapping("/phones/{id}")
+    @PutMapping("/phones/update/{id}")
     Phone updatePhone(@PathVariable int id, @RequestBody Phone request){
         Phone phone = phoneRepository.findById(id);
         if(phone == null)

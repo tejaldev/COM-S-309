@@ -26,7 +26,7 @@ public class LaptopController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/laptops")
+    @GetMapping(path = "/laptops/all")
     List<Laptop> getAllLaptops(){
         return laptopRepository.findAll();
     }
@@ -36,7 +36,7 @@ public class LaptopController {
         return laptopRepository.findById(id);
     }
 
-    @PostMapping(path = "/laptops")
+    @PostMapping(path = "/laptops/add")
     String createLaptop(@RequestBody Laptop Laptop){
         if (Laptop == null)
             return failure;
@@ -44,7 +44,7 @@ public class LaptopController {
         return success;
     }
 
-    @PutMapping(path = "/laptops/{id}")
+    @PutMapping(path = "/laptops/update/{id}")
     Laptop updateLaptop(@PathVariable int id, @RequestBody Laptop request){
         Laptop laptop = laptopRepository.findById(id);
         if(laptop == null)
@@ -53,7 +53,7 @@ public class LaptopController {
         return laptopRepository.findById(id);
     }
 
-    @DeleteMapping(path = "/laptops/{id}")
+    @DeleteMapping(path = "/laptops/delete/{id}")
     String deleteLaptop(@PathVariable int id){
         laptopRepository.deleteById(id);
         return success;
