@@ -1,10 +1,6 @@
 package onetoone.Friends;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,7 +15,7 @@ public class Friend {
 
     private String name; // Display only the 'name' field
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     private Person person;
 

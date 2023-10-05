@@ -1,10 +1,6 @@
 package onetoone.Profile;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +14,7 @@ public class Description {
     private int id;
     private String description;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     private Person person;
 

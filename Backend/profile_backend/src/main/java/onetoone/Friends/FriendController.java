@@ -3,59 +3,59 @@ package onetoone.Friends;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-/**
- * 
- * @author Vivek Bengre
- * 
- */ 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/friends") // Set a base URL for all endpoints
 public class FriendController {
 
     @Autowired
     FriendRepository friendRepository;
-    
-    private String success = "{\"message\":\"success\"}";
-    private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/friends/all")
-    List<Friend> getAllFriend(){
-        return friendRepository.findAll();
+    private static final String success = "{\"message\":\"success\"}";
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Friend>> getAllFriends() {
+        List<Friend> friends = friendRepository.findAll();
+        return ResponseEntity.ok(friends);
     }
 
-    @GetMapping(path = "/friends/{id}")
-    Friend getFriendById(@PathVariable int id){
-        return friendRepository.findById(id);
-    }
-
-    @PostMapping(path = "/friends/add")
-    String createFriend(@RequestBody Friend Friend){
-        if (Friend == null)
-            return failure;
-        friendRepository.save(Friend);
-        return success;
-    }
-
-    @PutMapping(path = "/friends/update/{id}")
-    Friend updateFriend(@PathVariable int id, @RequestBody Friend request){
+    @GetMapping("/{id}")
+    public ResponseEntity<Friend> getFriendById(@PathVariable int id) {
         Friend friend = friendRepository.findById(id);
-        if(friend == null)
-            return null;
-        friendRepository.save(request);
-        return friendRepository.findById(id);
+        if (friend == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(friend);
     }
 
-    @DeleteMapping(path = "/friends/delete/{id}")
-    String deleteFriend(@PathVariable int id){
+    @PostMapping("/add")
+    public ResponseEntity<Friend> createFriend(@Valid @RequestBody Friend friend) {
+        Friend savedFriend = friendRepository.save(friend);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedFriend);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Friend> updateFriend(@PathVariable int id, @Valid @RequestBody Friend request) {
+        Friend friend = friendRepository.findById(id);
+        if (friend == null) {
+            return ResponseEntity.notFound().build();
+        }
+        // Update the friend object here
+        friendRepository.save(request);
+        return ResponseEntity.ok(request);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFriend(@PathVariable int id) {
+        Friend friend = friendRepository.findById(id);
+        if (friend == null) {
+            return ResponseEntity.notFound().build();
+        }
         friendRepository.deleteById(id);
-        return success;
+        return ResponseEntity.ok(success);
     }
 }

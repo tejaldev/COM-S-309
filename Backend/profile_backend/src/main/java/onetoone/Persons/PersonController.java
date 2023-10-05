@@ -15,6 +15,8 @@ import onetoone.Friends.Friend;
 import onetoone.Friends.FriendRepository;
 import onetoone.Profile.Description;
 import onetoone.Profile.DescriptionRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 /**
  * 
@@ -38,9 +40,26 @@ public class PersonController {
     private String failure = "{\"message\":\"failure\"}";
 
     @GetMapping(path = "/persons/all")
-    List<Person> getAllPersons(){
-        return personRepository.findAll();
+    public ResponseEntity<List<Person>> getAllPersons() {
+        try {
+            List<Person> persons = personRepository.findAll();
+
+            // Optional: If you want to handle missing/deleted friends
+            persons.forEach(person -> {
+                if (person.getFriend() == null) {
+                    // Handle the case where a person has no friend
+                    // You can set person.setFriend(null) or perform any other logic here
+                }
+            });
+
+            return ResponseEntity.ok(persons);
+        } catch (Exception e) {
+            e.printStackTrace(); // Print the error for debugging purposes
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
 
     @GetMapping(path = "/persons/{id}")
     Person getPersonById( @PathVariable int id){
