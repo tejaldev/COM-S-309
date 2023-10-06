@@ -16,6 +16,7 @@ import onetoone.Laptops.Laptop;
  * 
  */ 
 
+//I just want to be able to commit please ....
 @Entity
 public class User {
 
