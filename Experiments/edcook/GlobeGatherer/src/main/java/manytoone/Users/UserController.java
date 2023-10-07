@@ -44,8 +44,9 @@ public class UserController {
 
     @PostMapping(path = "/users")
     String createUser(User user){
-        if (user == null)
+        if (user == null) {
             return failure;
+        }
         userRepository.save(user);
         return success;
     }

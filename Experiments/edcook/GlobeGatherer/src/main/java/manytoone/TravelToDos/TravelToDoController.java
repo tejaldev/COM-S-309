@@ -25,32 +25,29 @@ public class TravelToDoController {
 
     @Autowired
     TravelToDoRepository travelToDoRepository;
-
-    @Autowired
-    UserRepository userRepository;
     
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/travel_todo")
+    @GetMapping(path = "/TravelToDo")
     List<TravelToDo> getAllTravelToDo(){
         return travelToDoRepository.findAll();
     }
 
-    @GetMapping(path = "/travel_todo/{id}")
+    @GetMapping(path = "/TravelToDo/{id}")
     TravelToDo getTravelToDoById(@PathVariable int id){
         return travelToDoRepository.findById(id);
     }
 
-    @PostMapping(path = "/travel_todo")
-    String createTravelToDo(TravelToDo travel){
+    @PostMapping(path = "/TravelToDo")
+    TravelToDo createTravelToDo(@RequestBody TravelToDo travel){
         if (travel == null)
-            return failure;
-        travelToDoRepository.save(travel);
-        return success;
+            return null;
+        return travelToDoRepository.save(travel);
     }
 
-    @PutMapping(path = "/travel_todo/{id}")
+
+    @PutMapping(path = "/TravelToDo/{id}")
     TravelToDo updateTravelToDo(@PathVariable int id, @RequestBody TravelToDo request){
         TravelToDo travel = travelToDoRepository.findById(id);
         if(travel == null)
@@ -59,13 +56,10 @@ public class TravelToDoController {
         return travelToDoRepository.findById(id);
     }
 
-    @DeleteMapping(path = "/travel_todo/{id}")
+    @DeleteMapping(path = "/TravelToDo/{id}")
     String deleteTravelToDo(@PathVariable int id){
 
-        // Check if there is an object depending on user and then remove the dependency
-        User user = userRepository.findById(id);
-        user.setDestination(null);
-        userRepository.save(user);
+        // Check if there is an object depending on user and then remove the dependenc
 
         // delete the laptop if the changes have not been reflected by the above statement
         travelToDoRepository.deleteById(id);

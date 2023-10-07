@@ -32,7 +32,7 @@ public class User {
     private boolean ifActive;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "destination_id")
+    @JoinColumn(name = "TravelToDo_id")
     private TravelToDo destination;
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)

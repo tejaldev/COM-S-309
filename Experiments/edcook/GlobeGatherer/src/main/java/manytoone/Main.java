@@ -27,7 +27,7 @@ class Main {
     /**
      * 
      * @param userRepository repository for the User entity
-     * @param laptopRepository repository for the Laptop entity
+     * @param travelToDoRepository repository for the Laptop entity
      * Creates a commandLine runner to enter dummy data into the database
      * As mentioned in User.java just associating the Laptop object with the User will save it into the database because of the CascadeType
      */
@@ -37,9 +37,9 @@ class Main {
             User user1 = new User("John", "john@somemail.com");
             User user2 = new User("Jane", "jane@somemail.com");
             User user3 = new User("Justin", "justin@somemail.com");
-            TravelToDo travel1 = new TravelToDo("Paris","France","Jan 1 2024");
-            TravelToDo travel2 = new TravelToDo("Chicago","USA","Jan 1 2024");
-            TravelToDo travel3 = new TravelToDo("New York","USA","Jan 1 2024");
+            TravelToDo travel1 = new TravelToDo("Paris","France");
+            TravelToDo travel2 = new TravelToDo("Chicago","USA");
+            TravelToDo travel3 = new TravelToDo("New York","USA");
             user1.setDestination(travel1);
             user2.setDestination(travel2);
             user3.setDestination(travel3);
