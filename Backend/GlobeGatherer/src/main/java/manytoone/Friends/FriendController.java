@@ -41,7 +41,7 @@ public class FriendController {
     @PostMapping("/add")
     public ResponseEntity<String> addFriendToUser1(@RequestBody Friend friend) {
         // Find the user with ID 1
-        Person user1 = personRepository.findById(4);
+        Person user1 = personRepository.findById(1);
 
         if (user1 == null) {
             return ResponseEntity.notFound().build();

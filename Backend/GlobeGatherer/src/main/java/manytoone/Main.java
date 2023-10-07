@@ -39,30 +39,30 @@ class Main {
     @Bean
     CommandLineRunner initUser(PersonRepository personRepository, FriendRepository friendRepository, DescriptionRepository descriptionRepository) {
         return args -> {
-            Person person1 = new Person("Raghu", "raghu@somemail.com", "12345678", "Raghu", "12345678");
-            Person person2 = new Person("john", "john@somemail.com", "12345678", "john", "12345678");
-            Person person3 = new Person("xyz", "xyz@somemail.com", "12345678", "xyz", "12345678");
-
-
-            Friend friend1 = new Friend("Robert", "noob");
-            Friend friend2 = new Friend( "Sam", "pro");
-            Friend friend3 = new Friend( "Tony", "noob");
-            person1.setFriend(friend1);
-            person2.setFriend(friend2);
-            person3.setFriend(friend3);
-            personRepository.save(person1);
-            personRepository.save(person2);
-            personRepository.save(person3);
-
-            Description description1 = new Description("I am a java developer");
-            Description description2 = new Description("I am a C developer");
-            Description description3 = new Description("I am a python developer");
-            person1.setDescription(description1);
-            person2.setDescription(description2);
-            person3.setDescription(description3);
-            personRepository.save(person1);
-            personRepository.save(person2);
-            personRepository.save(person3);
+//            Person person1 = new Person("Raghu", "raghu@somemail.com", "12345678", "Raghu", "12345678");
+//            Person person2 = new Person("john", "john@somemail.com", "12345678", "john", "12345678");
+//            Person person3 = new Person("xyz", "xyz@somemail.com", "12345678", "xyz", "12345678");
+//
+//
+//            Friend friend1 = new Friend("Robert", "noob");
+//            Friend friend2 = new Friend( "Sam", "pro");
+//            Friend friend3 = new Friend( "Tony", "noob");
+//            person1.setFriend(friend1);
+//            person2.setFriend(friend2);
+//            person3.setFriend(friend3);
+//            personRepository.save(person1);
+//            personRepository.save(person2);
+//            personRepository.save(person3);
+//
+//            Description description1 = new Description("I am a java developer");
+//            Description description2 = new Description("I am a C developer");
+//            Description description3 = new Description("I am a python developer");
+//            person1.setDescription(description1);
+//            person2.setDescription(description2);
+//            person3.setDescription(description3);
+//            personRepository.save(person1);
+//            personRepository.save(person2);
+//            personRepository.save(person3);
 
         };
     }
