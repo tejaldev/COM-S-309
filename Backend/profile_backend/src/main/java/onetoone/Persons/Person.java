@@ -27,8 +27,12 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String emailId;
+    private String SignUpName;
+    private String SignUpUsername;
+    private String SignUpPassword;
+    private String SignUpEmail;
+    private String SignUpPhoneNo;
+
 
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
@@ -45,9 +49,12 @@ public class Person {
     private Description description;
 
 
-    public Person(String name, String emailId) {
-        this.name = name;
-        this.emailId = emailId;
+    public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
+        this.SignUpName = SignUpName;
+        this.SignUpUsername = SignUpUsername;
+        this.SignUpPassword = SignUpPassword;
+        this.SignUpEmail = SignUpEmail;
+        this.SignUpPhoneNo = SignUpPhoneNo;
     }
 
     public Person() {
@@ -63,20 +70,44 @@ public class Person {
         this.id = id;
     }
 
-    public String getName(){
-        return name;
+    public String getSignUpName(){
+        return SignUpName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setSignUpName(String name){
+        this.SignUpName = name;
     }
 
-    public String getEmailId(){
-        return emailId;
+    public String getSignUpUsername(){
+        return SignUpUsername;
     }
 
-    public void setEmailId(String emailId){
-        this.emailId = emailId;
+    public void setSignUpUsername(String emailId){
+        this.SignUpUsername = emailId;
+    }
+
+    public String getSignUpPassword(){
+        return SignUpPassword;
+    }
+
+    public void setSignUpPassword(String password){
+        this.SignUpPassword = password;
+    }
+
+    public String getSignUpEmail(){
+        return SignUpEmail;
+    }
+
+    public void setSignUpEmail(String email){
+        this.SignUpEmail = email;
+    }
+
+    public String getSignUpPhoneNo(){
+        return SignUpPhoneNo;
+    }
+
+    public void setSignUpPhoneNo(String phoneNo){
+        this.SignUpPhoneNo = phoneNo;
     }
 
     public Friend getFriend(){

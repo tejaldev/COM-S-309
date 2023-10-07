@@ -2,6 +2,8 @@ package onetoone.Friends;
 
 import java.util.List;
 
+import onetoone.Persons.Person;
+import onetoone.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,10 @@ public class FriendController {
 
     @Autowired
     FriendRepository friendRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
+
 
     private static final String success = "{\"message\":\"success\"}";
 
@@ -33,9 +39,25 @@ public class FriendController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Friend> createFriend(@Valid @RequestBody Friend friend) {
+    public ResponseEntity<String> addFriendToUser1(@RequestBody Friend friend) {
+        // Find the user with ID 1
+        Person user1 = personRepository.findById(4);
+
+        if (user1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Set the user1 as the owner of this friend
+        friend.setPerson(user1);
+
+        // Save the friend
         Friend savedFriend = friendRepository.save(friend);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedFriend);
+
+        // Update the user1's friend reference
+        user1.setFriend(savedFriend);
+        personRepository.save(user1);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
 
     @PutMapping("/update/{id}")

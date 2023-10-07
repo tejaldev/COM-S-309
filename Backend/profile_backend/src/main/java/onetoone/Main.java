@@ -35,17 +35,18 @@ class Main {
      * Creates a commandLine runner to enter dummy data into the database
      * As mentioned in User.java just associating the Laptop object with the User will save it into the database because of the CascadeType
      */
+
     @Bean
     CommandLineRunner initUser(PersonRepository personRepository, FriendRepository friendRepository, DescriptionRepository descriptionRepository) {
         return args -> {
-            Person person1 = new Person("Raghu", "raghu@somemail.com");
-            Person person2 = new Person("Ella", "ella@somemail.com");
-            Person person3 = new Person("Tejal", "tejal@somemail.com");
+            Person person1 = new Person("Raghu", "raghu@somemail.com", "12345678", "Raghu", "12345678");
+            Person person2 = new Person("john", "john@somemail.com", "12345678", "john", "12345678");
+            Person person3 = new Person("xyz", "xyz@somemail.com", "12345678", "xyz", "12345678");
 
 
-            Friend friend1 = new Friend("Robert");
-            Friend friend2 = new Friend( "Sam");
-            Friend friend3 = new Friend( "Tony");
+            Friend friend1 = new Friend("Robert", "noob");
+            Friend friend2 = new Friend( "Sam", "pro");
+            Friend friend3 = new Friend( "Tony", "noob");
             person1.setFriend(friend1);
             person2.setFriend(friend2);
             person3.setFriend(friend3);
@@ -65,5 +66,4 @@ class Main {
 
         };
     }
-
 }

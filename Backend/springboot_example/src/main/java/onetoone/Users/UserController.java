@@ -59,10 +59,10 @@ public class UserController {
         return userRepository.findById(id);
     }   
     
-    @PutMapping("/users/{userId}/laptops/{laptopId}")
-    String assignLaptopToUser(@PathVariable int userId,@PathVariable int laptopId){
+    @PutMapping("/users/{userId}/laptops/{laptopName}")
+    String assignLaptopToUser(@PathVariable int userId,@PathVariable String laptopName){
         User user = userRepository.findById(userId);
-        Laptop laptop = laptopRepository.findById(laptopId);
+        Laptop laptop = laptopRepository.findByName(laptopName);
         if(user == null || laptop == null)
             return failure;
         laptop.setUser(user);

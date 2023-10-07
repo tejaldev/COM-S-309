@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */ 
 
-public interface LaptopRepository extends JpaRepository<Laptop, Long> {
-    Laptop findById(int id);
+public interface LaptopRepository extends JpaRepository<Laptop, String> {
+    Laptop findByName(String name);
 
     @Transactional
-    void deleteById(int id);
+    void deleteByName(String name);
 }

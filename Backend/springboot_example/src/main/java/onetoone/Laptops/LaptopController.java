@@ -31,9 +31,9 @@ public class LaptopController {
         return laptopRepository.findAll();
     }
 
-    @GetMapping(path = "/laptops/{id}")
-    Laptop getLaptopById(@PathVariable int id){
-        return laptopRepository.findById(id);
+    @GetMapping(path = "/laptops/{name}")
+    Laptop getLaptopById(@PathVariable String name){
+        return laptopRepository.findByName(name);
     }
 
     @PostMapping(path = "/laptops")
@@ -44,18 +44,18 @@ public class LaptopController {
         return success;
     }
 
-    @PutMapping(path = "/laptops/{id}")
-    Laptop updateLaptop(@PathVariable int id, @RequestBody Laptop request){
-        Laptop laptop = laptopRepository.findById(id);
+    @PutMapping(path = "/laptops/{name}")
+    Laptop updateLaptop(@PathVariable String name, @RequestBody Laptop request){
+        Laptop laptop = laptopRepository.findByName(name);
         if(laptop == null)
             return null;
         laptopRepository.save(request);
-        return laptopRepository.findById(id);
+        return laptopRepository.findByName(name);
     }
 
-    @DeleteMapping(path = "/laptops/{id}")
-    String deleteLaptop(@PathVariable int id){
-        laptopRepository.deleteById(id);
+    @DeleteMapping(path = "/laptops/{name}")
+    String deleteLaptop(@PathVariable String name){
+        laptopRepository.deleteByName(name);
         return success;
     }
 }
