@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import onetoone.Laptops.Laptop;
-import onetoone.Laptops.LaptopRepository;
+import onetoone.TravelToDos.TravelToDo;
+import onetoone.TravelToDos.TravelToDoRepository;
 import onetoone.Users.User;
 import onetoone.Users.UserRepository;
 
@@ -32,17 +32,17 @@ class Main {
      * As mentioned in User.java just associating the Laptop object with the User will save it into the database because of the CascadeType
      */
     @Bean
-    CommandLineRunner initUser(UserRepository userRepository, LaptopRepository laptopRepository) {
+    CommandLineRunner initUser(UserRepository userRepository, TravelToDoRepository travelToDoRepository) {
         return args -> {
             User user1 = new User("John", "john@somemail.com");
             User user2 = new User("Jane", "jane@somemail.com");
             User user3 = new User("Justin", "justin@somemail.com");
-            Laptop laptop1 = new Laptop( 2.5, 4, 8, "Lenovo", 300);
-            Laptop laptop2 = new Laptop( 4.1, 8, 16, "Hp", 800);
-            Laptop laptop3 = new Laptop( 3.5, 32, 32, "Dell", 2300);  
-            user1.setLaptop(laptop1);
-            user2.setLaptop(laptop2);
-            user3.setLaptop(laptop3);            
+            TravelToDo travel1 = new TravelToDo("Paris","France","Jan 1 2024");
+            TravelToDo travel2 = new TravelToDo("Chicago","USA","Jan 1 2024");
+            TravelToDo travel3 = new TravelToDo("New York","USA","Jan 1 2024");
+            user1.setDestination(travel1);
+            user2.setDestination(travel2);
+            user3.setDestination(travel3);
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);

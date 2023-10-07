@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import onetoone.Laptops.Laptop;
+import onetoone.TravelToDos.TravelToDo;
 
 /**
  * 
@@ -16,7 +16,7 @@ import onetoone.Laptops.Laptop;
  * 
  */ 
 
-//I just want to be able to commit please ....
+
 @Entity
 public class User {
 
@@ -31,15 +31,17 @@ public class User {
     private String emailId;
     private boolean ifActive;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "destination_id")
+    private TravelToDo destination;
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
      * cascade is responsible propagating all changes, even to children of the class Eg: changes made to laptop within a user object will be reflected
      * in the database (more info : https://www.baeldung.com/jpa-cascade-types)
      * @JoinColumn defines the ownership of the foreign key i.e. the user table will have a field called laptop_id
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "laptop_id")
-    private Laptop laptop;
+
+
 
     public User(String name, String emailId) {
         this.name = name;
@@ -84,12 +86,12 @@ public class User {
         this.ifActive = ifActive;
     }
 
-    public Laptop getLaptop(){
-        return laptop;
+    public TravelToDo getDestination(){
+        return destination;
     }
 
-    public void setLaptop(Laptop laptop){
-        this.laptop = laptop;
+    public void setDestination(TravelToDo destination){
+        this.destination = destination;
     }
     
 }
