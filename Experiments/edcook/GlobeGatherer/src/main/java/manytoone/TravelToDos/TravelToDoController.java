@@ -1,4 +1,4 @@
-package onetoone.TravelToDos;
+package manytoone.TravelToDos;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import onetoone.Users.User;
-import onetoone.Users.UserRepository;
+import manytoone.Users.User;
+import manytoone.Users.UserRepository;
 
 /**
  * 

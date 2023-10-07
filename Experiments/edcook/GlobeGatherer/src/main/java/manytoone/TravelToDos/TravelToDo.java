@@ -1,4 +1,4 @@
-package onetoone.TravelToDos;
+package manytoone.TravelToDos;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import onetoone.Users.User;
+import manytoone.Users.User;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package onetoone.Users;
+package manytoone.Users;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import onetoone.TravelToDos.TravelToDo;
+import manytoone.TravelToDos.TravelToDo;
 
 /**
  * 

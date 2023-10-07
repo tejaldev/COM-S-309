@@ -1,14 +1,14 @@
-package onetoone;
+package manytoone;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import onetoone.TravelToDos.TravelToDo;
-import onetoone.TravelToDos.TravelToDoRepository;
-import onetoone.Users.User;
-import onetoone.Users.UserRepository;
+import manytoone.TravelToDos.TravelToDo;
+import manytoone.TravelToDos.TravelToDoRepository;
+import manytoone.Users.User;
+import manytoone.Users.UserRepository;
 
 /**
  * 
