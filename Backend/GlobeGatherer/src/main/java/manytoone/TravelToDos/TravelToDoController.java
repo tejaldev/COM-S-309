@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import manytoone.Users.User;
-import manytoone.Users.UserRepository;
+import manytoone.Persons.Person;
+import manytoone.Persons.PersonRepository;
 
 /**
  * 

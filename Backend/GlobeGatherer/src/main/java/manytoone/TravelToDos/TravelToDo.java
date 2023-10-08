@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import manytoone.Users.User;
+import manytoone.Persons.Person;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class TravelToDo {
 
     @ManyToOne
     @JsonIgnore
-    private User user;
+    private Person person;
 
     public TravelToDo(String destinationName, String country) {
         this.destinationName = destinationName;
@@ -47,11 +47,11 @@ public class TravelToDo {
     public String getCountry(){return country;}
     public void setCountry(String country){
         this.country = country;}
-    public User getUser(){
-        return user;
+    public Person getPerson(){
+        return person;
     }
-    public void setUser(User user){
-        this.user = user;
+    public void setPerson(Person person){
+        this.person = person;
     }
 
 }

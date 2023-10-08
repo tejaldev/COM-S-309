@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 
 import manytoone.Friends.Friend;
 import manytoone.Profile.Description;
+import manytoone.TravelToDos.TravelToDo;
 
 /**
  * 
@@ -47,6 +48,10 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "description_id")
     private Description description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "travel_id")
+    private TravelToDo travelToDo;
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -124,6 +129,14 @@ public class Person {
 
     public void setDescription(Description description){
         this.description = description;
+    }
+
+    public TravelToDo getTravelToDo(){
+        return travelToDo;
+    }
+
+    public void setTravelToDo(TravelToDo travelToDo){
+        this.travelToDo = travelToDo;
     }
     
 }
