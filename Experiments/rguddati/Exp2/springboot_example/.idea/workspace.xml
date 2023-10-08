@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b0f7411e-cadf-4212-87c9-141d76e03c84" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Backend/profile_backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Backend/profile_backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/LocationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Locations/LocationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/java/onetoone/Users/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile_backend/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exp3/springboot_example/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Exp3/springboot_example/target/classes/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2Vb6glPpnuZxu4f0mYj2b8BQQCq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "50-profile-page-backend",
+    "last_opened_file_path": "C:/Users/rguddati/Desktop/Coms309/ip_107/Experiments/rguddati/Exp2/profile_backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "759e8a9473e88555237f17b16104fb16",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="onetoone" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="onetoone.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0f7411e-cadf-4212-87c9-141d76e03c84" name="Changes" comment="" />
+      <created>1695092546425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695092546425</updated>
+      <workItem from="1695092547408" duration="440000" />
+      <workItem from="1695301338256" duration="4813000" />
+      <workItem from="1695424169659" duration="118000" />
+      <workItem from="1695424300346" duration="5583000" />
+      <workItem from="1695774330886" duration="94000" />
+      <workItem from="1695774510327" duration="939000" />
+      <workItem from="1695858138461" duration="505000" />
+      <workItem from="1696193141684" duration="87000" />
+      <workItem from="1696260901035" duration="123000" />
+      <workItem from="1696365656561" duration="259000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
