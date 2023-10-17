@@ -26,6 +26,20 @@
             android:name=".friends"
             android:exported="false" />
         <activity
+            android:name=".profile_page"
+            android:exported="false"/>
+        <activity
+            android:name=".Activity2_login_next"
+            android:exported="false" />
+        <activity android:name=".app.AppController"
+            android:exported="false" />
+        <activity
+            android:name=".net_utils.Const"
+            android:exported="false" />
+        <activity
+            android:name=".net_utils.LruBitmapCache"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
