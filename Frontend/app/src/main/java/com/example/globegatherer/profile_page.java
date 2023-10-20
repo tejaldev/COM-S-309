@@ -81,7 +81,7 @@ public class profile_page extends AppCompatActivity {
     }
 
     public void openActivity4(){
-        Intent intent = new Intent(this, showFriend.class);
+        Intent intent = new Intent(this, friends.class);
         startActivity(intent);
     }
 
