@@ -18,11 +18,16 @@ import com.example.globegatherer.R;
 
 import org.json.JSONObject;
 
-public class profile_page extends AppCompatActivity {
+public class profile_page extends AppCompatActivity{
 
     private Button Edit;
     private Button ToDo;
     private Button Friend;
+
+    //new code
+    private Button Chat;
+
+    // new code ends here
     private EditText description;
     private Button logout;
     private TextView Des_Response;
@@ -40,7 +45,9 @@ public class profile_page extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         ToDo = findViewById(R.id.To_do_button);
         Friend = findViewById(R.id.Friends);
-
+        //new code
+        Chat = findViewById(R.id.chatButton);
+        // new code ends here
         Des_Response = findViewById(R.id.Des_Response);
 
 
@@ -73,6 +80,15 @@ public class profile_page extends AppCompatActivity {
                 openActivity4();
             }
         });
+        //new code
+        Chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openChatPage();
+            }
+        });
+
+        // new code ends
     }
 
     public void openActivity(){
@@ -90,6 +106,12 @@ public class profile_page extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // new code
+    public void openChatPage(){
+        Intent intent = new Intent(this, chatpage.class);
+        startActivity(intent);
+    }
+    // new code ends here
     private void makeJsonObjReq() {
         // Creating a JSON object with the user's description
         JSONObject requestData = new JSONObject();

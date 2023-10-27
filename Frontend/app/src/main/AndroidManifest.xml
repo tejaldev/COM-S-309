@@ -17,6 +17,9 @@
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
         <activity
+            android:name=".chatpage"
+            android:exported="false" />
+        <activity
             android:name=".toDoList"
             android:exported="false" />
         <activity
@@ -27,11 +30,12 @@
             android:exported="false" />
         <activity
             android:name=".profile_page"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity2_login_next"
             android:exported="false" />
-        <activity android:name=".app.AppController"
+        <activity
+            android:name=".app.AppController"
             android:exported="false" />
         <activity
             android:name=".net_utils.Const"
