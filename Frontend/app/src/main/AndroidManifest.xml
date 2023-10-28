@@ -20,6 +20,12 @@
             android:name=".toDoList"
             android:exported="false" />
         <activity
+            android:name=".Announcements"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Page"
+            android:exported="false" />
+        <activity
             android:name=".showFriend"
             android:exported="false" />
         <activity
@@ -38,6 +44,12 @@
             android:exported="false" />
         <activity
             android:name=".net_utils.LruBitmapCache"
+            android:exported="false" />
+        <activity
+            android:name=".WebSocketListener"
+            android:exported="false" />
+        <activity
+            android:name=".WebSocketManager"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

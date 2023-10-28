@@ -3,6 +3,7 @@ package com.example.globegatherer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import com.example.globegatherer.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
     Button SignUp;
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private JSONArray jsonResponse;
 
-
+    private ArrayList<String> signUpUsernames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,20 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeJsonArrayReq();
+
+                String inputUsername = username.getText().toString().trim();
+                String inputPassword = Password.getText().toString().trim();
+
+                if (inputUsername.equals("admin") && inputPassword.equals("admin@123")) {
+                    openAdminPage(); // Redirect to the admin page
+                } else {
+                    if (signUpUsernames.contains(inputUsername)) {
+                        openActivity3();
+                    } else {
+                        makeJsonArrayReq();
+                    }
+                }
+                //makeJsonArrayReq();
             }
         });
 
@@ -70,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     public void openActivity2(){
@@ -82,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openAdminPage() {
+        Intent intent = new Intent(this, Admin_Page.class);
+        startActivity(intent);
+    }
 
 //    private void makeJsonArrayReq() {
 //        networkManager.sendGetRequest(URL_JSON_ARRAY,
@@ -112,22 +133,21 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            // Initializing a StringBuilder to store the signUpUsername values
-                            StringBuilder signUpUsernames = new StringBuilder();
+                            signUpUsernames.clear(); // Clear the array before adding new data
 
                             // Iterate through the JSON array and extract signUpUsername
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String signUpUsername = jsonObject.optString("signUpUsername", "");
 
-                                // Append signUpUsername to the StringBuilder
-                                signUpUsernames.append(signUpUsername);
+                                // Append signUpUsername to the ArrayList
+                                signUpUsernames.add(signUpUsername);
 
-                                // Append a comma or a separator if not the last element
-                                if (i < response.length() - 1) {
-                                    signUpUsernames.append(", ");
+
                                 }
-                            }
+                            // Convert ArrayList to a string for display
+                            String usernamesAsString = TextUtils.join(", ", signUpUsernames);
+
 
                             // Display the extracted signUpUsernames in your TextView
                             message.setText("signUpUsernames: " + signUpUsernames.toString());
