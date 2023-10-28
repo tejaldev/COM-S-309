@@ -1,4 +1,4 @@
-package manytoone.TravelToDos;
+package manytoone.TravelHistories;
 
 import javax.persistence.*;
 
@@ -12,25 +12,25 @@ import manytoone.Persons.Person;
  */ 
 
 @Entity
-public class TravelToDo {
+public class TravelHistory {
     
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String destinationName;
-    private String country;
+//    private String country;
 
     @ManyToOne
     @JsonIgnore
     private Person person;
 
-    public TravelToDo(String destinationName, String country) {
+    public TravelHistory(String destinationName) { //, String country
         this.destinationName = destinationName;
-        this.country = country;
+//        this.country = country;
     }
 
-    public TravelToDo() {
+    public TravelHistory() {
     }
 
     // =============================== Getters and Setters for each field ================================== //
@@ -44,9 +44,9 @@ public class TravelToDo {
     public String getDestinationName(){return destinationName;}
     public void setDestinationName(String destinationName){
         this.destinationName = destinationName;}
-    public String getCountry(){return country;}
-    public void setCountry(String country){
-        this.country = country;}
+//    public String getCountry(){return country;}
+//    public void setCountry(String country){
+//        this.country = country;}
     public Person getPerson(){
         return person;
     }
