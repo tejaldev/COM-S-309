@@ -27,6 +27,8 @@ public class profile_page extends AppCompatActivity{
     //new code
     private Button Chat;
 
+    private Button Map;
+
     // new code ends here
     private EditText description;
     private Button logout;

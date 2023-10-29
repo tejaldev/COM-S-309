@@ -41,4 +41,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("org.java-websocket:Java-WebSocket:1.5.1")
+    // code for google maps
+    implementation ("com.google.android.gms:play-services-maps:17.0.1")
+    implementation ("org.java-websocket:Java-WebSocket:1.4.0")
+    // code ends here
 }

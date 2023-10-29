@@ -125,23 +125,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="5dp">
 
 
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="To-Do List"
-            android:id="@+id/To_do_button"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/black"
-            android:textAlignment="center"/>
-
-
-
-
+            <Button
+                android:id="@+id/To_do_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:text="To-Do List"
+                android:textAlignment="center" />
 
 
         </LinearLayout>
@@ -182,6 +177,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:textAlignment="center"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -233,6 +229,8 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:textAlignment="center"/>
+
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

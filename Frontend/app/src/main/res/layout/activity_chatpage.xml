@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".chatpage"
     android:layout_height="match_parent"
-    tools:context=".chatpage">
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/messageInput"
-        android:padding="8dp"
-        android:clipToPadding="false" />
-
-    <!-- Message Input Field -->
     <EditText
-        android:id="@+id/messageInput"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:hint="Type a message..."
-        android:padding="8dp" />
-
-    <!-- Send Button -->
+        android:hint="username"
+        android:textSize="20dp"
+        android:id="@+id/et1" />
     <Button
-        android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/messageInput"
-        android:text="Send" />
-</RelativeLayout>
+        android:text="Connect"
+        android:id="@+id/bt1" />
+    <EditText
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:hint="message"
+        android:textSize="20dp"
+        android:id="@+id/messageInput" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/sendButton" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tx1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="The Coversation will appear here:\n"
+            android:textSize="20dp" />
+
+    </ScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
