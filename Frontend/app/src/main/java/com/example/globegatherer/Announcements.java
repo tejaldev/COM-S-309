@@ -21,7 +21,7 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
 
         private EditText Announcement, msgEtx;
         private TextView Announce;
-        private Button Exit, Connect;
+        private Button Exit, Connect, Send;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,21 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
             Announcement =  findViewById(R.id.announce_text);
             Connect = findViewById(R.id.Connect);
             Exit = findViewById(R.id.back);
+            Send = findViewById(R.id.send_button);
 
             Announce = findViewById(R.id.announce);
 
+            Send.setOnClickListener(view -> {
+                String message_announce = Announcement.getText().toString();
+
+                if (WebSocketManager.getInstance().isSocketOpen()) {
+                    // Send the announcement message to all connected users
+                    WebSocketManager.getInstance().sendMessage(message_announce);
+                } else {
+                    // Show a message if the WebSocket connection is not established
+                    Toast.makeText(Announcements.this, "WebSocket connection is not established", Toast.LENGTH_SHORT).show();
+                }
+            });
             /* connect button listener */
             Connect.setOnClickListener(view -> {
                 String serverUrl = BASE_URL + Announcement.getText().toString();

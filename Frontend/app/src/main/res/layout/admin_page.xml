@@ -189,110 +189,110 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="130dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:id="@+id/Suspend"
-            app:cardElevation="5dp">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="130dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:id="@+id/Suspend"-->
+<!--            app:cardElevation="5dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:gravity="center">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical"-->
+<!--                android:background="@color/white"-->
+<!--                android:gravity="center">-->
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circle_yellow"
-                    android:src="@drawable/baseline_delete_24"
-                    android:padding="15dp"/>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/cardview_light_background"
-                    android:layout_marginTop="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Suspend User"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/textcolor"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="64dp"-->
+<!--                    android:layout_height="64dp"-->
+<!--                    android:background="@drawable/circle_yellow"-->
+<!--                    android:src="@drawable/baseline_delete_24"-->
+<!--                    android:padding="15dp"/>-->
 
 
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/cardview_light_background"-->
+<!--                    android:layout_marginTop="10dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Suspend User"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:textColor="@color/textcolor"/>-->
 
 
-            </LinearLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+<!--            </LinearLayout>-->
+
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
 
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_margin="5dp">-->
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="130dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:id="@+id/Emergency"
-            app:cardElevation="5dp">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="130dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:id="@+id/Emergency"-->
+<!--            app:cardElevation="5dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:gravity="center">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical"-->
+<!--                android:background="@color/white"-->
+<!--                android:gravity="center">-->
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circle_red"
-                    android:src="@drawable/baseline_emergency_24"
-                    android:padding="15dp"/>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/cardview_light_background"
-                    android:layout_marginTop="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Emergency Text"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/textcolor"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="64dp"-->
+<!--                    android:layout_height="64dp"-->
+<!--                    android:background="@drawable/circle_red"-->
+<!--                    android:src="@drawable/baseline_emergency_24"-->
+<!--                    android:padding="15dp"/>-->
 
 
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/cardview_light_background"-->
+<!--                    android:layout_marginTop="10dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Emergency Text"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:textColor="@color/textcolor"/>-->
 
 
-            </LinearLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+<!--            </LinearLayout>-->
 
 
-    </LinearLayout>
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+<!--    </LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

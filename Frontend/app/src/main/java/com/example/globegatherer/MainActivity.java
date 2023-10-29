@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         networkManager = NetworkManager.getInstance(this);
 
         loginButton = findViewById(R.id.loginButton);
-        message = findViewById(R.id.message);
+//        message = findViewById(R.id.message);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAdminPage() {
         Intent intent = new Intent(this, Admin_Page.class);
+        // Pass the username to the profile_page activity
+        intent.putExtra("USERNAME", username.getText().toString());
         startActivity(intent);
     }
 
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             // Display the extracted signUpUsernames in your TextView
-                            message.setText("signUpUsernames: " + signUpUsernames.toString());
+//                            message.setText("signUpUsernames: " + signUpUsernames.toString());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

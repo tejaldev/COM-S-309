@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -58,6 +59,10 @@ public class NetworkManager {
         requestQueue.add(jsonObjectRequest);
     }
 
+    public void sendDeleteRequest(String url, Response.Listener<String> successListener, Response.ErrorListener errorListener) {
+        StringRequest request = new StringRequest(Request.Method.DELETE, url, successListener, errorListener);
+        requestQueue.add(request);
+    }
 
 
 

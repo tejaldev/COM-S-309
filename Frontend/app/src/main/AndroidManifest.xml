@@ -17,6 +17,9 @@
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
         <activity
+            android:name=".ban_user"
+            android:exported="false"/>
+        <activity
             android:name=".toDoList"
             android:exported="false" />
         <activity

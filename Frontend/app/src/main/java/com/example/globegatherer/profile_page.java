@@ -27,6 +27,7 @@ public class profile_page extends AppCompatActivity {
     private Button logout;
     private TextView Des_Response;
     private NetworkManager networkManager;
+    private String username;
 
     private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/add";
 
@@ -73,6 +74,19 @@ public class profile_page extends AppCompatActivity {
                 openActivity4();
             }
         });
+
+        username = getIntent().getStringExtra("USERNAME");
+        if (username != null) {
+            Log.d("Username", username); // Verify if the username is received correctly
+
+            // Pass the username along with the description to the server
+            Edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    makeJsonObjReq();
+                }
+            });
+        }
     }
 
     public void openActivity(){
@@ -95,6 +109,7 @@ public class profile_page extends AppCompatActivity {
         JSONObject requestData = new JSONObject();
         try {
             requestData.put("description", description.getText().toString());
+            requestData.put("username", username); // Add the username to the request
 
         } catch (Exception e) {
             e.printStackTrace();
