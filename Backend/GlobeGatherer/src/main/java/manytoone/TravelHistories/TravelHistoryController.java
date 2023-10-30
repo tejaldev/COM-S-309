@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TravelHistoryController {
 
     @Autowired
-    TravelHistoryRepository travelHistoryRepository;
+    manytoone.TravelHistories.GoogleMapRepository travelHistoryRepository;
     
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
