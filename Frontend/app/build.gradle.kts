@@ -42,7 +42,11 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation ("org.java-websocket:Java-WebSocket:1.5.1")
     // code for google maps
-    implementation ("com.google.android.gms:play-services-maps:17.0.1")
-    implementation ("org.java-websocket:Java-WebSocket:1.4.0")
+//    implementation ("com.google.android.gms:play-services-maps:17.0.1")
+//    implementation ("org.java-websocket:Java-WebSocket:1.4.0")
+
+    implementation ("com.google.android.gms:play-services-maps:17.0.0")
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
+
     // code ends here
 }

@@ -1,80 +1,123 @@
 package com.example.globegatherer;
 
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import com.google.android.gms.maps.CameraUpdate;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
-import java.net.URI;
+
+import android.location.Address;
+import android.location.Geocoder;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class mapPage extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap googleMap;
-    private WebSocketClient webSocketClient;
+    private GoogleMap mMap;
+    private EditText locationInput;
+    private List<Marker> pins = new ArrayList<>();
+    private RequestQueue requestQueue;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_page);
 
-        // Initialize Google Maps
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Initialize WebSocket connection
-        connectWebSocket();
+        locationInput = findViewById(R.id.locationInput);
+        Button searchButton = findViewById(R.id.searchButton);
+
+        requestQueue = Volley.newRequestQueue(this); // Initialize the RequestQueue
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String locationText = locationInput.getText().toString();
+                Geocoder geocoder = new Geocoder(mapPage.this);
+                List<Address> addressList;
+
+                try {
+                    addressList = geocoder.getFromLocationName(locationText, 1);
+                    if (!addressList.isEmpty()) {
+                        double latitude = addressList.get(0).getLatitude();
+                        double longitude = addressList.get(0).getLongitude();
+                        addPin(latitude, longitude);
+                        sendLocationToServer(latitude, longitude); // Send location data to the server
+                    } else {
+                        // Handle the case where the address couldn't be geocoded
+                    }
+                } catch (IOException e) {
+                    // Handle any geocoding errors or exceptions
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    private void connectWebSocket() {
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng defaultLocation = new LatLng(37.7749, -122.4194);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 15));
+    }
+
+    private void addPin(double latitude, double longitude) {
+        if (mMap != null) {
+            LatLng pinLocation = new LatLng(latitude, longitude);
+            Marker pin = mMap.addMarker(new MarkerOptions()
+                    .position(pinLocation)
+                    .title("Pin " + (pins.size() + 1)));
+            pins.add(pin);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pinLocation, 15));
+        }
+    }
+
+    private void sendLocationToServer(double latitude, double longitude) {
+        String url = "{{url}}"; // Replace with your server's endpoint
+
+        JSONObject locationData = new JSONObject();
         try {
-            webSocketClient = new WebSocketClient(new URI("ws://your-websocket-server-url")) {
-                @Override
-                public void onOpen(ServerHandshake handshakedata) {
-                    // Handle WebSocket connection opened
-                }
-
-                @Override
-                public void onMessage(String message) {
-                    // Handle incoming WebSocket messages
-                    // Update the map based on the received data
-                }
-
-                @Override
-                public void onClose(int code, String reason, boolean remote) {
-                    // Handle WebSocket connection closed
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    // Handle WebSocket errors
-                }
-            };
-
-            webSocketClient.connect();
-        } catch (Exception e) {
+            locationData.put("latitude", latitude);
+            locationData.put("longitude", longitude);
+            // Add other data if needed
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap map) {
-        googleMap = map;
-        // Customize your map settings here
-    }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, locationData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle a successful response from the server
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors
+                    }
+                });
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (webSocketClient != null) {
-            webSocketClient.close();
-        }
+        requestQueue.add(request); // Add the request to the RequestQueue
     }
 }

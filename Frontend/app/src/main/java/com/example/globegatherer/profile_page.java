@@ -110,7 +110,7 @@ public class profile_page extends AppCompatActivity{
 
     // new code
     public void openChatPage(){
-        Intent intent = new Intent(this, chatpage.class);
+        Intent intent = new Intent(this, mapPage.class);
         startActivity(intent);
     }
     // new code ends here
