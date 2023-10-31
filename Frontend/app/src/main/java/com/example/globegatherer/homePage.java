@@ -40,6 +40,10 @@ public class homePage extends AppCompatActivity {
                     opentravelHistory();
                     return true;
                 }
+//                }else if (itemId == R.id.menu_profile) {
+//                    openProfile();
+//                    return true;
+//                }
                 return false;
             }
         });
@@ -69,4 +73,10 @@ public class homePage extends AppCompatActivity {
         Intent intent = new Intent(this, travelHistory.class);
         startActivity(intent);
     }
+
+//    private void openProfile() {
+//        Intent intent = new Intent(this, profile_page.class);
+//        startActivity(intent);
+//    }
+
 }

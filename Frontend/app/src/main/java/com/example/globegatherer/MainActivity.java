@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString().trim();
                 String inputPassword = Password.getText().toString().trim();
                 if (signUpUsernames.contains(inputUsername)) {
-                    openActivity3();
+                    openActivity4();
                 } else {
                     makeJsonArrayReq();
                 }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivity3();
+                openActivity4();
             }
         });
 
@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivity3(){
+        Intent intent = new Intent(this, profile_page.class);
+        startActivity(intent);
+    }
+
+    public void openActivity4(){
         Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
