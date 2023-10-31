@@ -1,49 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".chatpage"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
-        android:layout_marginTop="20dp"
-        android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:hint="username"
-        android:textSize="20dp"
-        android:id="@+id/et1" />
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:id="@+id/et1"
+        android:textSize="18sp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Connect"
-        android:id="@+id/bt1" />
-    <EditText
-        android:layout_height="50dp"
-        android:layout_width="match_parent"
-        android:hint="message"
-        android:textSize="20dp"
-        android:id="@+id/messageInput" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/sendButton" />
+        android:id="@+id/bt1"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp">
 
         <TextView
             android:id="@+id/tx1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="The Coversation will appear here:\n"
-            android:textSize="20dp" />
+            android:text="The Conversation will appear here:"
+            android:textSize="18sp" />
 
     </ScrollView>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type a message"
+        android:id="@+id/messageInput"
+        android:textSize="18sp" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/sendButton"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
