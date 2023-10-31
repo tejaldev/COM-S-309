@@ -23,7 +23,7 @@ public class Admin_Page extends AppCompatActivity implements WebSocketListener{
 
     private String BASE_URL = "ws://10.0.2.2:8080/chat/";
 
-    private MaterialCardView Announcements, Delete_User, View_Credential;
+    private MaterialCardView Announcements, Ban_User, View_Credential;
     private EditText usernameEtx, msgEtx;
     private TextView msgTv;
     private Button connect;
@@ -35,7 +35,7 @@ public class Admin_Page extends AppCompatActivity implements WebSocketListener{
 
         /* initialize UI elements */
         Announcements = (MaterialCardView) findViewById(R.id.Announcement);
-        Delete_User = (MaterialCardView) findViewById(R.id.Delete);
+        Ban_User = (MaterialCardView) findViewById(R.id.Ban);
         View_Credential = (MaterialCardView) findViewById(R.id.Credential);
 //        Suspend_User = (MaterialCardView) findViewById(R.id.Suspend);
 //        Emergency_Text = (MaterialCardView) findViewById(R.id.Emergency);
@@ -50,7 +50,7 @@ public class Admin_Page extends AppCompatActivity implements WebSocketListener{
             WebSocketManager.getInstance().setWebSocketListener(Admin_Page.this);
         });
 
-        Delete_User.setOnClickListener(new View.OnClickListener() {
+        Ban_User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openActivity1();
@@ -62,6 +62,13 @@ public class Admin_Page extends AppCompatActivity implements WebSocketListener{
             @Override
             public void onClick(View view) {
                 openActivity();
+            }
+        });
+
+        View_Credential.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity2();
             }
         });
         /* send button listener */
@@ -85,6 +92,12 @@ public class Admin_Page extends AppCompatActivity implements WebSocketListener{
         Intent intent = new Intent(this, ban_user.class);
         startActivity(intent);
     }
+
+    public void openActivity2(){
+        Intent intent = new Intent(this, View_credentials.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onWebSocketMessage(String message) {
         /**

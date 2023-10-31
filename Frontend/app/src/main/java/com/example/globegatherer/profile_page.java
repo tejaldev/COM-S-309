@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class profile_page extends AppCompatActivity {
     private TextView Des_Response;
     private NetworkManager networkManager;
     private String username;
+    private ImageView Announcements;
 
     private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/add";
 
@@ -43,6 +45,7 @@ public class profile_page extends AppCompatActivity {
         Friend = findViewById(R.id.Friends);
 
         Des_Response = findViewById(R.id.Des_Response);
+        Announcements = findViewById(R.id.announcements);
 
 
         networkManager = NetworkManager.getInstance(this);
@@ -75,6 +78,13 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
+        Announcements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity6();
+            }
+        });
+
         username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
             Log.d("Username", username); // Verify if the username is received correctly
@@ -104,6 +114,10 @@ public class profile_page extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openActivity6(){
+        Intent intent = new Intent(this, Announcements_admin.class);
+        startActivity(intent);
+    }
     private void makeJsonObjReq() {
         // Creating a JSON object with the user's description
         JSONObject requestData = new JSONObject();

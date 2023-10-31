@@ -92,7 +92,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:id="@+id/Delete"
+            android:id="@+id/Ban"
             app:cardElevation="5dp">
 
             <LinearLayout

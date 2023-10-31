@@ -9,7 +9,7 @@
 
     <!-- Announcement CardView at the top -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/announcement_card_view"
+        android:id="@+id/announcement_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ban User"
+            android:text="Messages"
             android:textStyle="bold"
             android:textSize="30dp"
             android:textAlignment="center"
@@ -42,10 +42,10 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/announce_text"
+                android:id="@+id/Announce"
                 android:padding="10dp"
                 android:background="@drawable/custom_editing"
                 android:layout_marginTop="16dp"
@@ -54,13 +54,13 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:hint="Username"/>
+                android:hint="Message"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Ban_user"
-                android:text="Ban"
+                android:id="@+id/Connect"
+                android:text="Connect"
                 android:textColor="@color/white"
                 android:textStyle="normal"
                 android:textSize="15dp"
@@ -68,9 +68,17 @@
                 android:backgroundTint="@color/black"
                 />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_button"
+                android:text="Send"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:textAlignment="center"/>
 
             <TextView
-                android:id="@+id/user_ban"
+                android:id="@+id/text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
