@@ -56,6 +56,12 @@ public class profile_page extends AppCompatActivity {
                 } else if (itemId == R.id.menu_todo) {
                     openTodoListActivity();
                     return true;
+                }else if (itemId == R.id.menu_map) {
+                    openmapPage();
+                    return true;
+                }else if (itemId == R.id.menu_history) {
+                    opentravelHistory();
+                    return true;
                 }
                 return false;
             }
@@ -77,7 +83,7 @@ public class profile_page extends AppCompatActivity {
     }
 
     private void openFriendsActivity() {
-        Intent intent = new Intent(this, friends.class);
+        Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
 
@@ -88,6 +94,16 @@ public class profile_page extends AppCompatActivity {
 
     private void openTodoListActivity() {
         Intent intent = new Intent(this, toDoList.class);
+        startActivity(intent);
+    }
+
+    private void openmapPage() {
+        Intent intent = new Intent(this, mapPage.class);
+        startActivity(intent);
+    }
+
+    private void opentravelHistory() {
+        Intent intent = new Intent(this, travelHistory.class);
         startActivity(intent);
     }
 

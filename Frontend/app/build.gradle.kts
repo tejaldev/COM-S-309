@@ -44,6 +44,7 @@ dependencies {
     // code for google maps
 //    implementation ("com.google.android.gms:play-services-maps:17.0.1")
 //    implementation ("org.java-websocket:Java-WebSocket:1.4.0")
+    implementation ("com.google.android.gms:play-services-maps:17.0.1")
 
     implementation ("com.google.android.gms:play-services-maps:17.0.0")
     implementation ("com.google.android.gms:play-services-location:18.0.0")
