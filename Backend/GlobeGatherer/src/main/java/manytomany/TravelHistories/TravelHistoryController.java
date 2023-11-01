@@ -1,4 +1,4 @@
-package manytoone.TravelHistories;
+package manytomany.TravelHistories;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TravelHistoryController {
 
     @Autowired
-    manytoone.TravelHistories.GoogleMapRepository travelHistoryRepository;
+    manytomany.TravelHistories.GoogleMapRepository travelHistoryRepository;
     
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";

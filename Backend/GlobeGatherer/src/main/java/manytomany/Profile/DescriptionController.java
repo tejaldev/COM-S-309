@@ -1,4 +1,4 @@
-package manytoone.Profile;
+package manytomany.Profile;
 
 import java.util.List;
 

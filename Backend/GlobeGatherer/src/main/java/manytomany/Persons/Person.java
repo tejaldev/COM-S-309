@@ -1,4 +1,4 @@
-package manytoone.Persons;
+package manytomany.Persons;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import manytoone.Friends.Friend;
-import manytoone.Profile.Description;
-import manytoone.TravelHistories.TravelHistory;
+import manytomany.Friends.Friend;
+import manytomany.Profile.Description;
+import manytomany.TravelHistories.TravelHistory;
 
 /**
  * 

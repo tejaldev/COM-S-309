@@ -1,5 +1,6 @@
-package manytoone.Friends;
+package manytomany.GoogleMaps;
 
+import manytomany.TravelHistories.GoogleMap;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */ 
 
-public interface FriendRepository extends JpaRepository<Friend, Long> {
-    Friend findById(int id);
+public interface GoogleMapRepository extends JpaRepository<GoogleMap, Long> {
+    GoogleMap findById(int id);
 
     @Transactional
     void deleteById(int id);

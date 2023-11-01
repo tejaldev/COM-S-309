@@ -1,10 +1,10 @@
-package manytoone.Friends;
+package manytomany.Friends;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import manytoone.Persons.Person;
+import manytomany.Persons.Person;
 
 @Entity
 public class Friend {

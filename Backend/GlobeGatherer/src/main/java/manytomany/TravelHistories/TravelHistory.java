@@ -1,10 +1,10 @@
-package manytoone.TravelHistories;
+package manytomany.TravelHistories;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import manytoone.Persons.Person;
+import manytomany.Persons.Person;
 
 /**
  * 
@@ -12,8 +12,8 @@ import manytoone.Persons.Person;
  */ 
 
 @Entity
-public class GoogleMap {
-
+public class TravelHistory {
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,41 +25,33 @@ public class GoogleMap {
     @JsonIgnore
     private Person person;
 
-    public GoogleMap(String destinationName) { //, String country
+    public TravelHistory(String destinationName) { //, String country
         this.destinationName = destinationName;
 //        this.country = country;
     }
 
-    public GoogleMap() {
+    public TravelHistory() {
     }
 
     // =============================== Getters and Setters for each field ================================== //
 
-    public int getId() {
+    public int getId(){
         return id;
     }
-
-    public void setId(int id) {
+    public void setId(int id){
         this.id = id;
     }
-
-    public String getDestinationName() {
-        return destinationName;
-    }
-
-    public void setDestinationName(String destinationName) {
-        this.destinationName = destinationName;
-    }
-}
-
+    public String getDestinationName(){return destinationName;}
+    public void setDestinationName(String destinationName){
+        this.destinationName = destinationName;}
 //    public String getCountry(){return country;}
 //    public void setCountry(String country){
 //        this.country = country;}
-//    public Person getPerson(){
-//        return person;
-//    }
-//    public void setPerson(Person person){
-//        this.person = person;
-//    }
+    public Person getPerson(){
+        return person;
+    }
+    public void setPerson(Person person){
+        this.person = person;
+    }
 
-//}
+}

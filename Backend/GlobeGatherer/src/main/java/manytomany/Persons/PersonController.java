@@ -1,4 +1,4 @@
-package manytoone.Persons;
+package manytomany.Persons;
 
 import java.util.List;
 
@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import manytoone.Friends.Friend;
-import manytoone.Friends.FriendRepository;
-import manytoone.Profile.Description;
-import manytoone.Profile.DescriptionRepository;
+import manytomany.Friends.Friend;
+import manytomany.Friends.FriendRepository;
+import manytomany.Profile.DescriptionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
