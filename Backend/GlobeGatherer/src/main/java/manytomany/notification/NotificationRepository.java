@@ -1,4 +1,4 @@
-package com.cs309.websocket3.chat;
+package manytomany.notification;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

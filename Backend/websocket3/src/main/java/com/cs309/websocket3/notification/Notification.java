@@ -1,4 +1,4 @@
-package com.cs309.websocket3.chat;
+package com.cs309.websocket3.notification;
 
 import java.util.Date;
 
