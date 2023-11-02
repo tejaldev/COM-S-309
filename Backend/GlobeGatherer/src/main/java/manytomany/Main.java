@@ -22,6 +22,7 @@ class Main {
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
+        //SpringApplication.run(Websocket3Application.class, args);
     }
 
     // Create 3 users with their machines

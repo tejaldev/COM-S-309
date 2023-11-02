@@ -12,21 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * 
  * @author Vivek Bengre
- *
- */
+ * 
+ */ 
 
 @RestController
 public class TravelToDoController {
 
     @Autowired
     TravelToDoRepository travelToDoRepository;
-
+    
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
-
-
 
     @GetMapping(path = "/TravelToDo")
     List<TravelToDo> getAllTravelToDo(){

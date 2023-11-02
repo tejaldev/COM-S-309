@@ -1,6 +1,7 @@
 package manytomany.Persons;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,6 +63,7 @@ public class PersonController {
 
     @GetMapping(path = "/persons/{id}")
     Person getPersonById( @PathVariable int id){
+
         return personRepository.findById(id);
     }
 
@@ -72,6 +74,31 @@ public class PersonController {
         personRepository.save(person);
         return success;
     }
+
+    @PostMapping(path = "/persons/login")
+    public ResponseEntity<String> login(@RequestBody Map<String, String> request) {
+        String username = request.get("SignUpUsername");
+        String password = request.get("SignUpPassword");
+
+        if (username == null || password == null) {
+            return ResponseEntity.badRequest().body("{\"message\":\"Username and password are required.\"}");
+        }
+
+        // Query the database to find a user with the given username
+        Person person = personRepository.findBySignUpUsername(username);
+
+        if (person == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\":\"Invalid credentials.\"}");
+        }
+
+        // Check if the provided password matches the stored password
+        if (person.getSignUpPassword().equals(password)) {
+            return ResponseEntity.ok("{\"message\":\"Login successful.\"}");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\":\"Invalid credentials.\"}");
+        }
+    }
+
 
     @PutMapping("/persons/update/{id}")
     Person updatePerson(@PathVariable int id, @RequestBody Person request){
@@ -94,7 +121,7 @@ public class PersonController {
         return success;
     }
 
-    @DeleteMapping(path = "/persons/delete{id}")
+    @DeleteMapping(path = "/persons/delete/{id}")
     String deletePerson(@PathVariable int id){
         personRepository.deleteById(id);
         return success;

@@ -7,10 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
+import java.util.HashMap;
+import java.util.Map;
+import javax.persistence.*;
+import java.util.Set;
 import manytomany.Friends.Friend;
 import manytomany.Profile.Description;
-import manytomany.TravelHistories.TravelHistory;
+import manytomany.TravelToDos.TravelToDo;
 
 /**
  * 
@@ -28,11 +31,15 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "sign_up_name", unique = true)
     private String SignUpName;
     private String SignUpUsername;
     private String SignUpPassword;
     private String SignUpEmail;
     private String SignUpPhoneNo;
+
+
 
 
     /*
@@ -51,7 +58,7 @@ public class Person {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "travel_id")
-    private TravelHistory travelHistory;
+    private TravelToDo travelToDo;
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -131,12 +138,12 @@ public class Person {
         this.description = description;
     }
 
-    public TravelHistory getTravelToDo(){
-        return travelHistory;
+    public TravelToDo getTravelToDo(){
+        return travelToDo;
     }
 
-    public void setTravelToDo(TravelHistory travelToDo){
-        this.travelHistory = travelToDo;
+    public void setTravelToDo(TravelToDo travelToDo){
+        this.travelToDo = travelToDo;
     }
     
 }
