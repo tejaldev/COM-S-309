@@ -26,7 +26,7 @@ public class GoogleMapController {
     private String failure = "{\"message\":\"failure\"}";
 
     @GetMapping(path = "/GoogleMaps")
-    List<GoogleMap> getAllTravelToDo(){
+    List<GoogleMap> getAllGoogleMap(){
         return googleMapRepository.findAll();
     }
 
@@ -36,7 +36,7 @@ public class GoogleMapController {
 //    }
 
     @PostMapping(path = "/GoogleMaps")
-    GoogleMap createTravelToDo(@RequestBody GoogleMap dest){
+    GoogleMap createGoogleMap(@RequestBody GoogleMap dest){
         if (dest == null)
             return null;
         return googleMapRepository.save(dest);
