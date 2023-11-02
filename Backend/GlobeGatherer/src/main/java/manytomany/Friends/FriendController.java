@@ -1,9 +1,9 @@
-package manytoone.Friends;
+package manytomany.Friends;
 
 import java.util.List;
 
-import manytoone.Persons.Person;
-import manytoone.Persons.PersonRepository;
+import manytomany.Persons.Person;
+import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

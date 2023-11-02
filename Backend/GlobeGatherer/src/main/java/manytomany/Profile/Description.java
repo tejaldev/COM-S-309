@@ -1,10 +1,10 @@
-package manytoone.Profile;
+package manytomany.Profile;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import manytoone.Persons.Person;
+import manytomany.Persons.Person;
 
 @Entity
 public class Description {

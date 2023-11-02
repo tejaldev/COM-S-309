@@ -1,4 +1,4 @@
-package manytoone;
+package manytomany;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -6,12 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import manytoone.Friends.Friend;
-import manytoone.Friends.FriendRepository;
-import manytoone.Persons.Person;
-import manytoone.Persons.PersonRepository;
-import manytoone.Profile.Description;
-import manytoone.Profile.DescriptionRepository;
+import manytomany.Friends.FriendRepository;
+import manytomany.Persons.PersonRepository;
+import manytomany.Profile.DescriptionRepository;
 
 /**
  * 

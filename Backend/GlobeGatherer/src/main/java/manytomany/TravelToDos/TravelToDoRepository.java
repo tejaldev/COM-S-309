@@ -1,4 +1,4 @@
-package manytoone.Profile;
+package manytomany.TravelToDos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 
-public interface DescriptionRepository extends JpaRepository<Description, Long> {
-    Description findById(int id);
+public interface TravelToDoRepository extends JpaRepository<TravelToDo, Long> {
+    TravelToDo findById(int id);
 
     @Transactional
     void deleteById(int id);

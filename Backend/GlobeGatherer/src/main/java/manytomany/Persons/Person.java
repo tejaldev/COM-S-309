@@ -1,4 +1,4 @@
-package manytoone.Persons;
+package manytomany.Persons;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import manytoone.Friends.Friend;
-import manytoone.Profile.Description;
-import manytoone.TravelToDos.TravelToDo;
+import manytomany.Friends.Friend;
+import manytomany.Profile.Description;
+import manytomany.TravelHistories.TravelHistory;
 
 /**
  * 
@@ -51,7 +51,7 @@ public class Person {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "travel_id")
-    private TravelToDo travelToDo;
+    private TravelHistory travelHistory;
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -131,12 +131,12 @@ public class Person {
         this.description = description;
     }
 
-    public TravelToDo getTravelToDo(){
-        return travelToDo;
+    public TravelHistory getTravelToDo(){
+        return travelHistory;
     }
 
-    public void setTravelToDo(TravelToDo travelToDo){
-        this.travelToDo = travelToDo;
+    public void setTravelToDo(TravelHistory travelToDo){
+        this.travelHistory = travelToDo;
     }
     
 }
