@@ -1,20 +1,29 @@
-package manytomany.notification;
+package manytomany.chat;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
-
-import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "messages")
 @Data
-public class Notification {
-    @Id
+public class Message {
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String adminName;
+    private String userName;
 
     @Lob
     private String content;
@@ -22,13 +31,14 @@ public class Notification {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sent")
     private Date sent = new Date();
-
-    public Notification() {};
-
-    public Notification(String adminName, String content) {
-        this.adminName = adminName;
-        this.content = content;
-    }
+	
+	
+	public Message() {};
+	
+	public Message(String userName, String content) {
+		this.userName = userName;
+		this.content = content;
+	}
 
     public Long getId() {
         return id;
@@ -38,12 +48,12 @@ public class Notification {
         this.id = id;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getContent() {

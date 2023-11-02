@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import manytomany.Persons.Person;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Friend {
 
@@ -16,6 +19,14 @@ public class Friend {
     private String name;
     private String username;
 
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    private Set<Person> friends = new HashSet<>();
+
+    //one half of ManytoMany
     @ManyToOne
     @JsonIgnore
     private Person person;
