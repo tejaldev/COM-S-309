@@ -57,16 +57,17 @@ public class ChatSocket {
 
 		logger.info("Entered into Open");
 
-    // store connecting user information
-		sessionUsernameMap.put(session, username);
-		usernameSessionMap.put(username, session);
+			// store connecting user information
+			sessionUsernameMap.put(session, username);
+			usernameSessionMap.put(username, session);
 
-		//Send chat history to the newly connected user
-		sendMessageToPArticularUser(username, getChatHistory());
+			//Send chat history to the newly connected user
+			sendMessageToPArticularUser(username, getChatHistory());
 
-    // broadcast that new user joined
-		String message = "User:" + username + " has Joined the globeChat";
-		broadcast(message);
+			// broadcast that new user joined
+			String message = "User:" + username + " has Joined the globeChat";
+			broadcast(message);
+
 	}
 
 
@@ -167,7 +168,20 @@ public class ChatSocket {
 		announcementRepo.save(announcement);
 
 		// Broadcast the announcement to all users
-		broadcast("[Announcement] " + username + ": " + content);
+		broadcast("[ADMIN Announcement] " + username + ": " + content);
+	}
+
+	private String getAnnouncements() {
+		List<Notification> announcements = announcementRepo.findAll();
+
+		// Convert the list of announcements to a string
+		StringBuilder sb = new StringBuilder();
+		if (announcements != null && announcements.size() != 0) {
+			for (Notification announcement : announcements) {
+				sb.append(announcement.getUserName() + ": " + announcement.getContent() + "\n");
+			}
+		}
+		return sb.toString();
 	}
 
 } // end of Class
