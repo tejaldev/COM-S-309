@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Chat</title>
+  <title>InBox</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@ var ws;
 
 function connect() {
     var username = document.getElementById("username").value;
-    var url = "ws://localhost:8080/chat/" + username;
+    var url = "ws://localhost:8080/notification/" + username;
 
     ws = new WebSocket(url);
 
