@@ -127,6 +127,12 @@
         android:id="@+id/profile"
         android:text="Profile Page"
         android:backgroundTint="@color/black"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rate"
+        android:text="Ratings Page"
+        android:backgroundTint="@color/black"/>
 
 
 

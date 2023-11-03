@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button Profile;
     EditText username;
     EditText Password;
-    Button loginButton;
+    Button loginButton, Ratings;
     private TextView message;
     private NetworkManager networkManager;
 
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         SignUp = findViewById(R.id.signupbutton);
         Profile = findViewById(R.id.profile);
+        Ratings = findViewById(R.id.rate);
 
         networkManager = NetworkManager.getInstance(this);
 
@@ -86,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Ratings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity4();
+            }
+        });
+
 
     }
 
@@ -98,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, profile_page.class);
         startActivity(intent);
     }
+    public void openActivity4(){
+        Intent intent = new Intent(this, Ratings.class);
+        startActivity(intent);
+    }
+
 
     public void openAdminPage() {
         Intent intent = new Intent(this, Admin_Page.class);

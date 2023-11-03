@@ -118,6 +118,8 @@ public class profile_page extends AppCompatActivity {
         Intent intent = new Intent(this, Announcements_admin.class);
         startActivity(intent);
     }
+
+
     private void makeJsonObjReq() {
         // Creating a JSON object with the user's description
         JSONObject requestData = new JSONObject();
