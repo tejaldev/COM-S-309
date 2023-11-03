@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class profile_page extends AppCompatActivity {
 
     private Button Edit;
-    private Button ToDo;
+    private Button ToDo, Calendar;
     private Button Friend;
     private EditText description;
     private Button logout;
@@ -43,6 +43,7 @@ public class profile_page extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         ToDo = findViewById(R.id.To_do_button);
         Friend = findViewById(R.id.Friends);
+        Calendar = findViewById(R.id.calendar_open);
 
         Des_Response = findViewById(R.id.Des_Response);
         Announcements = findViewById(R.id.announcements);
@@ -85,6 +86,13 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
+        Calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity7();
+            }
+        });
+
         username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
             Log.d("Username", username); // Verify if the username is received correctly
@@ -116,6 +124,10 @@ public class profile_page extends AppCompatActivity {
 
     public void openActivity6(){
         Intent intent = new Intent(this, Announcements_admin.class);
+        startActivity(intent);
+    }
+    public void openActivity7(){
+        Intent intent = new Intent(this, Calendar_Page.class);
         startActivity(intent);
     }
 
