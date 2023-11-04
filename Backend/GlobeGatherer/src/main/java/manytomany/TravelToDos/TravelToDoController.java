@@ -1,5 +1,6 @@
 package manytomany.TravelToDos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import manytomany.Persons.Person;
@@ -39,31 +40,44 @@ public class TravelToDoController {
         return travelToDoRepository.findAll();
     }
 
-    @GetMapping(path = "/TravelToDo/{id}")
-    TravelToDo getTravelToDoById(@PathVariable int id){
-        return travelToDoRepository.findById(id);
-    }
+    @GetMapping("/TravelToDo/{SignUpName}")
+    public ResponseEntity<List<TravelToDo>> getTravelToDosBySignUpName(@PathVariable String SignUpName) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
 
-    @PostMapping("/TravelToDo")
-   public ResponseEntity<String> createTravelToDoForPerson1(@RequestBody TravelToDo travel) {
-        Person user1 = personRepository.findById(1);
-
-        if (user1 == null) {
+        if (user == null || user.getTravelToDo() == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Set the user1 as the owner of this description
-        travel.setPerson(user1);
+        List<TravelToDo> travelToDos = new ArrayList<>(user.getTravelToDos());
 
-        // Save the description
+        return ResponseEntity.ok(travelToDos);
+    }
+
+
+
+    @PostMapping("/TravelToDo/{SignUpName}")
+    public ResponseEntity<String> createTravelToDoForPerson(@PathVariable String SignUpName, @RequestBody TravelToDo travel) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Set the user as the owner of this TravelToDo
+        travel.setPerson(user);
+
+        // Save the TravelToDo
         TravelToDo savedTravel = travelToDoRepository.save(travel);
 
-        // Update the user1's description reference
-        user1.setTravelToDo(savedTravel);
-        personRepository.save(user1);
+        // Update the user's TravelToDo reference
+        user.setTravelToDo(savedTravel);
+        personRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
+
 
 
 

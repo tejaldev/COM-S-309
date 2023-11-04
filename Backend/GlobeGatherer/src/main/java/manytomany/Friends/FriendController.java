@@ -1,5 +1,7 @@
 package manytomany.Friends;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import manytomany.Persons.Person;
@@ -29,36 +31,43 @@ public class FriendController {
         return ResponseEntity.ok(friends);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Friend> getFriendById(@PathVariable int id) {
-        Friend friend = friendRepository.findById(id);
-        if (friend == null) {
+    @GetMapping("/{SignUpName}")
+    public ResponseEntity<List<Friend>> getAllFriendsBySignUpName(@PathVariable String SignUpName) {
+        Person user = personRepository.findBySignUpName(SignUpName);
+
+        if (user == null || user.getFriends() == null || user.getFriends().isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(friend);
+
+        List<Friend> friends = new ArrayList<>(user.getFriends());
+
+        return ResponseEntity.ok(friends);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addFriendToUser1(@RequestBody Friend friend) {
-        // Find the user with ID 1
-        Person user1 = personRepository.findById(1);
 
-        if (user1 == null) {
+
+    @PostMapping("/add/{SignUpName}")
+    public ResponseEntity<String> addFriendToUser1(@PathVariable String SignUpName, @RequestBody Friend friend) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
+
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Set the user1 as the owner of this friend
-        friend.setPerson(user1);
+        // Set the user as the owner of this friend
+        friend.setPerson(user);
 
         // Save the friend
         Friend savedFriend = friendRepository.save(friend);
 
-        // Update the user1's friend reference
-        user1.setFriend(savedFriend);
-        personRepository.save(user1);
+        // Update the user's friend reference
+        user.setFriend(savedFriend); // Add the friend to the collection
+        personRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Friend> updateFriend(@PathVariable int id, @Valid @RequestBody Friend request) {

@@ -39,33 +39,45 @@ public class DescriptionController {
         return descriptionRepository.findAll();
     }
 
-    @GetMapping(path = "/description/{id}")
-    Description getDescriptionById(@PathVariable int id){
-        return descriptionRepository.findById(id);
-    }
+    @GetMapping("/description/{SignUpName}")
+    public ResponseEntity<Description> getDescriptionBySignUpName(@PathVariable String SignUpName) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addDescription(@RequestBody Description description) {
-        // Find the user with ID 1
-        Person user1 = personRepository.findById(1);
-
-        if (user1 == null) {
+        if (user == null || user.getDescription() == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Set the user1 as the owner of this description
-        description.setPerson(user1);
+        Description description = user.getDescription();
+
+        return ResponseEntity.ok(description);
+    }
+
+
+    @PostMapping("/description/{SignUpName}")
+    public ResponseEntity<String> addDescriptionBySignUpName(
+            @PathVariable String SignUpName,
+            @RequestBody Description description) {
+
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Set the user as the owner of this description
+        description.setPerson(user);
 
         // Save the description
         Description savedDescription = descriptionRepository.save(description);
 
-        // Update the user1's description reference
-        user1.setDescription(savedDescription);
-        personRepository.save(user1);
+        // Update the user's description reference
+        user.setDescription(savedDescription);
+        personRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
-
 
 
     @PutMapping(path = "/description/update/{id}")

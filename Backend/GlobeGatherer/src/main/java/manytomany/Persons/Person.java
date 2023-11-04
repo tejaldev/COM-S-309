@@ -1,5 +1,8 @@
 package manytomany.Persons;
 
+import java.util.Set;
+import javax.persistence.OneToMany;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +45,8 @@ public class Person {
 
 
 
+
+
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
      * cascade is responsible propagating all changes, even to children of the class Eg: changes made to laptop within a user object will be reflected
@@ -59,6 +64,12 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "travel_id")
     private TravelToDo travelToDo;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<Friend> friends;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<TravelToDo> travelToDos;
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -144,6 +155,22 @@ public class Person {
 
     public void setTravelToDo(TravelToDo travelToDo){
         this.travelToDo = travelToDo;
+    }
+
+    public Set<Friend> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<Friend> friends) {
+        this.friends = friends;
+    }
+
+    public Set<TravelToDo> getTravelToDos() {
+        return travelToDos;
+    }
+
+    public void setTravelToDos(Set<TravelToDo> travelToDos) {
+        this.travelToDos = travelToDos;
     }
     
 }
