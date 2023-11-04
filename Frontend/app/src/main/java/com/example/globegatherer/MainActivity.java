@@ -18,6 +18,8 @@ import com.example.globegatherer.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
     Button SignUp;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private NetworkManager networkManager;
 
     private JSONArray jsonResponse;
-
+    private ArrayList<String> signUpUsernames = new ArrayList<>();
 
 
     @Override
@@ -46,13 +48,20 @@ public class MainActivity extends AppCompatActivity {
 
         networkManager = NetworkManager.getInstance(this);
 
-        loginButton = findViewById(R.id.loginButton);
+        //loginButton = findViewById(R.id.loginButton);
         message = findViewById(R.id.message);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeJsonArrayReq();
+                String inputUsername = username.getText().toString().trim();
+                String inputPassword = Password.getText().toString().trim();
+                if (signUpUsernames.contains(inputUsername)) {
+                    openActivity4();
+                } else {
+                    makeJsonArrayReq();
+                }
+
             }
         });
 
@@ -66,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivity3();
+                openActivity4();
             }
         });
 
@@ -79,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity3(){
         Intent intent = new Intent(this, profile_page.class);
+        startActivity(intent);
+    }
+
+    public void openActivity4(){
+        Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
 

@@ -21,7 +21,7 @@ import org.json.JSONArray;
 
 public class showFriend extends AppCompatActivity {
 
-    private Button showToDoLists;
+   // private Button showToDoLists;
 
     private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/friends/all";
 
@@ -35,27 +35,27 @@ public class showFriend extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_friend);
         showing = findViewById(R.id.showing);
-        showToDoLists = findViewById(R.id.showToDoList);
+        //showToDoLists = findViewById(R.id.showToDoList);
         JSONArray parameter= new JSONArray();
         getRequest(parameter);
 
 
-        showToDoLists.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                openToDoList();
-            }
-
-
-        });
+//        showToDoLists.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                openToDoList();
+//            }
+//
+//
+//        });
 
     }
 
-    private void openToDoList(){
-        Intent intent = new Intent(this, toDoList.class);
-        startActivity(intent);
-    }
+//    private void openToDoList(){
+//        Intent intent = new Intent(this, toDoList.class);
+//        startActivity(intent);
+//    }
 
     private void getRequest(JSONArray parameter){
 

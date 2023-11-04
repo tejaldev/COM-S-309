@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".app.AppController"
@@ -17,6 +19,21 @@
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
         <activity
+            android:name=".discover"
+            android:exported="false" />
+        <activity
+            android:name=".homePage"
+            android:exported="false" />
+        <activity
+            android:name=".travelHistory"
+            android:exported="false" />
+        <activity
+            android:name=".mapPage"
+            android:exported="false" />
+        <activity
+            android:name=".chatpage"
+            android:exported="false" />
+        <activity
             android:name=".toDoList"
             android:exported="false" />
         <activity
@@ -27,18 +44,27 @@
             android:exported="false" />
         <activity
             android:name=".profile_page"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity2_login_next"
             android:exported="false" />
-        <activity android:name=".app.AppController"
+        <activity
+            android:name=".app.AppController"
             android:exported="false" />
         <activity
             android:name=".net_utils.Const"
             android:exported="false" />
         <activity
             android:name=".net_utils.LruBitmapCache"
-            android:exported="false" />
+            android:exported="false" /> <!-- key for google maps -->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.geo.API_KEY" -->
+        <!-- android:value="AIzaSyCDA4zkRTyQeCinpcn2jKsQiF2HpEgC7b0" /> -->
+        <!-- key for google maps ends here -->
+        <!-- key for google places -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDhErL4BQUwbPztgjBuGPDAODUQFxVZeE0" /> <!-- key for google places ends here -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

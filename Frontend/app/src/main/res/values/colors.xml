@@ -3,5 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#8692f7</color>
+    <color name="colorPrimary">#3498db</color>
+    <color name="colorPrimaryText">#FF0000</color>
 
 </resources>

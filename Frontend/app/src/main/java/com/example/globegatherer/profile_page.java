@@ -1,28 +1,26 @@
-
-
 package com.example.globegatherer;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.globegatherer.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
 public class profile_page extends AppCompatActivity {
-
+    private BottomNavigationView bottomNavigation;
     private Button Edit;
-    private Button ToDo;
-    private Button Friend;
     private EditText description;
     private Button logout;
     private TextView Des_Response;
@@ -35,16 +33,39 @@ public class profile_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
+        // Initialize your elements
         Edit = findViewById(R.id.edit);
         description = findViewById(R.id.Description);
         logout = findViewById(R.id.logout);
-        ToDo = findViewById(R.id.To_do_button);
-        Friend = findViewById(R.id.Friends);
-
         Des_Response = findViewById(R.id.Des_Response);
-
-
         networkManager = NetworkManager.getInstance(this);
+
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+
+        // Set up a listener to handle item selection
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                 int itemId = item.getItemId();
+                if (itemId == R.id.menu_friends) {
+                    openFriendsActivity();
+                    return true;
+                } else if (itemId == R.id.menu_chat) {
+                    openChatActivity();
+                    return true;
+                } else if (itemId == R.id.menu_todo) {
+                    openTodoListActivity();
+                    return true;
+                }else if (itemId == R.id.menu_map) {
+                    openmapPage();
+                    return true;
+                }else if (itemId == R.id.menu_history) {
+                    opentravelHistory();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         Edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,34 +80,35 @@ public class profile_page extends AppCompatActivity {
                 openActivity();
             }
         });
-
-        ToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity5();
-            }
-        });
-
-        Friend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity4();
-            }
-        });
     }
 
-    public void openActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    private void openFriendsActivity() {
+        Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
 
-    public void openActivity4(){
-        Intent intent = new Intent(this, friends.class);
+    private void openChatActivity() {
+        Intent intent = new Intent(this, chatpage.class);
         startActivity(intent);
     }
 
-    public void openActivity5(){
+    private void openTodoListActivity() {
         Intent intent = new Intent(this, toDoList.class);
+        startActivity(intent);
+    }
+
+    private void openmapPage() {
+        Intent intent = new Intent(this, mapPage.class);
+        startActivity(intent);
+    }
+
+    private void opentravelHistory() {
+        Intent intent = new Intent(this, travelHistory.class);
+        startActivity(intent);
+    }
+
+    private void openActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -95,7 +117,6 @@ public class profile_page extends AppCompatActivity {
         JSONObject requestData = new JSONObject();
         try {
             requestData.put("description", description.getText().toString());
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,7 +129,6 @@ public class profile_page extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             Log.d("Volley Response", response.toString());
-                            //Toast.makeText(profile_page.this, "Description saved successfully", Toast.LENGTH_SHORT).show();
                             Des_Response.setText(response.toString());
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -124,4 +144,3 @@ public class profile_page extends AppCompatActivity {
         );
     }
 }
-
