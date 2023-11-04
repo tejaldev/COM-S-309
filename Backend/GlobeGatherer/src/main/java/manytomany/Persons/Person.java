@@ -16,6 +16,8 @@ import javax.persistence.*;
 import java.util.Set;
 import manytomany.Friends.Friend;
 import manytomany.Profile.Description;
+import manytomany.SearchHistories.SearchHistory;
+import manytomany.TravelHistories.TravelHistory;
 import manytomany.TravelToDos.TravelToDo;
 
 /**
@@ -70,6 +72,12 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<TravelToDo> travelToDos;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<SearchHistory> searches;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<TravelHistory> histories;
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -171,6 +179,22 @@ public class Person {
 
     public void setTravelToDos(Set<TravelToDo> travelToDos) {
         this.travelToDos = travelToDos;
+    }
+
+    public void setSearches(Set<SearchHistory> searches) {
+        this.searches = searches;
+    }
+
+    public Set<SearchHistory> getSearches() {
+        return searches;
+    }
+
+    public void setHistories(Set<TravelHistory> histories) {
+        this.histories = histories;
+    }
+
+    public Set<TravelHistory> getHistories() {
+        return histories;
     }
     
 }

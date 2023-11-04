@@ -1,8 +1,13 @@
 package manytomany.SearchHistories;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import manytomany.Friends.Friend;
+import manytomany.Persons.Person;
+import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +28,9 @@ public class SearchHistoryController {
     @Autowired
     SearchHistoryRepository searchHistoryRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -32,19 +40,38 @@ public class SearchHistoryController {
         return searchHistoryRepository.findAll();
     }
 
-    @GetMapping(path = "/search/{id}")
-    SearchHistory getRatingById(@PathVariable int id){
+    @GetMapping("/search/{SignUpName}")
+    public ResponseEntity<List<SearchHistory>> getAllSearchessBySignUpName(@PathVariable String SignUpName) {
+        Person user = personRepository.findBySignUpName(SignUpName);
 
-        return searchHistoryRepository.findById(id);
+        if (user == null || user.getSearches() == null || user.getSearches().isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<SearchHistory> searches = new ArrayList<>(user.getSearches());
+
+        return ResponseEntity.ok(searches);
     }
 
-    @PostMapping(path = "/search/add")
-    String createRatingDescription(@RequestBody SearchHistory Rating){
-        if (Rating == null)
-            return failure;
-        searchHistoryRepository.save(Rating);
+
+    @PostMapping("/search/add/{SignUpName}")
+    String createRatingDescriptionForUser(@PathVariable String SignUpName, @RequestBody SearchHistory rating) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
+
+        if (user == null) {
+            return failure; // User not found
+        }
+
+        // Set the user as the owner of this search history
+        rating.setPerson(user);
+
+        // Save the search history entry
+        searchHistoryRepository.save(rating);
+
         return success;
     }
+
 
     @PutMapping(path = "/search/update/{id}")
     SearchHistory updateRating(@PathVariable int id, @RequestBody SearchHistory request){
