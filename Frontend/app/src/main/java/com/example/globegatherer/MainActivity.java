@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivity3();
+                openActivity4();
             }
         });
 
@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openActivity4(){
         Intent intent = new Intent(this, Ratings.class);
+        startActivity(intent);
+    }
+
+    public void openActivity4(){
+        Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
 

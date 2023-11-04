@@ -1,5 +1,6 @@
 package com.example.globegatherer;
 
+
 import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
