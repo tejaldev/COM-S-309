@@ -52,32 +52,32 @@ public class profile_page extends AppCompatActivity {
 
         networkManager = NetworkManager.getInstance(this);
 
-        bottomNavigation = findViewById(R.id.bottom_navigation);
+//        bottomNavigation = findViewById(R.id.bottom_navigation);
 
         // Set up a listener to handle item selection
-        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 int itemId = item.getItemId();
-                if (itemId == R.id.menu_friends) {
-                    openFriendsActivity();
-                    return true;
-                } else if (itemId == R.id.menu_chat) {
-                    openChatActivity();
-                    return true;
-                } else if (itemId == R.id.menu_todo) {
-                    openTodoListActivity();
-                    return true;
-                }else if (itemId == R.id.menu_map) {
-                    openmapPage();
-                    return true;
-                }else if (itemId == R.id.menu_history) {
-                    opentravelHistory();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                 int itemId = item.getItemId();
+//                if (itemId == R.id.menu_friends) {
+//                    openFriendsActivity();
+//                    return true;
+//                } else if (itemId == R.id.menu_chat) {
+//                    openChatActivity();
+//                    return true;
+//                } else if (itemId == R.id.menu_todo) {
+//                    openTodoListActivity();
+//                    return true;
+//                }else if (itemId == R.id.menu_map) {
+//                    openmapPage();
+//                    return true;
+//                }else if (itemId == R.id.menu_history) {
+//                    opentravelHistory();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         Edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,19 +93,19 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
-        ToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity5();
-            }
-        });
-
-        Friend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity4();
-            }
-        });
+//        ToDo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity5();
+//            }
+//        });
+//
+//        Friend.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity4();
+//            }
+//        });
 
         Announcements.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,10 +135,26 @@ public class profile_page extends AppCompatActivity {
         }
     }
 
-    private void openFriendsActivity() {
-        Intent intent = new Intent(this, homePage.class);
+    private void openActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    private void openFriendsActivity() {
+        Intent intent = new Intent(this, friends.class);
+        startActivity(intent);
+    }
+
+    private void openmapPage() {
+        Intent intent = new Intent(this, mapPage.class);
+        startActivity(intent);
+    }
+
+    private void opentravelHistory() {
+        Intent intent = new Intent(this, travelHistory.class);
+        startActivity(intent);
+    }
+
 
     private void openChatActivity() {
         Intent intent = new Intent(this, chatpage.class);

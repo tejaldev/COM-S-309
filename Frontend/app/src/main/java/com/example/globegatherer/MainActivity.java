@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
+    static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/login";
     Button SignUp;
     Button Profile;
     EditText username;
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 if (inputUsername.equals("admin") && inputPassword.equals("admin@123")) {
                     openAdminPage(); // Redirect to the admin page
                 } else {
-                    if (signUpUsernames.contains(inputUsername)) {
-                        openActivity3();
-                    } else {
+//                    if (signUpUsernames.contains(inputUsername)) {
+//                        openActivity3();
+//                    } else {
                         makeJsonArrayReq();
-                    }
+//                    }
                 }
                 //makeJsonArrayReq();
             }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivity4();
+                openActivity3();
             }
         });
 
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivity3(){
-        Intent intent = new Intent(this, profile_page.class);
+        Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
     public void openActivity4(){
@@ -111,10 +111,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openActivity4(){
-        Intent intent = new Intent(this, homePage.class);
+    public void openActivity5(){
+        Intent intent = new Intent(this, profile_page.class);
         startActivity(intent);
     }
+
+//    public void openHomepage(){
+//        Intent intent = new Intent(this, homePage.class);
+//        startActivity(intent);
+//    }
 
 
     public void openAdminPage() {
@@ -147,30 +152,60 @@ public class MainActivity extends AppCompatActivity {
 //    }
 //
 
+//    private void makeJsonArrayReq() {
+//        networkManager.sendGetRequest(URL_JSON_ARRAY,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        try {
+//                            signUpUsernames.clear(); // Clear the array before adding new data
+//
+//                            // Iterate through the JSON array and extract signUpUsername
+//                            for (int i = 0; i < response.length(); i++) {
+//                                JSONObject jsonObject = response.getJSONObject(i);
+//                                String signUpUsername = jsonObject.optString("signUpUsername", "");
+//
+//                                // Append signUpUsername to the ArrayList
+//                                signUpUsernames.add(signUpUsername);
+//
+//
+//                                }
+//                            // Convert ArrayList to a string for display
+//                            String usernamesAsString = TextUtils.join(", ", signUpUsernames);
+//
+//
+//                            // Display the extracted signUpUsernames in your TextView
+////                            message.setText("signUpUsernames: " + signUpUsernames.toString());
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.e("Volley Error", error.toString());
+//                    }
+//                }
+//        );
+//    }
+
     private void makeJsonArrayReq() {
-        networkManager.sendGetRequest(URL_JSON_ARRAY,
-                new Response.Listener<JSONArray>() {
+        JSONObject emptyData = new JSONObject();
+
+        networkManager.sendPostRequest(emptyData, URL_JSON_ARRAY,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
-                            signUpUsernames.clear(); // Clear the array before adding new data
+                            // Upon successful response, check for the welcome message
+                            String welcomeMessage = response.optString("message", "");
 
-                            // Iterate through the JSON array and extract signUpUsername
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                String signUpUsername = jsonObject.optString("signUpUsername", "");
+                            // Assuming the response contains "Welcome {username}"
+                            if (welcomeMessage.contains("Welcome")) {
+                                openActivity3(); // Open the login page
+                            }
 
-                                // Append signUpUsername to the ArrayList
-                                signUpUsernames.add(signUpUsername);
-
-
-                                }
-                            // Convert ArrayList to a string for display
-                            String usernamesAsString = TextUtils.join(", ", signUpUsernames);
-
-
-                            // Display the extracted signUpUsernames in your TextView
-//                            message.setText("signUpUsernames: " + signUpUsernames.toString());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -180,10 +215,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString());
+                        // Handle error cases
                     }
                 }
         );
     }
+
 
 
 

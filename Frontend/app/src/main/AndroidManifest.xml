@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
-        <activity
-            android:name=".discover"
-            android:exported="false" />
+
         <activity
             android:name=".homePage"
             android:exported="false" />
@@ -53,6 +51,21 @@
             android:exported="false" />
         <activity
             android:name=".Activity2_login_next"
+            android:exported="false" />
+        <activity
+            android:name=".Calendar_Page"
+            android:exported="false" />
+        <activity
+            android:name=".View_credentials"
+            android:exported="false" />
+        <activity
+            android:name=".Ratings"
+            android:exported="false" />
+        <activity
+            android:name=".Announcements_admin"
+            android:exported="false" />
+        <activity
+            android:name=".ban_user"
             android:exported="false" />
         <activity
             android:name=".app.AppController"
