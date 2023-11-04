@@ -18,6 +18,8 @@ import org.json.JSONObject;
 public class Calendar_Page extends AppCompatActivity {
 
     private CalendarView StartDate;
+    private Button startDateButton;
+    private Button endDateButton;
     private CalendarView EndDate;
     private EditText destinationEditText;
     private Button Save;
@@ -33,8 +35,26 @@ public class Calendar_Page extends AppCompatActivity {
         EndDate = findViewById(R.id.endDate);
         destinationEditText = findViewById(R.id.destinationEditText);
         Save = findViewById(R.id.calendarButton);
+        startDateButton = findViewById(R.id.startDateButton);
+        endDateButton = findViewById(R.id.endDateButton);
         networkManager = NetworkManager.getInstance(this);
 
+
+        startDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartDate.setVisibility(View.VISIBLE);
+                EndDate.setVisibility(View.GONE);
+            }
+        });
+
+        endDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartDate.setVisibility(View.GONE);
+                EndDate.setVisibility(View.VISIBLE);
+            }
+        });
 
         Save.setOnClickListener(new View.OnClickListener() {
             @Override

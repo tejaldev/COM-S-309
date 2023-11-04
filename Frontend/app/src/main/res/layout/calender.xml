@@ -9,6 +9,7 @@
     android:background="@drawable/img"
     tools:context=".Calendar_Page">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/calendar"
         android:layout_width="match_parent"
@@ -18,10 +19,11 @@
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="Calendar"
             android:textAlignment="center"
             android:textSize="30dp"
@@ -31,10 +33,64 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:background="@drawable/custom_editing">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/startDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Select Start Date"
+            android:backgroundTint="@color/black"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/endDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select End Date"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/black"
+            android:textAlignment="center"/>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigationView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        app:menu="@menu/calendar_xml" />-->
+
+<!--    <CalendarView-->
+<!--        android:id="@+id/startDateCalendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone" />-->
+
+<!--    <CalendarView-->
+<!--        android:id="@+id/endDateCalendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone" />-->
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
         android:background="@drawable/custom_editing">
+
 
     <CalendarView
         android:layout_width="match_parent"
@@ -47,6 +103,21 @@
             android:id="@+id/endDate"/>
 
     </androidx.cardview.widget.CardView>
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:cardCornerRadius="30dp"-->
+<!--        app:cardElevation="20dp"-->
+<!--        android:background="@drawable/custom_editing">-->
+
+<!--    <CalendarView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/endDate"/>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
 
     <androidx.cardview.widget.CardView
@@ -63,7 +134,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp">
+            android:padding="10dp">
 
     <EditText
         android:id="@+id/destinationEditText"
@@ -88,7 +159,9 @@
 
         </LinearLayout>
 
+
     </androidx.cardview.widget.CardView>
+
 
 
 </LinearLayout>
