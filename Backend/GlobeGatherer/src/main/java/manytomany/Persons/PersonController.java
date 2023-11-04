@@ -75,29 +75,32 @@ public class PersonController {
         return success;
     }
 
-    @PostMapping(path = "/persons/login")
-    public ResponseEntity<String> login(@RequestBody Map<String, String> request) {
-        String username = request.get("SignUpUsername");
-        String password = request.get("SignUpPassword");
+    @PostMapping(path = "/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        String signUpUsername = loginRequest.getSignUpUsername();
+        String password = loginRequest.getSignUpPassword();
 
-        if (username == null || password == null) {
-            return ResponseEntity.badRequest().body("{\"message\":\"Username and password are required.\"}");
-        }
+        // Check if user exists and if password matches
+        Person user = personRepository.findBySignUpUsername(signUpUsername);
 
-        // Query the database to find a user with the given username
-        Person person = personRepository.findBySignUpUsername(username);
-
-        if (person == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\":\"Invalid credentials.\"}");
-        }
-
-        // Check if the provided password matches the stored password
-        if (person.getSignUpPassword().equals(password)) {
-            return ResponseEntity.ok("{\"message\":\"Login successful.\"}");
+        if (user != null && user.getSignUpPassword() != null && user.getSignUpPassword().equals(password)) {
+            String welcomeMessage = "Welcome " + user.getSignUpName();
+            return ResponseEntity.ok(welcomeMessage);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\":\"Invalid credentials.\"}");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login credentials");
         }
     }
+
+    @GetMapping(path = "/username")
+    public ResponseEntity<String> getSignUpUsernameForMostRecentPassword() {
+        String signUpUsername = personRepository.findSignUpNameByMostRecentPassword();
+        if (signUpUsername != null) {
+            return ResponseEntity.ok(signUpUsername);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
     @PutMapping("/persons/update/{id}")

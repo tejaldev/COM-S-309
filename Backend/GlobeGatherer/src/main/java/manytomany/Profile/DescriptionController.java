@@ -1,8 +1,13 @@
 package manytomany.Profile;
 
 import java.util.List;
+import java.util.Optional;
 
+import manytomany.Persons.Person;
+import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +28,9 @@ public class DescriptionController {
     @Autowired
     DescriptionRepository descriptionRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -36,13 +44,29 @@ public class DescriptionController {
         return descriptionRepository.findById(id);
     }
 
-    @PostMapping(path = "/description/add")
-    String createDescription(@RequestBody Description Description){
-        if (Description == null)
-            return failure;
-        descriptionRepository.save(Description);
-        return success;
+    @PostMapping("/add")
+    public ResponseEntity<String> addDescription(@RequestBody Description description) {
+        // Find the user with ID 1
+        Person user1 = personRepository.findById(1);
+
+        if (user1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Set the user1 as the owner of this description
+        description.setPerson(user1);
+
+        // Save the description
+        Description savedDescription = descriptionRepository.save(description);
+
+        // Update the user1's description reference
+        user1.setDescription(savedDescription);
+        personRepository.save(user1);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
+
+
 
     @PutMapping(path = "/description/update/{id}")
     Description updateDescription(@PathVariable int id, @RequestBody Description request){

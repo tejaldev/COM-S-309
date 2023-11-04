@@ -2,7 +2,12 @@ package manytomany.TravelToDos;
 
 import java.util.List;
 
+import manytomany.Persons.Person;
+import manytomany.Persons.PersonRepository;
+import manytomany.Profile.Description;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +27,9 @@ public class TravelToDoController {
 
     @Autowired
     TravelToDoRepository travelToDoRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
     
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
@@ -36,12 +44,27 @@ public class TravelToDoController {
         return travelToDoRepository.findById(id);
     }
 
-    @PostMapping(path = "/TravelToDo")
-    TravelToDo createTravelToDo(@RequestBody TravelToDo travel){
-        if (travel == null)
-            return null;
-        return travelToDoRepository.save(travel);
+    @PostMapping("/TravelToDo")
+   public ResponseEntity<String> createTravelToDoForPerson1(@RequestBody TravelToDo travel) {
+        Person user1 = personRepository.findById(1);
+
+        if (user1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Set the user1 as the owner of this description
+        travel.setPerson(user1);
+
+        // Save the description
+        TravelToDo savedTravel = travelToDoRepository.save(travel);
+
+        // Update the user1's description reference
+        user1.setTravelToDo(savedTravel);
+        personRepository.save(user1);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
+
 
 
     @PutMapping(path = "/TravelToDo/{id}")

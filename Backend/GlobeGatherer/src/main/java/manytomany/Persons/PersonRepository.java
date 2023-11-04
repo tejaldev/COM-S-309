@@ -20,8 +20,12 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT p FROM Person p WHERE p.SignUpUsername = :SignUpUsername")
     Person findBySignUpUsername(@Param("SignUpUsername") String SignUpUsername);
 
-    // Custom query method to delete a Person by SignUpName
+    @Query("SELECT p.SignUpName FROM Person p WHERE p.id = (SELECT MAX(p2.id) FROM Person p2)")
+    String findSignUpNameByMostRecentPassword();
 
+
+
+    // Custom query method to delete a Person by SignUpName
     @Modifying
     @Transactional
     @Query("DELETE FROM Person p WHERE p.SignUpName = :signUpName")
