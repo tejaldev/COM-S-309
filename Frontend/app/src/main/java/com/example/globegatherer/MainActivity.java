@@ -3,6 +3,7 @@ package com.example.globegatherer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
     Button Profile;
     EditText username;
     EditText Password;
-    Button loginButton;
+    Button loginButton, Ratings;
     private TextView message;
     private NetworkManager networkManager;
 
     private JSONArray jsonResponse;
-    private ArrayList<String> signUpUsernames = new ArrayList<>();
 
+    private ArrayList<String> signUpUsernames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +46,30 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         SignUp = findViewById(R.id.signupbutton);
         Profile = findViewById(R.id.profile);
+        Ratings = findViewById(R.id.rate);
 
         networkManager = NetworkManager.getInstance(this);
 
-        //loginButton = findViewById(R.id.loginButton);
-        message = findViewById(R.id.message);
+        loginButton = findViewById(R.id.loginButton);
+//        message = findViewById(R.id.message);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String inputUsername = username.getText().toString().trim();
                 String inputPassword = Password.getText().toString().trim();
-                if (signUpUsernames.contains(inputUsername)) {
-                    openActivity4();
-                } else {
-                    makeJsonArrayReq();
-                }
 
+                if (inputUsername.equals("admin") && inputPassword.equals("admin@123")) {
+                    openAdminPage(); // Redirect to the admin page
+                } else {
+                    if (signUpUsernames.contains(inputUsername)) {
+                        openActivity3();
+                    } else {
+                        makeJsonArrayReq();
+                    }
+                }
+                //makeJsonArrayReq();
             }
         });
 
@@ -79,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Ratings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity4();
+            }
+        });
+
+
     }
 
     public void openActivity2(){
@@ -90,12 +106,23 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, profile_page.class);
         startActivity(intent);
     }
+    public void openActivity4(){
+        Intent intent = new Intent(this, Ratings.class);
+        startActivity(intent);
+    }
 
     public void openActivity4(){
         Intent intent = new Intent(this, homePage.class);
         startActivity(intent);
     }
 
+
+    public void openAdminPage() {
+        Intent intent = new Intent(this, Admin_Page.class);
+        // Pass the username to the profile_page activity
+        intent.putExtra("USERNAME", username.getText().toString());
+        startActivity(intent);
+    }
 
 //    private void makeJsonArrayReq() {
 //        networkManager.sendGetRequest(URL_JSON_ARRAY,
@@ -126,25 +153,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            // Initializing a StringBuilder to store the signUpUsername values
-                            StringBuilder signUpUsernames = new StringBuilder();
+                            signUpUsernames.clear(); // Clear the array before adding new data
 
                             // Iterate through the JSON array and extract signUpUsername
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String signUpUsername = jsonObject.optString("signUpUsername", "");
 
-                                // Append signUpUsername to the StringBuilder
-                                signUpUsernames.append(signUpUsername);
+                                // Append signUpUsername to the ArrayList
+                                signUpUsernames.add(signUpUsername);
 
-                                // Append a comma or a separator if not the last element
-                                if (i < response.length() - 1) {
-                                    signUpUsernames.append(", ");
+
                                 }
-                            }
+                            // Convert ArrayList to a string for display
+                            String usernamesAsString = TextUtils.join(", ", signUpUsernames);
+
 
                             // Display the extracted signUpUsernames in your TextView
-                            message.setText("signUpUsernames: " + signUpUsernames.toString());
+//                            message.setText("signUpUsernames: " + signUpUsernames.toString());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

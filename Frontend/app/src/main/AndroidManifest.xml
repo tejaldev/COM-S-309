@@ -37,6 +37,12 @@
             android:name=".toDoList"
             android:exported="false" />
         <activity
+            android:name=".Announcements"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Page"
+            android:exported="false" />
+        <activity
             android:name=".showFriend"
             android:exported="false" />
         <activity
@@ -65,6 +71,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDhErL4BQUwbPztgjBuGPDAODUQFxVZeE0" /> <!-- key for google places ends here -->
+        <activity
+            android:name=".WebSocketListener"
+            android:exported="false" />
+        <activity
+            android:name=".WebSocketManager"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

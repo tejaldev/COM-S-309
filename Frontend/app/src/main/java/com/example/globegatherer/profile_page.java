@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,10 +22,14 @@ import org.json.JSONObject;
 public class profile_page extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
     private Button Edit;
+    private Button ToDo, Calendar;
+    private Button Friend;
     private EditText description;
     private Button logout;
     private TextView Des_Response;
     private NetworkManager networkManager;
+    private String username;
+    private ImageView Announcements;
 
     private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/add";
 
@@ -37,7 +42,14 @@ public class profile_page extends AppCompatActivity {
         Edit = findViewById(R.id.edit);
         description = findViewById(R.id.Description);
         logout = findViewById(R.id.logout);
+        ToDo = findViewById(R.id.To_do_button);
+        Friend = findViewById(R.id.Friends);
+        Calendar = findViewById(R.id.calendar_open);
+
         Des_Response = findViewById(R.id.Des_Response);
+        Announcements = findViewById(R.id.announcements);
+
+
         networkManager = NetworkManager.getInstance(this);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -80,6 +92,47 @@ public class profile_page extends AppCompatActivity {
                 openActivity();
             }
         });
+
+        ToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity5();
+            }
+        });
+
+        Friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity4();
+            }
+        });
+
+        Announcements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity6();
+            }
+        });
+
+        Calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity7();
+            }
+        });
+
+        username = getIntent().getStringExtra("USERNAME");
+        if (username != null) {
+            Log.d("Username", username); // Verify if the username is received correctly
+
+            // Pass the username along with the description to the server
+            Edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    makeJsonObjReq();
+                }
+            });
+        }
     }
 
     private void openFriendsActivity() {
@@ -97,26 +150,23 @@ public class profile_page extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openmapPage() {
-        Intent intent = new Intent(this, mapPage.class);
+    public void openActivity6(){
+        Intent intent = new Intent(this, Announcements_admin.class);
+        startActivity(intent);
+    }
+    public void openActivity7(){
+        Intent intent = new Intent(this, Calendar_Page.class);
         startActivity(intent);
     }
 
-    private void opentravelHistory() {
-        Intent intent = new Intent(this, travelHistory.class);
-        startActivity(intent);
-    }
-
-    private void openActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 
     private void makeJsonObjReq() {
         // Creating a JSON object with the user's description
         JSONObject requestData = new JSONObject();
         try {
             requestData.put("description", description.getText().toString());
+            requestData.put("username", username); // Add the username to the request
+
         } catch (Exception e) {
             e.printStackTrace();
         }

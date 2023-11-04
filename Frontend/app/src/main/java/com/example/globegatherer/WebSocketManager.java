@@ -21,6 +21,9 @@ public class WebSocketManager {
     private MyWebSocketClient webSocketClient;
     private WebSocketListener webSocketListener;
 
+    public boolean isSocketOpen() {
+        return webSocketClient != null && webSocketClient.isOpen();
+    }
     private WebSocketManager() {}
 
     /**
