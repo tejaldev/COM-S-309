@@ -39,6 +39,8 @@ public class PersonController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+    private String login = "{\"message\":\"Welcome\"}";
+
     @GetMapping(path = "/persons/all")
     public ResponseEntity<List<Person>> getAllPersons() {
         try {
@@ -85,7 +87,7 @@ public class PersonController {
 
         if (user != null && user.getSignUpPassword() != null && user.getSignUpPassword().equals(password)) {
             String welcomeMessage = "Welcome " + user.getSignUpName();
-            return ResponseEntity.ok(welcomeMessage);
+            return ResponseEntity.ok(login);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login credentials");
         }

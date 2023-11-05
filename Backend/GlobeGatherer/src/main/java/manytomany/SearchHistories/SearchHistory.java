@@ -55,5 +55,5 @@ public class SearchHistory {
     public void setPerson(Person person) {
 
         this.person = person;
-    }
+    }{}
 }

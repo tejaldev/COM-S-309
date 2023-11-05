@@ -1,4 +1,4 @@
-package manytomany.GoogleMaps;
+package manytomany.Calendars;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
+ *
  * @author Vivek Bengre
- * 
- */ 
+ *
+ */
 
 @RestController
-public class GoogleMapController {
+public class CalendarController {
 
     @Autowired
-    GoogleMapRepository googleMapRepository;
+    CalendarRepository calendarRepository;
 
     @Autowired
     private PersonRepository personRepository;
@@ -33,29 +33,29 @@ public class GoogleMapController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/GoogleMaps")
-    List<GoogleMap> getAllGoogleMap(){
-        return googleMapRepository.findAll();
+    @GetMapping(path = "/cal/all")
+    List<Calendar> getAllGoogleMap(){
+        return calendarRepository.findAll();
     }
 
-    @GetMapping(path = "/GoogleMaps/{SignUpName}")
-    public ResponseEntity<List<GoogleMap>> getMapBySignUpName(@PathVariable String SignUpName) {
+    @GetMapping(path = "/cal/{SignUpName}")
+    public ResponseEntity<List<Calendar>> getMapBySignUpName(@PathVariable String SignUpName) {
         // Find the user by SignUpName
         Person user = personRepository.findBySignUpName(SignUpName);
 
-        if (user == null || user.getMaps() == null) {
+        if (user == null || user.getCals() == null) {
             return ResponseEntity.notFound().build();
         }
 
-        List<GoogleMap> maps = new ArrayList<>(user.getMaps());
+        List<Calendar> cals = new ArrayList<>(user.getCals());
 
-        return ResponseEntity.ok(maps);
+        return ResponseEntity.ok(cals);
     }
 
-    @PostMapping("/GoogleMaps/{SignUpName}")
-    public ResponseEntity<GoogleMap> createGoogleMapForSignUpName(
+    @PostMapping("/cal/{SignUpName}")
+    public ResponseEntity<Calendar> createGoogleMapForSignUpName(
             @PathVariable String SignUpName,
-            @RequestBody GoogleMap googleMap
+            @RequestBody Calendar googleMap
     ) {
         // Find the user with the provided SignUpName
         Person user = personRepository.findBySignUpName(SignUpName);
@@ -68,12 +68,8 @@ public class GoogleMapController {
         googleMap.setPerson(user);
 
         // Save the GoogleMap entry
-        GoogleMap savedGoogleMap = googleMapRepository.save(googleMap);
+        Calendar savedGoogleMap = calendarRepository.save(googleMap);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedGoogleMap);
     }
-
-
-
-
 }

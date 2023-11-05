@@ -1,6 +1,6 @@
 package manytomany.Persons;
 
-import java.util.Set;
+import java.util.*;
 import javax.persistence.OneToMany;
 
 import javax.persistence.CascadeType;
@@ -10,15 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import java.util.HashMap;
-import java.util.Map;
 import javax.persistence.*;
 import java.util.Set;
+
+
 import manytomany.Friends.Friend;
+import manytomany.GoogleMaps.GoogleMap;
 import manytomany.Profile.Description;
+import manytomany.Ratings.Rating;
 import manytomany.SearchHistories.SearchHistory;
 import manytomany.TravelHistories.TravelHistory;
 import manytomany.TravelToDos.TravelToDo;
+import manytomany.Calendars.Calendar;
 
 /**
  * 
@@ -78,6 +81,17 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<TravelHistory> histories;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<Rating> ratings;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<GoogleMap> maps;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<Calendar> cals;
+
+
 
 
     public Person(String SignUpName, String SignUpUsername, String SignUpPassword, String SignUpEmail, String SignUpPhoneNo) {
@@ -195,6 +209,30 @@ public class Person {
 
     public Set<TravelHistory> getHistories() {
         return histories;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setMaps(Set<GoogleMap> maps) {
+        this.maps = maps;
+    }
+
+    public Set<GoogleMap> getMaps() {
+        return maps;
+    }
+
+    public void setCals(Set<Calendar> cals) {
+        this.cals = cals;
+    }
+
+    public Set<Calendar> getCals() {
+        return cals;
     }
     
 }

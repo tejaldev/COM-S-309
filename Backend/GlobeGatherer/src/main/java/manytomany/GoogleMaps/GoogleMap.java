@@ -1,10 +1,10 @@
 package manytomany.GoogleMaps;
 
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import manytomany.Persons.Person;
+
+import javax.persistence.*;
 
 /**
  * 
@@ -48,18 +48,17 @@ public class GoogleMap {
     }
 
     public void setDestinationName(String destinationName) {
+
         this.destinationName = destinationName;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+
+        this.person = person;
     }
 }
 
-//    public String getCountry(){return country;}
-//    public void setCountry(String country){
-//        this.country = country;}
-//    public Person getPerson(){
-//        return person;
-//    }
-//    public void setPerson(Person person){
-//        this.person = person;
-//    }
-
-//}

@@ -57,4 +57,14 @@ public class Rating {
 
         this.stars = stars;
     }
+
+    public Person getPerson() {
+
+        return person;
+    }
+
+    public void setPerson(Person person) {
+
+        this.person = person;
+    }
 }

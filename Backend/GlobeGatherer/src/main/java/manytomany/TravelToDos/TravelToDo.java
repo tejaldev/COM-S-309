@@ -28,12 +28,7 @@ public class TravelToDo {
     @JsonIgnore
     private Person person;
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    private Set<Person> travelToDos = new HashSet<>();
+
 
     public TravelToDo(String destinationName, String country) {
         this.destinationName = destinationName;
