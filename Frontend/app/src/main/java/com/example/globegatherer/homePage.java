@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -13,10 +16,25 @@ public class homePage extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
 
+    private ImageButton ProfileButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        ProfileButton=findViewById(R.id.profile_button);
+
+        ProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the click event for the profile button
+                // You can open the profile page using an Intent
+                Intent intent = new Intent(homePage.this, profile_page.class); // Replace ProfileActivity with your actual profile page activity
+                startActivity(intent);
+            }
+        });
+
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         // Set up a listener to handle item selection

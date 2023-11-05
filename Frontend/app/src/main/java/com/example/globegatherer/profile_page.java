@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class profile_page extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
     private Button Edit;
-    private Button ToDo, Calendar;
+    private Button rate, Calendar;
     private Button Friend;
     private EditText description;
     private Button logout;
@@ -30,6 +30,8 @@ public class profile_page extends AppCompatActivity {
     private NetworkManager networkManager;
     private String username;
     private ImageView Announcements;
+
+
 
     private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/{SignUpName}";
 
@@ -42,9 +44,10 @@ public class profile_page extends AppCompatActivity {
         Edit = findViewById(R.id.edit);
         description = findViewById(R.id.Description);
         logout = findViewById(R.id.logout);
-        //ToDo = findViewById(R.id.To_do_button);
+        rate = findViewById(R.id.ratings);
         //Friend = findViewById(R.id.Friends);
         Calendar = findViewById(R.id.calendar_open);
+
 
         Des_Response = findViewById(R.id.Des_Response);
         Announcements = findViewById(R.id.announcements);
@@ -67,12 +70,12 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
-//        ToDo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openActivity5();
-//            }
-//        });
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRatings();
+            }
+        });
 //
 //        Friend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -111,6 +114,11 @@ public class profile_page extends AppCompatActivity {
 
     private void openActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void openRatings() {
+        Intent intent = new Intent(this, Ratings.class);
         startActivity(intent);
     }
 

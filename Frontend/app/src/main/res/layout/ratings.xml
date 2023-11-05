@@ -47,8 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:numStars="5"
-                android:progressBackgroundTint="@color/black"
-                android:progressTint="@color/green1"/>
+            android:progressBackgroundTint="@color/black"
+            android:progressTint="@color/green1"/>
+
 
             <EditText
                 android:layout_width="match_parent"

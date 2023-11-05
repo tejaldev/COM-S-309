@@ -1,11 +1,8 @@
-
 package com.example.globegatherer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.util.Log;
-
-
 
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +22,7 @@ public class Ratings extends AppCompatActivity {
     private Button rateUsButton;
     EditText Comments;
 
+    private String URL = "http://coms-309-013.class.las.iastate.edu:8080/rating/add/{SignUpName}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +32,26 @@ public class Ratings extends AppCompatActivity {
         rateUsButton = findViewById(R.id.rateUsButton);
         ratings = findViewById(R.id.ratingbar);
         Comments = findViewById(R.id.comments);
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
 
         rateUsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float ratingValue = ratings.getRating();
+                // Get the rating value as an integer
+                int ratingValueInt = (int) ratings.getRating();
+
+                // Convert the integer rating value to a float
+                float ratingValue = (float) ratingValueInt;
                 String comment = Comments.getText().toString();
 
                 try {
                     JSONObject postData = new JSONObject();
-                    postData.put("rating", ratingValue);
+                    postData.put("rating", ratingValue); // Send the rating value as a float
                     postData.put("comment", comment);
 
                     // Assuming you have a NetworkManager class
                     NetworkManager networkManager = NetworkManager.getInstance(getApplicationContext());
-                    String url = "/rating/add";
 
                     networkManager.sendPostRequest(postData, url,
                             new Response.Listener<JSONObject>() {
@@ -71,6 +74,5 @@ public class Ratings extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
