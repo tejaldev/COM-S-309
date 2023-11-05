@@ -27,7 +27,7 @@ public class View_credentials extends AppCompatActivity {
     private TextView Credentials;
     private EditText Username_Edit;
     private Button View;
-    private static String URL="http://coms-309-013.class.las.iastate.edu:8080/persons/all";
+    private static String URL="http://coms-309-013.class.las.iastate.edu:8080/persons/cred";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

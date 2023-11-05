@@ -96,8 +96,8 @@ public class ban_user extends AppCompatActivity {
     public void banUser(String userId) {
 
 
-        String Iusername = SharedPrefsUtil.getUsername(this);
-        String url = URL.replace("{SignUpName}", Iusername);
+//        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", userId);
 
         networkManager.sendDeleteRequest(
                 url,
