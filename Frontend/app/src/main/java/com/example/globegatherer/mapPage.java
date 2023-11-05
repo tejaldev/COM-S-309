@@ -1,10 +1,15 @@
 package com.example.globegatherer;
 
 import androidx.fragment.app.FragmentActivity;
+
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.android.volley.VolleyLog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +39,12 @@ public class mapPage extends FragmentActivity implements OnMapReadyCallback {
     private EditText locationInput;
     private List<Marker> pins = new ArrayList<>();
     private RequestQueue requestQueue;
+    private ProgressDialog pDialog;
+
+    private static final String TAG = toDoList.class.getSimpleName();
+    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/GoogleMaps/{SignUpName}";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +61,14 @@ public class mapPage extends FragmentActivity implements OnMapReadyCallback {
         requestQueue = Volley.newRequestQueue(this); // Initialize the RequestQueue
 
         searchButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 String locationText = locationInput.getText().toString();
                 Geocoder geocoder = new Geocoder(mapPage.this);
                 List<Address> addressList;
-
+                String name = locationInput.getText().toString().trim();
                 try {
                     addressList = geocoder.getFromLocationName(locationText, 1);
                     if (!addressList.isEmpty()) {
@@ -70,9 +83,64 @@ public class mapPage extends FragmentActivity implements OnMapReadyCallback {
                     // Handle any geocoding errors or exceptions
                     e.printStackTrace();
                 }
+                JSONObject params = new JSONObject();
+                try {
+                    params.put("destinationName", name);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                postRequest(params);
+
             }
         });
     }
+
+
+    private void postRequest(JSONObject params) {
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                //responses2.setText(response.toString());
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                //responses2.setText("Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        }) {
+            //            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                // Your header logic here
+//                HashMap<String, String> headers = new HashMap<>();
+//                // Add any necessary headers here
+//                // Example: headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+//                // Example: headers.put("Content-Type", "application/json");
+//                return headers;
+//            }
+            {
+                setShouldCache(false); // Disable caching for debugging
+                VolleyLog.DEBUG = true;
+            }
+        };
+
+
+
+        // Adding the request to the request queue
+        Volley.newRequestQueue(this).add(jsonObjReq);
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
