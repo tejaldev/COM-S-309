@@ -23,7 +23,7 @@ public class showFriend extends AppCompatActivity {
 
    // private Button showToDoLists;
 
-    private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/friends/all";
+    private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/friends/{SignUpName}";
 
     private ProgressDialog pDialog;
     private static final String TAG = showFriend.class.getSimpleName();
@@ -64,8 +64,11 @@ public class showFriend extends AppCompatActivity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL2.replace("{SignUpName}", Iusername);
+
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(
-                Request.Method.GET, URL2, parameter, new Response.Listener<JSONArray>() {
+                Request.Method.GET, url, parameter, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());

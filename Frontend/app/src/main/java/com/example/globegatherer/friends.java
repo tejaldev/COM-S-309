@@ -31,7 +31,7 @@ public class friends extends AppCompatActivity {
 
     private Button addFriend;
     private static final String TAG = friends.class.getSimpleName();
-    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add";
+    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
 
 
     private ProgressDialog pDialog;
@@ -64,6 +64,7 @@ public class friends extends AppCompatActivity {
                 // Get user input
                 String name = nameEditText.getText().toString().trim();
                 String username = usernameEditText.getText().toString().trim();
+
 
                 // Check if name and username are not empty
                 if (!name.isEmpty() && !username.isEmpty()) {
@@ -107,9 +108,11 @@ public class friends extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.POST, URL, params, new Response.Listener<JSONObject>() {
+                Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());

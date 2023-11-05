@@ -59,6 +59,18 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/get"
+                android:text="View"
+                android:textColor="@color/white"
+                android:textStyle="normal"
+                android:textSize="15dp"
+                android:padding="10dp"
+                android:backgroundTint="@color/black"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/Ban_user"
                 android:text="Ban"
                 android:textColor="@color/white"

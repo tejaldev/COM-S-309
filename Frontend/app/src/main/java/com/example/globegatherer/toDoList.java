@@ -31,7 +31,7 @@ public class toDoList extends AppCompatActivity {
 
     private Button save;
     private static final String TAG = toDoList.class.getSimpleName();
-    private static final String URL3 = "http://coms-309-013.class.las.iastate.edu:8080//TravelToDo";
+    private static final String URL3 = "http://coms-309-013.class.las.iastate.edu:8080/TravelToDo/{SignUpName}";
 
 
     private ProgressDialog pDialog;
@@ -106,8 +106,11 @@ public class toDoList extends AppCompatActivity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL3.replace("{SignUpName}", Iusername);
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.POST, URL3, params, new Response.Listener<JSONObject>() {
+                Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
@@ -151,8 +154,11 @@ public class toDoList extends AppCompatActivity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL3.replace("{SignUpName}", Iusername);
+
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(
-                Request.Method.GET, URL3, parameter, new Response.Listener<JSONArray>() {
+                Request.Method.GET, url, parameter, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());

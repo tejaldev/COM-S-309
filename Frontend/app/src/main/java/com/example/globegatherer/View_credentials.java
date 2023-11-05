@@ -1,6 +1,6 @@
 package com.example.globegatherer;
 
-import static com.example.globegatherer.MainActivity.URL_JSON_ARRAY;
+//import static com.example.globegatherer.MainActivity.URL_JSON_ARRAY;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,11 +15,15 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
 
+import java.net.URL;
+
 public class View_credentials extends AppCompatActivity {
+
 
     private NetworkManager networkManager;
     private TextView Credentials;
     private Button View;
+    private static String URL="http://coms-309-013.class.las.iastate.edu:8080/admins/{SignUpName}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,10 @@ public class View_credentials extends AppCompatActivity {
     }
 
     private void makeJsonArrayReq() {
-        networkManager.sendGetRequest(URL_JSON_ARRAY,
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
+
+        networkManager.sendGetRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

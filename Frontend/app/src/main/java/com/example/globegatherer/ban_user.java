@@ -14,12 +14,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 public class ban_user extends AppCompatActivity {
-    private Button Ban, Exit;
+    private Button Ban, Exit, Show;
     private TextView Banned;
 
     private EditText Ban_username;
 
     private NetworkManager networkManager;
+    private static String URL = "http://coms-309-013.class.las.iastate.edu:8080/admins/delete/{SignUpName}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,11 @@ public class ban_user extends AppCompatActivity {
         Ban_username = findViewById(R.id.announce_text);
         Banned = findViewById(R.id.user_ban);
         Exit = findViewById(R.id.back);
+        Show = findViewById(R.id.get);
 
         networkManager = NetworkManager.getInstance(this);
+
+
 
         Ban.setOnClickListener(view -> {
             // Get the username from the EditText
@@ -58,7 +62,10 @@ public class ban_user extends AppCompatActivity {
         startActivity(intent);
     }
     public void banUser(String userId) {
-        String url = "/admins/delete/{SignUpName}" + userId; // Replace with your API endpoint for banning users
+
+
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
 
         networkManager.sendDeleteRequest(
                 url,

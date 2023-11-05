@@ -31,7 +31,7 @@ public class profile_page extends AppCompatActivity {
     private String username;
     private ImageView Announcements;
 
-    private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/add";
+    private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/{SignUpName}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class profile_page extends AppCompatActivity {
         Edit = findViewById(R.id.edit);
         description = findViewById(R.id.Description);
         logout = findViewById(R.id.logout);
-        ToDo = findViewById(R.id.To_do_button);
-        Friend = findViewById(R.id.Friends);
+        //ToDo = findViewById(R.id.To_do_button);
+        //Friend = findViewById(R.id.Friends);
         Calendar = findViewById(R.id.calendar_open);
 
         Des_Response = findViewById(R.id.Des_Response);
@@ -52,32 +52,6 @@ public class profile_page extends AppCompatActivity {
 
         networkManager = NetworkManager.getInstance(this);
 
-//        bottomNavigation = findViewById(R.id.bottom_navigation);
-
-        // Set up a listener to handle item selection
-//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                 int itemId = item.getItemId();
-//                if (itemId == R.id.menu_friends) {
-//                    openFriendsActivity();
-//                    return true;
-//                } else if (itemId == R.id.menu_chat) {
-//                    openChatActivity();
-//                    return true;
-//                } else if (itemId == R.id.menu_todo) {
-//                    openTodoListActivity();
-//                    return true;
-//                }else if (itemId == R.id.menu_map) {
-//                    openmapPage();
-//                    return true;
-//                }else if (itemId == R.id.menu_history) {
-//                    opentravelHistory();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
 
         Edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +97,7 @@ public class profile_page extends AppCompatActivity {
 
         username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
-            Log.d("Username", username); // Verify if the username is received correctly
+            Log.d("Username", username); // Verify if the ussername is received correctly
 
             // Pass the username along with the description to the server
             Edit.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +151,9 @@ public class profile_page extends AppCompatActivity {
 
 
     private void makeJsonObjReq() {
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL_JSON_OBJECT.replace("{SignUpName}", Iusername);
+
         // Creating a JSON object with the user's description
         JSONObject requestData = new JSONObject();
         try {
@@ -189,7 +166,7 @@ public class profile_page extends AppCompatActivity {
 
         networkManager.sendPostRequest(
                 requestData,
-                URL_JSON_OBJECT,
+                url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

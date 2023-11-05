@@ -17,12 +17,15 @@ import com.android.volley.VolleyError;
 import com.example.globegatherer.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/login";
+    static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/login";
+    static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
+
     Button SignUp;
     Button Profile;
     EditText username;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        message= findViewById(R.id.message);
         username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
@@ -66,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
 //                    if (signUpUsernames.contains(inputUsername)) {
 //                        openActivity3();
 //                    } else {
-                        makeJsonArrayReq();
+//                    openActivity3();
+                    SharedPrefsUtil.saveUsername(MainActivity.this, inputUsername); // Save the username
+                        makeJsonObjReq();
 //                    }
                 }
                 //makeJsonArrayReq();
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivity3();
+                openActivity5();
             }
         });
 
@@ -190,20 +196,34 @@ public class MainActivity extends AppCompatActivity {
 //        );
 //    }
 
-    private void makeJsonArrayReq() {
-        JSONObject emptyData = new JSONObject();
+    private void makeJsonObjReq() {
+        // Create a JSON object with the user's input data
+        JSONObject requestData = new JSONObject();
+        try {
+            requestData.put("signUpUsername", username.getText().toString());
+            requestData.put("signUpPassword", Password.getText().toString());
+//            requestData.put("signUpPassword", signUpPasswordEditText.getText().toString());
+//            requestData.put("signUpEmail", signUpEmailEditText.getText().toString());
+//            requestData.put("signUpPhoneNo", signUpPhoneNoEditText.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        networkManager.sendPostRequest(emptyData, URL_JSON_ARRAY,
+        networkManager.sendPostRequest(
+                requestData,
+                URL_JSON_OBJECT,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            // Upon successful response, check for the welcome message
-                            String welcomeMessage = response.optString("message", "");
+                            Log.d("Volley Response", response.toString());
+                            String Message = response.optString("message", "");
 
-                            // Assuming the response contains "Welcome {username}"
-                            if (welcomeMessage.contains("Welcome")) {
-                                openActivity3(); // Open the login page
+                            if (Message.equals("Welcome")) {
+                                openActivity3(); // Redirect to the home page on successful login
+                            } else {
+                                // Handle other messages or errors if needed
+                                message.setText(Message); // Display the message to the user
                             }
 
                         } catch (Exception e) {
@@ -215,11 +235,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString());
-                        // Handle error cases
                     }
                 }
         );
     }
+
 
 
 

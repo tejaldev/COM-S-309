@@ -18,7 +18,7 @@ import org.w3c.dom.Text;
 
 public class chatpage extends AppCompatActivity implements WebSocketListener{
 
-    private String BASE_URL = "ws://10.0.2.2:8080/chat/";
+    private String BASE_URL = "ws://coms-309-013.class.las.iastate.edu:8080/chat/{SignUpName}";
 
     private Button connectBtn, sendBtn;
     private EditText usernameEtx, msgEtx;
@@ -38,7 +38,10 @@ public class chatpage extends AppCompatActivity implements WebSocketListener{
 
         /* connect button listener */
         connectBtn.setOnClickListener(view -> {
-            String serverUrl = BASE_URL + usernameEtx.getText().toString();
+            String Iusername = SharedPrefsUtil.getUsername(this);
+            String url = BASE_URL.replace("{SignUpName}", Iusername);
+
+            String serverUrl = url + usernameEtx.getText().toString();
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
