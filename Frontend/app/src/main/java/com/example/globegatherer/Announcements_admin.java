@@ -32,7 +32,7 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
     }
 
     private boolean isMessageFromAdmin(String message) {
-        return message.trim().startsWith("/announcement"); // Update with your admin message identification logic
+        return message.trim().startsWith("/announcement");
     }
 
 

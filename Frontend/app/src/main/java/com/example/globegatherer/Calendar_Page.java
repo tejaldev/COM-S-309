@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
@@ -14,6 +15,11 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Calendar_Page extends AppCompatActivity {
 
@@ -25,6 +31,8 @@ public class Calendar_Page extends AppCompatActivity {
     private Button Save;
 
     private NetworkManager networkManager;
+    private long selectedStartDate;
+    private long selectedEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,65 +47,61 @@ public class Calendar_Page extends AppCompatActivity {
         endDateButton = findViewById(R.id.endDateButton);
         networkManager = NetworkManager.getInstance(this);
 
-
-        startDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartDate.setVisibility(View.VISIBLE);
-                EndDate.setVisibility(View.GONE);
-            }
+        StartDate.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, dayOfMonth);
+            selectedStartDate = calendar.getTimeInMillis();
         });
 
-        endDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartDate.setVisibility(View.GONE);
-                EndDate.setVisibility(View.VISIBLE);
-            }
+        EndDate.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, dayOfMonth);
+            selectedEndDate = calendar.getTimeInMillis();
         });
 
-        Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendDataToBackend();
-            }
+        startDateButton.setOnClickListener(v -> {
+            StartDate.setVisibility(View.VISIBLE);
+            EndDate.setVisibility(View.GONE);
         });
 
+        endDateButton.setOnClickListener(v -> {
+            StartDate.setVisibility(View.GONE);
+            EndDate.setVisibility(View.VISIBLE);
+        });
+
+        Save.setOnClickListener(v -> sendDataToBackend());
     }
 
     private void sendDataToBackend() {
-        long startDate = StartDate.getDate(); // Get selected start date in milliseconds
-        long endDate = EndDate.getDate(); // Get selected end date in milliseconds
+
         String destination = destinationEditText.getText().toString();
 
-        try {
-            JSONObject postData = new JSONObject();
-            postData.put("start_date", startDate);
-            postData.put("end_date", endDate);
-            postData.put("destination", destination);
+        if (selectedStartDate != 0 && selectedEndDate != 0) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-            // Assuming NetworkManager class is implemented and available
-            NetworkManager networkManager = NetworkManager.getInstance(getApplicationContext());
-            String url = "YOUR_BACKEND_ENDPOINT"; // Replace with your actual endpoint
+                String startDateString = sdf.format(new Date(selectedStartDate));
+                String endDateString = sdf.format(new Date(selectedEndDate));
 
-            networkManager.sendPostRequest(postData, url,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // Handle the response from the server, if needed
-                            Log.d("Network", "Post request successful: " + response.toString());
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle the error from the server, if needed
-                            Log.e("Network", "Post request failed: " + error.toString());
-                        }
-                    }
-            );
-        } catch (JSONException e) {
-            e.printStackTrace();
+                JSONObject postData = new JSONObject();
+                postData.put("startDate", startDateString);
+                postData.put("endDate", endDateString);
+                postData.put("destination", destination);
+
+                // NetworkManager class is used to send the JSON data to the backend
+                String url = "http://coms-309-013.class.las.iastate.edu:8080/cal/{SignUpName}"; // Replace with your actual endpoint
+                String Iusername = SharedPrefsUtil.getUsername(this);
+                String Url = url.replace("{SignUpName}", Iusername);
+
+                networkManager.sendPostRequest(postData, Url,
+                        response -> Log.d("Network", "Post request successful: " + response.toString()),
+                        error -> Log.e("Network", "Post request failed: " + error.toString())
+                );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("Network", "Selected dates are not set properly");
         }
     }
 }

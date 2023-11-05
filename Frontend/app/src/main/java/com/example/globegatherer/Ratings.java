@@ -47,7 +47,7 @@ public class Ratings extends AppCompatActivity {
 
                 try {
                     JSONObject postData = new JSONObject();
-                    postData.put("rating", ratingValue); // Send the rating value as a float
+                    postData.put("stars", ratingValue); // Send the rating value as a float
                     postData.put("comment", comment);
 
                     // Assuming you have a NetworkManager class

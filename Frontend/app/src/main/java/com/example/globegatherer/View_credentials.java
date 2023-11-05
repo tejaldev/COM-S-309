@@ -15,6 +15,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 
@@ -25,7 +27,7 @@ public class View_credentials extends AppCompatActivity {
     private TextView Credentials;
     private EditText Username_Edit;
     private Button View;
-    private static String URL="http://coms-309-013.class.las.iastate.edu:8080/admins/{SignUpName}";
+    private static String URL="http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +40,27 @@ public class View_credentials extends AppCompatActivity {
         View = findViewById(R.id.view_credentials);
         Username_Edit = findViewById(R.id.usernameEdit);
 
+
         View.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String inputUsername = Username_Edit.getText().toString();
-                if (!inputUsername.isEmpty()) {
-                    makeJsonArrayReq(inputUsername);
-                } else {
-                    // Handle empty input case
-                    // For example, show a message to the user to enter a username
-                }
-                }
-                //makeJsonArrayReq();
+//                if (!inputUsername.isEmpty()) {
+//                    makeJsonArrayReq();
+//                } else {
+//                    // Handle empty input case
+//                    // For example, show a message to the user to enter a username
+//                }
+                makeJsonArrayReq();
+            }
             });
     }
 
     // Inside the makeJsonArrayReq method in View_credentials activity
-    private void makeJsonArrayReq(String username) {
-//        String baseUrl = "http://coms-309-013.class.las.iastate.edu:8080/admins";
-        networkManager.sendGetRequestWithArgument(URL, username,
+        private void makeJsonArrayReq() {
+//            String Iusername = SharedPrefsUtil.getUsername(this);
+//            String url = URL.replace("{SignUpName}", Iusername);
+        networkManager.sendGetRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -72,10 +76,11 @@ public class View_credentials extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString());
-                        Credentials.setText("Error: " + error.toString());
                     }
                 }
         );
     }
+
+
 
 }
