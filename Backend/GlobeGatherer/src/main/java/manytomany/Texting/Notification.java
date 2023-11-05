@@ -1,4 +1,4 @@
-package manytomany.chat;
+package manytomany.Texting;
 
 import java.util.Date;
 

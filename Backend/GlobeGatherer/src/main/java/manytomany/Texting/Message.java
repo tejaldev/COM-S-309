@@ -1,4 +1,4 @@
-package manytomany.chat;
+package manytomany.Texting;
 
 import java.util.Date;
 
@@ -31,14 +31,27 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sent")
     private Date sent = new Date();
-	
-	
-	public Message() {};
+
+    @Column
+    private Boolean seen = false;
+
+
+
+
+    public Message() {};
 	
 	public Message(String userName, String content) {
 		this.userName = userName;
 		this.content = content;
 	}
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
 
     public Long getId() {
         return id;
