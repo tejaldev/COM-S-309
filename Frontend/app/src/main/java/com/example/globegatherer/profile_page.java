@@ -55,6 +55,20 @@ public class profile_page extends AppCompatActivity {
 
         networkManager = NetworkManager.getInstance(this);
 
+        String Iusername = SharedPrefsUtil.getUsername(this);
+
+        // Set the username in the "Profile_userame" EditText
+        EditText profileUsernameEditText = findViewById(R.id.Profile_userame);
+        if (Iusername != null) {
+            profileUsernameEditText.setText(Iusername);
+        }
+
+        EditText NameText = findViewById(R.id.Name);
+        if (Iusername != null) {
+            NameText.setText(Iusername);
+        }
+
+
 
         Edit.setOnClickListener(new View.OnClickListener() {
             @Override
