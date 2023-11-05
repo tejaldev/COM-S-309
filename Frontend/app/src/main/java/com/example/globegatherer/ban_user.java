@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
+
 public class ban_user extends AppCompatActivity {
     private Button Ban, Exit, Show;
     private TextView Banned;
@@ -21,6 +23,8 @@ public class ban_user extends AppCompatActivity {
 
     private NetworkManager networkManager;
     private static String URL = "http://coms-309-013.class.las.iastate.edu:8080/admins/delete/{SignUpName}";
+
+    private static String URL_GET = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,9 @@ public class ban_user extends AppCompatActivity {
 
         networkManager = NetworkManager.getInstance(this);
 
-
+        Show.setOnClickListener(view -> {
+            getUsers();
+        });
 
         Ban.setOnClickListener(view -> {
             // Get the username from the EditText
@@ -57,9 +63,35 @@ public class ban_user extends AppCompatActivity {
 //        networkManager = NetworkManager.getInstance(context);
 //    }
 
+
+
     public void openActivity(){
         Intent intent = new Intent(this, Admin_Page.class);
         startActivity(intent);
+    }
+
+    public void getUsers() {
+//        String Iusername = SharedPrefsUtil.getUsername(this);
+//        String url = URL.replace("{SignUpName}", Iusername);
+
+        networkManager.sendGetRequest(
+                URL_GET,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Handle the response (all the users' data)
+                        String usersData = response.toString();
+                        Banned.setText("All users: " + usersData);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Banned.setText("Error: " + error.toString());
+                    }
+                }
+        );
     }
     public void banUser(String userId) {
 

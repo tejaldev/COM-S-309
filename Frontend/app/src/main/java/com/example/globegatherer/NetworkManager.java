@@ -64,6 +64,11 @@ public class NetworkManager {
         requestQueue.add(request);
     }
 
+    public void sendGetRequestWithArgument(String url, String argument, Response.Listener<JSONArray> responseListener, Response.ErrorListener errorListener) {
+        String fullUrl = url + argument;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, fullUrl, null, responseListener, errorListener);
+        getRequestQueue().add(jsonArrayRequest);
+    }
 
 
 }

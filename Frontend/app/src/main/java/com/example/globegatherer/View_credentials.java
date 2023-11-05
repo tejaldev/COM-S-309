@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -22,6 +23,7 @@ public class View_credentials extends AppCompatActivity {
 
     private NetworkManager networkManager;
     private TextView Credentials;
+    private EditText Username_Edit;
     private Button View;
     private static String URL="http://coms-309-013.class.las.iastate.edu:8080/admins/{SignUpName}";
 
@@ -34,21 +36,27 @@ public class View_credentials extends AppCompatActivity {
 
         Credentials = findViewById(R.id.credentials_user);
         View = findViewById(R.id.view_credentials);
+        Username_Edit = findViewById(R.id.usernameEdit);
 
         View.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        makeJsonArrayReq();
+                String inputUsername = Username_Edit.getText().toString();
+                if (!inputUsername.isEmpty()) {
+                    makeJsonArrayReq(inputUsername);
+                } else {
+                    // Handle empty input case
+                    // For example, show a message to the user to enter a username
+                }
                 }
                 //makeJsonArrayReq();
             });
     }
 
-    private void makeJsonArrayReq() {
-        String Iusername = SharedPrefsUtil.getUsername(this);
-        String url = URL.replace("{SignUpName}", Iusername);
-
-        networkManager.sendGetRequest(url,
+    // Inside the makeJsonArrayReq method in View_credentials activity
+    private void makeJsonArrayReq(String username) {
+//        String baseUrl = "http://coms-309-013.class.las.iastate.edu:8080/admins";
+        networkManager.sendGetRequestWithArgument(URL, username,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -64,8 +72,10 @@ public class View_credentials extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString());
+                        Credentials.setText("Error: " + error.toString());
                     }
                 }
         );
     }
+
 }
