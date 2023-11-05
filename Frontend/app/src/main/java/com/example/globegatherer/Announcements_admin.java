@@ -1,6 +1,7 @@
 package com.example.globegatherer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,13 +15,25 @@ import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment;
 public class Announcements_admin extends AppCompatActivity implements WebSocketListener {
 
     private TextView Message;
-    private Button Back;
+    private Button Back, connection;
+    private WebSocketManager webSocketManager;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcements_admin);
 
         Message = findViewById(R.id.Announce);
         Back = findViewById(R.id.back);
+        connection = findViewById(R.id.Connect);
+        webSocketManager = WebSocketManager.getInstance();
+
+
+        connection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connectToWebSocket();
+            }
+        });
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +41,9 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
                 openActivity();
             }
         });
+
+        webSocketManager.setWebSocketListener(this);
+
 
     }
 
@@ -40,9 +56,18 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
         Intent intent = new Intent(this, profile_page.class);
         startActivity(intent);
     }
+
+    private void connectToWebSocket() {
+        String URL = "ws://coms-309-013.class.las.iastate.edu:8080/chat/{SignUpName}";
+
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String webSocketURL = URL.replace("{SignUpName}", Iusername);
+
+        webSocketManager.connectWebSocket(webSocketURL);
+    }
     @Override
     public void onWebSocketOpen(ServerHandshake handshakedata) {
-
+        Log.d("WebSocket", "Connected to the server");
     }
 
     public void onWebSocketMessage(String message) {
@@ -52,14 +77,10 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
          * is used to post a runnable to the UI thread's message queue, allowing UI updates
          * to occur safely from a background or non-UI thread.
          */
+        Log.d("WebSocket", "Received message: " + message);
         runOnUiThread(() -> {
-            if (Message != null) {
-                if (isMessageFromAdmin(message)) {
-                    // The message is from the admin - Display it in this view
-                    String s = Message.getText().toString();
-                    Message.setText(s + "\n" + message);
-                }
-            }
+            String s = Message.getText().toString();
+            Message.setText(s + "\n" + message);
         });
     }
 
@@ -78,4 +99,8 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
 
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+        webSocketManager.removeWebSocketListener();
+    }
 }
