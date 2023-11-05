@@ -18,7 +18,7 @@ import org.w3c.dom.Text;
 public class Announcements extends AppCompatActivity implements WebSocketListener {
 
 //        private String BASE_URL = "ws://10.0.2.2:8080/chat/";
-        private String BASE_URL = "/notification";
+        private String BASE_URL = "ws://coms-309-013.class.las.iastate.edu:8080/chat/{SignUpName}";
 
         private EditText Announcement, msgEtx;
         private TextView Announce;
@@ -38,6 +38,7 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
             Announce = findViewById(R.id.announce);
 
             Send.setOnClickListener(view -> {
+
                 String message_announce = Announcement.getText().toString();
 
                 if (WebSocketManager.getInstance().isSocketOpen()) {
@@ -50,12 +51,14 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
             });
             /* connect button listener */
             Connect.setOnClickListener(view -> {
-                String serverUrl = BASE_URL + Announcement.getText().toString();
+                String Iusername = SharedPrefsUtil.getUsername(this);
+                String url = BASE_URL.replace("{SignUpName}", Iusername);
 
                 // Establish WebSocket connection and set listener
-                WebSocketManager.getInstance().connectWebSocket(serverUrl);
+                WebSocketManager.getInstance().connectWebSocket(url);
                 WebSocketManager.getInstance().setWebSocketListener(Announcements.this);
             });
+
 
             Exit.setOnClickListener(new View.OnClickListener() {
                 @Override
