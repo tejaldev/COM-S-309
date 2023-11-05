@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
     Button SignUp;
-    Button Profile;
+    Button Profile, Ratings;
     EditText username;
     EditText Password;
-    Button loginButton, Ratings;
+    Button loginButton;
     private TextView message;
     private NetworkManager networkManager;
 
@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        message= findViewById(R.id.message);
+//        message= findViewById(R.id.message);
         username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         SignUp = findViewById(R.id.signupbutton);
-        Profile = findViewById(R.id.profile);
-        Ratings = findViewById(R.id.rate);
+//        Profile = findViewById(R.id.profile);
+//        Ratings = findViewById(R.id.rate);
 
         networkManager = NetworkManager.getInstance(this);
 
@@ -86,19 +86,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity5();
-            }
-        });
+//        Profile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity5();
+//            }
+//        });
 
-        Ratings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity4();
-            }
-        });
+//        Ratings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity4();
+//            }
+//        });
 
 
     }

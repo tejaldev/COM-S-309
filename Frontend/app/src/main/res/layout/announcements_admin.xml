@@ -68,14 +68,14 @@
                 android:backgroundTint="@color/black"
                 />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/send_button"
-                android:text="Send"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:textAlignment="center"/>
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/send_button"-->
+<!--                android:text="Send"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:textAlignment="center"/>-->
 
             <TextView
                 android:id="@+id/text"

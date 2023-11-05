@@ -93,7 +93,7 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
              */
             runOnUiThread(() -> {
                 String s = Announce.getText().toString();
-                Announce.setText(s + "\n" + message);
+//                Announce.setText(s + "\n" + message);
             });
         }
 
@@ -102,7 +102,7 @@ public class Announcements extends AppCompatActivity implements WebSocketListene
             String closedBy = remote ? "server" : "local";
             runOnUiThread(() -> {
                 String s = Announce.getText().toString();
-                Announce.setText(s + "---\nconnection closed by " + closedBy + "\nreason: " + reason);
+//                Announce.setText(s + "---\nconnection closed by " + closedBy + "\nreason: " + reason);
             });
         }
 
