@@ -1,7 +1,10 @@
 package manytomany.Persons;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,24 +45,45 @@ public class PersonController {
     private String login = "{\"message\":\"Welcome\"}";
 
     @GetMapping(path = "/persons/all")
-    public ResponseEntity<List<Person>> getAllPersons() {
+    public ResponseEntity<List<String>> getAllPersonSignUpNames() {
         try {
             List<Person> persons = personRepository.findAll();
 
-            // Optional: If you want to handle missing/deleted friends
-            persons.forEach(person -> {
-                if (person.getFriend() == null) {
-                    // Handle the case where a person has no friend
-                    // You can set person.setFriend(null) or perform any other logic here
-                }
-            });
+            // Extract the SignUpName from each person
+            List<String> signUpNames = persons.stream()
+                    .map(Person::getSignUpName)
+                    .collect(Collectors.toList());
 
-            return ResponseEntity.ok(persons);
+            return ResponseEntity.ok(signUpNames);
         } catch (Exception e) {
             e.printStackTrace(); // Print the error for debugging purposes
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping(path = "/persons/cred")
+    public ResponseEntity<List<Map<String, String>>> getAllPersonSign() {
+        try {
+            List<Person> persons = personRepository.findAll();
+
+            // Extract the SignUpName and SignUpPassword from each person
+            List<Map<String, String>> signUpData = persons.stream()
+                    .map(person -> {
+                        Map<String, String> data = new HashMap<>();
+                        data.put("SignUpName", person.getSignUpName());
+                        data.put("SignUpPassword", person.getSignUpPassword());
+                        return data;
+                    })
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(signUpData);
+        } catch (Exception e) {
+            e.printStackTrace(); // Print the error for debugging purposes
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
 
 
 
