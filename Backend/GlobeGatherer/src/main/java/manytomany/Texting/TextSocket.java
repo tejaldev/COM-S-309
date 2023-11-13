@@ -115,6 +115,7 @@ public class TextSocket {
 
 // Call the markMessageAsSeen method
 			markMessageAsSeen(messageId);
+
 		} else if (message.startsWith("/announcement")) { // Handle announcements
 			String announcementContent = message.substring("/announcement".length()).trim();
 			sendAnnouncement(username, announcementContent);
