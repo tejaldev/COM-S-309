@@ -3,9 +3,14 @@ package manytomany.SearchHistories;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import manytomany.Friends.Friend;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
+import manytomany.Profile.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Vivek Bengre
  *
  */
-
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to SEARCH Entity!")
 @RestController
 public class SearchHistoryController {
 
@@ -34,11 +39,27 @@ public class SearchHistoryController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+
+    @ApiOperation(value = "Get All Search histories that exist", response = SearchHistory.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @GetMapping(path = "/search/all")
     List<SearchHistory> getAllRating(){
 
         return searchHistoryRepository.findAll();
     }
+
+
+    @ApiOperation(value = "Get All Search Histories for the current user", response = SearchHistory.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping("/search/{SignUpName}")
     public ResponseEntity<List<SearchHistory>> getAllSearchessBySignUpName(@PathVariable String SignUpName) {
@@ -53,6 +74,13 @@ public class SearchHistoryController {
         return ResponseEntity.ok(searches);
     }
 
+
+    @ApiOperation(value = "Add a Search for the current user", response = SearchHistory.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PostMapping("/search/add/{SignUpName}")
     String createRatingDescriptionForUser(@PathVariable String SignUpName, @RequestBody SearchHistory rating) {
@@ -73,6 +101,13 @@ public class SearchHistoryController {
     }
 
 
+    @ApiOperation(value = "Update Search histories by ID", response = SearchHistory.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @PutMapping(path = "/search/update/{id}")
     SearchHistory updateRating(@PathVariable int id, @RequestBody SearchHistory request){
         SearchHistory description = searchHistoryRepository.findById(id);
@@ -81,6 +116,14 @@ public class SearchHistoryController {
         searchHistoryRepository.save(request);
         return searchHistoryRepository.findById(id);
     }
+
+
+    @ApiOperation(value = "Delete Search histories by ID", response = SearchHistory.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @DeleteMapping(path = "/search/delete/{id}")
     String deleteRating(@PathVariable int id){

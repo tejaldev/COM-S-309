@@ -5,6 +5,10 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ import org.springframework.http.ResponseEntity;
  * @author Raghuram Guddati
  *
  */
-
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to ADMIN Entity!!!!")
 @RestController
 public class AdminController {
 
@@ -32,24 +36,13 @@ public class AdminController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/admins/all")
-    public ResponseEntity<List<Admin>> getAllAdmins() {
-        List<Admin> admins = adminRepository.findAll();
-        return ResponseEntity.ok(admins);
-    }
 
-//    @GetMapping(path = "/admins/{id}")
-//    Credential getPersonCredential(@PathVariable int id) {
-//        Person admin = personRepository.findById(id);
-//        if (admin != null) {
-//            Credential credentialDTO = new Credential();
-//            credentialDTO.setSignUpUsername(admin.getSignUpUsername());
-//            credentialDTO.setSignUpPassword(admin.getSignUpPassword());
-//            return credentialDTO;
-//        } else {
-//            return null; // Handle the case where no person with the given ID is found
-//        }
-//    }
+    @ApiOperation(value = "Get Person's Credentials by SignUpName", response = Credential.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping("/admins/{SignUpName}")
     public ResponseEntity<Credential> getPersonBySignUpName(@PathVariable String SignUpName) {
@@ -68,8 +61,12 @@ public class AdminController {
     }
 
 
-
-
+    @ApiOperation(value = "Create a new Admin", response = Admin.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 400, message = "Bad Request")})
 
     @PostMapping(path = "/admins/add")
     String createAdmin(@RequestBody Admin admin){
@@ -78,6 +75,13 @@ public class AdminController {
         adminRepository.save(admin);
         return success;
     }
+
+    @ApiOperation(value = "Update an existing Admin by ID", response = Admin.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PutMapping("/admins/update/{id}")
     Admin updateAdmin(@PathVariable int id, @RequestBody Admin request){
@@ -88,10 +92,17 @@ public class AdminController {
         return adminRepository.findById(id);
     }
 
+
+    @ApiOperation(value = "Ban a Person by SignUpName", response = Admin.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @DeleteMapping(path = "/admins/delete/{SignUpName}")
     String banPerson(@PathVariable String SignUpName) {
         personRepository.deleteBySignUpName(SignUpName);
         return success;
     }
-
 }

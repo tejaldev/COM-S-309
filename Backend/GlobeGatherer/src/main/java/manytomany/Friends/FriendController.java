@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import manytomany.Admins.Credential;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to FRIEND Entity!")
 @RestController
 @RequestMapping("/friends") // Set a base URL for all endpoints
 public class FriendController {
@@ -25,11 +31,13 @@ public class FriendController {
 
     private static final String success = "{\"message\":\"success\"}";
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Friend>> getAllFriends() {
-        List<Friend> friends = friendRepository.findAll();
-        return ResponseEntity.ok(friends);
-    }
+
+    @ApiOperation(value = "Get Person's Friends by SignUpName", response = Friend.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping("/{SignUpName}")
     public ResponseEntity<List<Friend>> getAllFriendsBySignUpName(@PathVariable String SignUpName) {
@@ -45,6 +53,12 @@ public class FriendController {
     }
 
 
+    @ApiOperation(value = "Add a Friend to the current user", response = Friend.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PostMapping("/add/{SignUpName}")
     public ResponseEntity<String> addFriendToUser1(@PathVariable String SignUpName, @RequestBody Friend friend) {
@@ -69,6 +83,13 @@ public class FriendController {
     }
 
 
+    @ApiOperation(value = "Update a Person's Friend by ID", response = Friend.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Friend> updateFriend(@PathVariable int id, @Valid @RequestBody Friend request) {
         Friend friend = friendRepository.findById(id);
@@ -79,6 +100,14 @@ public class FriendController {
         friendRepository.save(request);
         return ResponseEntity.ok(request);
     }
+
+
+    @ApiOperation(value = "Delete a Person's Friend by ID", response = Friend.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteFriend(@PathVariable int id) {

@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import manytomany.Admins.Credential;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +30,9 @@ import org.springframework.http.HttpStatus;
  * 
  * @author Vivek Bengre
  * 
- */ 
+ */
 
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to PERSON Entity!")
 @RestController
 public class PersonController {
 
@@ -44,6 +50,13 @@ public class PersonController {
 
     private String login = "{\"message\":\"Welcome\"}";
 
+    @ApiOperation(value = "Get All Persons that exist", response = Person.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @GetMapping(path = "/persons/all")
     public ResponseEntity<List<String>> getAllPersonSignUpNames() {
         try {
@@ -60,6 +73,13 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @ApiOperation(value = "Get All Person's Credentials", response = PersonInfo.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping(path = "/persons/cred")
     public ResponseEntity<List<Map<String, String>>> getAllPersonSign() {
@@ -85,13 +105,26 @@ public class PersonController {
 
 
 
-
+    @ApiOperation(value = "Search a Person by ID", response = Person.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping(path = "/persons/{id}")
     Person getPersonById( @PathVariable int id){
 
         return personRepository.findById(id);
     }
+
+
+    @ApiOperation(value = "Add Person to the app", response = Person.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PostMapping(path = "/persons/add")
     String createPerson(@RequestBody Person person){
@@ -100,6 +133,14 @@ public class PersonController {
         personRepository.save(person);
         return success;
     }
+
+
+    @ApiOperation(value = "Checks if the credentials are correct", response = LoginRequest.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PostMapping(path = "/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
@@ -116,6 +157,7 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login credentials");
         }
     }
+
 
     @GetMapping(path = "/username")
     public ResponseEntity<String> getSignUpUsernameForMostRecentPassword() {
