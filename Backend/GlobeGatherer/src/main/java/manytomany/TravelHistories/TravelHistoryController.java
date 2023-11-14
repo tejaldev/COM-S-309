@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  */
 
+
 @Api(value = "Swagger2DemoAdmin", description = "REST APIs related to TravelHistory Entity!!!!")
 @RestController
 public class TravelHistoryController {
