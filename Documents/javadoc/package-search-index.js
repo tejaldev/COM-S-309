@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.globegatherer"},{"l":"com.example.globegatherer.app"},{"l":"com.example.globegatherer.net_utils"}];updateSearchResults();
