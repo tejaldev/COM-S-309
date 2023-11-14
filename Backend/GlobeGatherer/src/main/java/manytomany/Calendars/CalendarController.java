@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import manytomany.Admins.Credential;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Vivek Bengre
  *
  */
-
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to Cal Entity!!!!")
 @RestController
 public class CalendarController {
 
@@ -38,6 +43,14 @@ public class CalendarController {
         return calendarRepository.findAll();
     }
 
+    @ApiOperation(value = "Get Person's Cal", response = Calendar.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
+
     @GetMapping(path = "/cal/{SignUpName}")
     public ResponseEntity<List<Calendar>> getMapBySignUpName(@PathVariable String SignUpName) {
         // Find the user by SignUpName
@@ -52,6 +65,12 @@ public class CalendarController {
         return ResponseEntity.ok(cals);
     }
 
+    @ApiOperation(value = "Post Person's Cal", response = Calendar.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
     @PostMapping("/cal/{SignUpName}")
     public ResponseEntity<Calendar> createGoogleMapForSignUpName(
             @PathVariable String SignUpName,

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import manytomany.Calendars.Calendar;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * @author Vivek Bengre
  * 
- */ 
-
+ */
+@Api(value = "Swagger2DemoAdmin", description = "REST APIs related to GoogleMap Entity!!!!")
 @RestController
 public class GoogleMapController {
 
@@ -33,10 +38,24 @@ public class GoogleMapController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+    @ApiOperation(value = "Get Person's GoogleMap", response = GoogleMap.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
     @GetMapping(path = "/GoogleMaps")
     List<GoogleMap> getAllGoogleMap(){
         return googleMapRepository.findAll();
     }
+
+    @ApiOperation(value = "Get Person's GoogleMap by sign up name", response = GoogleMap.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @GetMapping(path = "/GoogleMaps/{SignUpName}")
     public ResponseEntity<List<GoogleMap>> getMapBySignUpName(@PathVariable String SignUpName) {
@@ -51,6 +70,13 @@ public class GoogleMapController {
 
         return ResponseEntity.ok(maps);
     }
+
+    @ApiOperation(value = "Post Person's GoogleMap by sign up name", response = GoogleMap.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
 
     @PostMapping("/GoogleMaps/{SignUpName}")
     public ResponseEntity<GoogleMap> createGoogleMapForSignUpName(
