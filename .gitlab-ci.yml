@@ -2,6 +2,8 @@
 stages:
   - maventry
   - androidtry
+  - androidbuild
+  - androidtest 
 
 maven-build:   #this is a JOB
   stage: maventry
@@ -20,4 +22,17 @@ android-build: #this is another job
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew			#change directory to where you have ‘gradlew’ in your android directory
   script:
-    - cd Frontend					#change directory to where you have your android application
+    - cd Frontend		
+    - ./gradlew build			#change directory to where you have your android application
+    
+android-test:
+   image: afirefly/android-ci:java17
+   stage: androidtest
+   tags:
+    - yourname_tag                  # <-- change to your runner's tag
+   before_script:                   # change 'Frontend' to where you have 'gradlew'
+     - export GRADLE_USER_HOME=`pwd`/.gradle
+     - chmod +x ./Frontend/gradlew
+   script:
+     - cd Frontend                  # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+     - ./gradlew test
