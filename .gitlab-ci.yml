@@ -41,20 +41,9 @@ android-build:
     - android_tag
   script:
     - cd Frontend
-    - rm -rf gradle/ gradlew gradlew.bat
-    - ls -l  # Add this line to list the contents of the current directory before extraction
-    - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle.zip
-    - ls -l  # Add this line to list the contents after downloading the zip file
-    - jar xf gradle.zip
-    - ls -l  # Add this line to list the contents after extraction
-    - rm gradle.zip
-    - ls -l  # Add this line to list the contents after removing the zip file
-    - mv gradle-7.6.3 gradle
     - chmod +x ./gradlew
     - ./gradlew --version
     - ./gradlew build
-
-
 
 
 
