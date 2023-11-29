@@ -42,11 +42,11 @@ android-build:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew
+    - export JAVA_HOME="/c/Users/rguddati/Downloads/jdk-20_windows-x64_bin/jdk-20.0.2"  # Adjust the path based on your JDK installation
+    - export PATH="$JAVA_HOME/bin:$PATH"
   script:
     - cd Frontend
-    - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk  # Replace with the correct path for your Java installation
-    - gradle build --stacktrace
-
+    - ./gradlew build --stacktrace
 
 
 
