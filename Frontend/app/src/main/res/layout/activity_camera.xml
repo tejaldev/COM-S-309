@@ -9,23 +9,34 @@
       android:id="@+id/previewTextureView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_above="@+id/captureButton" />
+      android:layout_above="@+id/buttonLayout" />
 
   <ImageView
       android:id="@+id/capturedImageView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:visibility="gone"
-      android:scaleType="centerCrop"
-      android:layout_above="@+id/captureButton" />
+      android:scaleType="centerCrop" />
 
-  <Button
-      android:id="@+id/captureButton"
-      android:layout_width="wrap_content"
+  <LinearLayout
+      android:id="@+id/buttonLayout"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="16dp"
-      android:text="Capture" />
+      android:orientation="horizontal">
 
+    <Button
+        android:id="@+id/captureButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Capture" />
+
+    <Button
+        android:id="@+id/uploadButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Upload" />
+  </LinearLayout>
 </RelativeLayout>

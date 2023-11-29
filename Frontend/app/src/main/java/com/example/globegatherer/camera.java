@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Size;
 import android.view.TextureView;
@@ -28,8 +29,16 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.Volley;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,8 +46,21 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.app.ProgressDialog;
+import android.widget.TextView;
 
 public class camera extends AppCompatActivity {
+
+    private static final String TAG = friends.class.getSimpleName();
+    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
+
+
+    private ProgressDialog pDialog;
+
+    private TextView responses;
+
 
     private static final int REQUEST_CODE_PERMISSIONS = 10;
     private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.CAMERA};
@@ -46,6 +68,7 @@ public class camera extends AppCompatActivity {
     private ImageCapture imageCapture;
     private Executor executor = Executors.newSingleThreadExecutor();
     private ImageView capturedImageView; // New ImageView variable
+    private String lastCapturedImagePath; // Store the path of the last captured image
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +86,24 @@ public class camera extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-
         Button captureButton = findViewById(R.id.captureButton);
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePhoto();
+            }
+        });
+
+        Button uploadButton = findViewById(R.id.uploadButton);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the captured image as base64
+                Bitmap capturedBitmap = BitmapFactory.decodeFile(lastCapturedImagePath);
+                String base64Image = bitmapToBase64(capturedBitmap);
+
+                // Upload the base64 image
+                uploadImage(base64Image);
             }
         });
     }
@@ -88,8 +123,6 @@ public class camera extends AppCompatActivity {
     }
 
     private void bindCameraUseCases(@NonNull ProcessCameraProvider cameraProvider, PreviewView previewView) {
-
-
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_BACK)
@@ -116,7 +149,6 @@ public class camera extends AppCompatActivity {
         // Set the surface provider for the preview
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
     }
-
 
     private boolean allPermissionsGranted() {
         for (String permission : REQUIRED_PERMISSIONS) {
@@ -147,6 +179,7 @@ public class camera extends AppCompatActivity {
                 // Image saved successfully
                 Uri savedUri = Uri.fromFile(photoFile);
                 displayCapturedImage(savedUri); // Display the captured image
+                lastCapturedImagePath = photoFile.getAbsolutePath(); // Store the path
             }
 
             @Override
@@ -177,5 +210,59 @@ public class camera extends AppCompatActivity {
                 capturedImageView.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    private void uploadImage(String base64Image) {
+        try {
+            // Create JSON object with the base64-encoded image
+            JSONObject params = new JSONObject();
+            params.put("image", base64Image);
+
+            // Call the post request method with the JSON object
+            postRequest(params);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Your post request method
+    private void postRequest(JSONObject params) {
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String url = URL.replace("{SignUpName}", Iusername);
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                responses.setText(response.toString());
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                responses.setText("Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        }) {
+            {
+                setShouldCache(false); // Disable caching for debugging
+                VolleyLog.DEBUG = true;
+            }
+        };
+
+        // Adding the request to the request queue
+        Volley.newRequestQueue(this).add(jsonObjReq);
     }
 }
