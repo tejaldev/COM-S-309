@@ -35,18 +35,16 @@ auto-deploy:
     - sudo systemctl start system-web-demo
 
 android-build:
-  image: afirefly/android-ci:java17
+  image: openjdk:17  # Use a standard OpenJDK image
   stage: androidbuild
   tags:
     - android_tag
-  before_script:
-    - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./Frontend/gradlew
-    - cd Frontend
-    - rm -rf .gradle  # Remove the existing .gradle directory to ensure a clean setup
-    - ./gradlew wrapper --gradle-version 7.6.3
   script:
+    - apt-get update && apt-get install -y unzip  # Install necessary tools
+    - cd Frontend
+    - ./gradlew wrapper --gradle-version 7.6.3
     - ./gradlew build
+
 
 
 android-test:
