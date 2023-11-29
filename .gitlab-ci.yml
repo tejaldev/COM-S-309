@@ -45,11 +45,11 @@ android-build:
     - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle.zip
     - jar xf gradle.zip
     - rm gradle.zip
+    - ls -l gradle  # Add this line to list the contents of the 'gradle' directory
     - mv gradle-7.6.3 gradle
     - chmod +x ./gradlew
     - ./gradlew --version
     - ./gradlew build
-
 
 
 
