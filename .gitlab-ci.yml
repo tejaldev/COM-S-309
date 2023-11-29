@@ -40,25 +40,17 @@ android-build:
   tags:
     - android_tag
   script:
-    - cd Frontend  # Change to the Frontend directory
-    
-    # Remove any existing Gradle wrapper files
+    - cd Frontend
     - rm -rf gradle/ gradlew gradlew.bat
-
-    # Download and install the Gradle wrapper using curl
     - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle-7.6.3-bin.zip
     - jar xf gradle-7.6.3-bin.zip
     - mv gradle-7.6.3 gradle
     - rm gradle-7.6.3-bin.zip
-
-    # Ensure the Gradle wrapper is executable
     - chmod +x ./gradlew
-
-    # Print Gradle version information (optional, for debugging)
-    - ./gradlew --version  
-
-    # Build the Android project
+    - ./gradlew wrapper --gradle-version 7.6.3
+    - ./gradlew --version
     - ./gradlew build
+
 
 
 
