@@ -33,25 +33,18 @@ auto-deploy:
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
-    
+
 android-build:
-  image: openjdk:17
-  stage: androidbuild
+  image: afirefly/android-ci:java17 # Docker image that has Android environments installed     gjandres/android-ci:latest
+  stage: androidbuild               # one of the stages listed above
   tags:
-    - android_tag
+   - android_tag                    # change to your runner's tag
+  before_script:                    # enable gradlew, change 'Frontend' to where you have 'gradlew'
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
   script:
-    - cd Frontend
-    - rm -rf gradle/ gradlew gradlew.bat
-    - ls -l
-    - curl -s "https://get.sdkman.io" | bash
-    - source "$HOME/.sdkman/bin/sdkman-init.sh"
-    - sdk install gradle 7.6.3
-    - sdk use gradle 7.6.3
-    - ./gradlew --version
-    - ./gradlew build
-
-
-
+    - cd Frontend                   # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+    - ./gradlew build               # gradle build
 
 android-test:
    image: afirefly/android-ci:java17
