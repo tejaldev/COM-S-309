@@ -44,7 +44,8 @@ android-build:
     - chmod +x ./Frontend/gradlew
   script:
     - cd Frontend
-    - gradle build
+    - gradle build --stacktrace
+
 
 
 
