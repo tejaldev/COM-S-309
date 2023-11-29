@@ -45,8 +45,8 @@ android-build:
     # Remove any existing Gradle wrapper files
     - rm -rf gradle/ gradlew gradlew.bat
 
-    # Download and install the Gradle wrapper
-    - wget https://services.gradle.org/distributions/gradle-7.6.3-bin.zip
+    # Download and install the Gradle wrapper using curl
+    - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle-7.6.3-bin.zip
     - unzip -q gradle-7.6.3-bin.zip
     - mv gradle-7.6.3 gradle
     - rm gradle-7.6.3-bin.zip
@@ -59,6 +59,7 @@ android-build:
 
     # Build the Android project
     - ./gradlew build
+
 
 
 
