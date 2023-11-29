@@ -42,15 +42,14 @@ android-build:
   script:
     - cd Frontend
     - rm -rf gradle/ gradlew gradlew.bat
-    - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle-7.6.3-bin.zip
-    - jar xf gradle-7.6.3-bin.zip
+    - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle.zip
+    - unzip -q gradle.zip
     - mv gradle-7.6.3 gradle
-    - rm gradle-7.6.3-bin.zip
-    - chmod +x ./gradlew
+    - rm gradle.zip
     - ./gradlew wrapper --gradle-version 7.6.3
+    - chmod +x gradlew
     - ./gradlew --version
     - ./gradlew build
-
 
 
 
