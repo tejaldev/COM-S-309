@@ -42,6 +42,8 @@ android-build:
   script:
     - cd Frontend  # Change to the Frontend directory
     - chmod +x ./gradlew
+
+    # Ensure the Gradle wrapper is installed
     - ./gradlew wrapper --gradle-version 7.6.3
 
     # Print Gradle version information (optional, for debugging)
@@ -49,6 +51,7 @@ android-build:
 
     # Build the Android project
     - ./gradlew build
+
 
 
 android-test:
