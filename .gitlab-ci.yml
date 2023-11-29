@@ -52,7 +52,7 @@ android-test:
    tags:
     - android_tag                   # change to your runner's tag
    before_script:                   # enable gradlew, change 'Frontend' to where you have 'gradlew'
-     - export GRADLE_USER_HOME=`pwd`/.gradle
+     - export GRADLE_USER_HOME=`pwd`/.gradle/wrapper
      - chmod +x ./Frontend/gradlew
    script:
      - cd Frontend                  # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
