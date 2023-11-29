@@ -44,7 +44,9 @@ android-build:
     - chmod +x ./Frontend/gradlew
   script:
     - cd Frontend
+    - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk  # Replace with the correct path for your Java installation
     - gradle build --stacktrace
+
 
 
 
