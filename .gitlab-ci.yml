@@ -40,9 +40,15 @@ android-build:
   tags:
     - android_tag
   before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
     - cd Frontend
-    - chmod +x ./gradlew
-    - ./gradlew wrapper --gradle-version=7.0
+    - |
+      if [ ! -e ./gradlew ]; then
+        echo "Gradle wrapper not found. Installing..."
+        ./gradle wrapper --gradle-version=7.0
+      fi
+  script:
     - ./gradlew build
 
 
