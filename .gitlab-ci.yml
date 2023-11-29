@@ -43,13 +43,10 @@ android-build:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew
     - cd Frontend
-    - |
-      if [ ! -e ./gradlew ]; then
-        echo "Gradle wrapper not found. Installing..."
-        ./gradle wrapper --gradle-version=7.0
-      fi
+    - ./gradlew wrapper --gradle-version=7.0
   script:
     - ./gradlew build
+
 
 
 android-test:
