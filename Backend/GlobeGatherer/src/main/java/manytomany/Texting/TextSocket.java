@@ -1,40 +1,28 @@
 package manytomany.Texting;
 
-import java.io.IOException;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
-
+import manytomany.Persons.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-@Controller      // this is needed for this to be an endpoint to springboot
-@ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@ServerEndpoint(value = "/chat/{username}")
 public class TextSocket {
 
-  // cannot autowire static directly (instead we do it by the below
-  // method
 	private static MessageRepository msgRepo;
 
 	private static NotificationRepository announcementRepo;
-	/*
-   * Grabs the MessageRepository singleton from the Spring Application
-   * Context.  This works because of the @Controller annotation on this
-   * class and because the variable is declared as static.
-   * There are other ways to set this. However, this approach is
-   * easiest.
-	 */
+	private static PersonRepository personRepository;
+
 	@Autowired
 	public void setMessageRepository(MessageRepository repo) {
 		msgRepo = repo;  // we are setting the static variable
@@ -43,6 +31,11 @@ public class TextSocket {
 	@Autowired
 	public void setAnnouncementRepository(NotificationRepository repo) {
 		announcementRepo = repo;
+	}
+
+	@Autowired
+	public void setPersonRepository(PersonRepository repo) {
+		personRepository = repo;
 	}
 
 
@@ -65,31 +58,11 @@ public class TextSocket {
 		// Send chat history to the newly connected user
 		sendMessageToPArticularUser(username, getChatHistory());
 
-		// Set the "seen" flag to false for all unseen messages
-		markMessagesAsUnseen(username);
-
 		// Broadcast that a new user has joined
 		String message = "User: " + username + " has joined the globeChat";
 		broadcast(message);
-	}
 
-
-	private void markMessagesAsUnseen(String username) {
-		List<Message> unseenMessages = msgRepo.findByUserNameAndSeenIsFalse(username);
-		unseenMessages.forEach(message -> {
-			message.setSeen(false); // Set the "seen" flag to false
-			msgRepo.save(message);
-		});
-	}
-
-	private void markMessageAsSeen(Long messageId) {
-		Optional<Message> optionalMessage = msgRepo.findById(messageId);
-
-		if (optionalMessage.isPresent()) {
-			Message message = optionalMessage.get();
-			message.setSeen(true);
-			msgRepo.save(message);
-		}
+		markMessagesAsSeen(username);
 	}
 
 
@@ -110,21 +83,33 @@ public class TextSocket {
 			sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
 			sendMessageToPArticularUser(username, "[DM] " + username + ": " + message);
 
-			// Mark the message as seen by the sender
-			Long messageId = 18L; // Replace with the actual messageId
-
-// Call the markMessageAsSeen method
-			markMessageAsSeen(messageId);
-
 		} else if (message.startsWith("/announcement")) { // Handle announcements
 			String announcementContent = message.substring("/announcement".length()).trim();
 			sendAnnouncement(username, announcementContent);
 		} else { // broadcast
 			broadcast(username + ": " + message);
+			msgRepo.save(new Message(username, message));
+
+			// Mark messages as seen for the user
+			markMessagesAsSeen(username);
 		}
 
-		// Saving chat history to repository
-		msgRepo.save(new Message(username, message));
+	}
+
+	private void markMessagesAsSeen(String username) {
+		// Check the number of connected users
+		int numberOfConnectedUsers = sessionUsernameMap.size();
+
+		// Find all messages sent by the user
+		List<Message> userMessages = msgRepo.findByUserNameAndSeen(username, false);
+
+		// Mark each message as seen based on the number of connected users
+		boolean markAsSeen = numberOfConnectedUsers > 1; // true if more than one user is connected
+
+		for (Message message : userMessages) {
+			message.setSeen(markAsSeen);
+			msgRepo.save(message);
+		}
 	}
 
 
@@ -141,6 +126,9 @@ public class TextSocket {
     // broadcase that the user disconnected
 		String message = username + " disconnected";
 		broadcast(message);
+
+		markMessagesAsSeen(username);
+
 	}
 
 

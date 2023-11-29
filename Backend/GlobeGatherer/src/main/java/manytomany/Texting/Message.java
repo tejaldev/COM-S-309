@@ -1,18 +1,10 @@
 package manytomany.Texting;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import lombok.Data;
+import manytomany.Persons.Person;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "messages")
@@ -32,9 +24,12 @@ public class Message {
     @Column(name = "sent")
     private Date sent = new Date();
 
-    @Column
-    private Boolean seen = false;
+    @Column(columnDefinition = "boolean default false")
+    private boolean seen;
 
+    @ManyToOne
+    @JoinColumn(name = "person_id") // specify the join column name
+    private Person person;
 
 
 
