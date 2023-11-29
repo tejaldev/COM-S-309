@@ -40,10 +40,11 @@ android-build:
   tags:
     - android_tag
   script:
-    - apt-get update && apt-get install -y unzip  # Install necessary tools
     - cd Frontend
+    - chmod +x ./gradlew  # Ensure the Gradle Wrapper script has execution permissions
     - ./gradlew wrapper --gradle-version 7.6.3
     - ./gradlew build
+
 
 
 
