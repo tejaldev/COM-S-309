@@ -43,8 +43,8 @@ android-build:
     - cd Frontend  # Change to the Frontend directory
     - chmod +x ./gradlew
     - ./gradlew wrapper --gradle-version 7.6.3
+    - ./gradlew --version  # Print Gradle version information
     - ./gradlew build
-
 
 
 
