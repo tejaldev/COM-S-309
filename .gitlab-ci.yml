@@ -33,7 +33,7 @@ auto-deploy:
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
-
+    
 android-build:
   image: openjdk:17
   stage: androidbuild
@@ -47,7 +47,7 @@ android-build:
 
     # Download and install the Gradle wrapper using curl
     - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle-7.6.3-bin.zip
-    - unzip -q gradle-7.6.3-bin.zip
+    - jar xf gradle-7.6.3-bin.zip
     - mv gradle-7.6.3 gradle
     - rm gradle-7.6.3-bin.zip
 
@@ -59,8 +59,6 @@ android-build:
 
     # Build the Android project
     - ./gradlew build
-
-
 
 
 
