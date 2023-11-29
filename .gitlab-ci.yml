@@ -44,7 +44,7 @@ android-build:
     - chmod +x ./Frontend/gradlew
   script:
     - cd Frontend                # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
-    - ./Frontend/gradlew build               # gradle build
+    - ./gradlew build               # gradle build
 
 android-test:
    image: afirefly/android-ci:java17
