@@ -35,15 +35,16 @@ auto-deploy:
     - sudo systemctl start system-web-demo
 
 android-build:
-  image: openjdk:17  # Use a standard OpenJDK image
+  image: openjdk:17
   stage: androidbuild
   tags:
     - android_tag
   script:
-    - cd Frontend
-    - chmod +x ./gradlew  # Ensure the Gradle Wrapper script has execution permissions
+    - cd Frontend  # Change to the Frontend directory
+    - chmod +x ./gradlew
     - ./gradlew wrapper --gradle-version 7.6.3
     - ./gradlew build
+
 
 
 
