@@ -43,8 +43,7 @@ android-build:
     - cd Frontend
     - rm -rf gradle/ gradlew gradlew.bat
     - curl -L https://services.gradle.org/distributions/gradle-7.6.3-bin.zip -o gradle.zip
-    - apt-get update && apt-get install -y unzip
-    - unzip -q gradle.zip
+    - jar xf gradle.zip
     - rm gradle.zip
     - mv gradle-7.6.3 gradle
     - chmod +x ./gradlew
