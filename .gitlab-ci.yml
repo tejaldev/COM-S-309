@@ -42,11 +42,12 @@ android-build:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew
-  script:
     - cd Frontend
-    - ./gradlew wrapper --gradle-version 7.6.3  # Make sure the Gradle Wrapper is generated with the correct version
+    - rm -rf .gradle  # Remove the existing .gradle directory to ensure a clean setup
+    - ./gradlew wrapper --gradle-version 7.6.3
+  script:
     - ./gradlew build
-             # gradle build
+
 
 android-test:
    image: afirefly/android-ci:java17
