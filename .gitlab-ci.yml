@@ -41,9 +41,9 @@ android-build:
    - android_tag                    # change to your runner's tag
   before_script:                    # enable gradlew, change 'Frontend' to where you have 'gradlew'
     - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./Frontend/gradlew
+    - chmod +x ./ip_107/Frontend/gradlew
   script:
-    - cd Frontend                # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+    - cd ip_107/Frontend                # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
     - ./gradlew build               # gradle build
 
 android-test:
