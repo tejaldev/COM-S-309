@@ -78,7 +78,7 @@ public class homePage extends AppCompatActivity {
     }
 
     private void openTodoListActivity() {
-        Intent intent = new Intent(this, toDoList.class);
+        Intent intent = new Intent(this, camera.class);
         startActivity(intent);
     }
 
