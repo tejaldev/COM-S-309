@@ -29,9 +29,11 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -53,7 +55,7 @@ import android.widget.TextView;
 
 public class camera extends AppCompatActivity {
 
-    private static final String TAG = friends.class.getSimpleName();
+    private static final String TAG = camera.class.getSimpleName();
     private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
 
 
