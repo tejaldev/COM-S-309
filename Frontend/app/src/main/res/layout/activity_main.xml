@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/img"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
     <ScrollView
         android:layout_width="match_parent"
