@@ -50,7 +50,7 @@ public class toDoList extends AppCompatActivity {
         setContentView(R.layout.activity_to_do_list);
 
         responses2 = findViewById(R.id.responses2);
-        showingList = findViewById(R.id.showingLists);
+//        showingList = findViewById(R.id.showingLists);
         showingListButtons  = findViewById(R.id.showListButton);
         save = findViewById(R.id.saveList);
 
