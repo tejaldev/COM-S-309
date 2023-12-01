@@ -19,76 +19,43 @@
         app:cardElevation="30dp">
 
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#FFFFFF"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="16dp"
+            tools:context=".showFriend">
 
             <TextView
-                android:id="@+id/friends"
-                android:layout_width="match_parent"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Friends"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="36sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:text="Friends will be displayed here:"
+                android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/nameEditText"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/custom_editing"
-                android:drawableLeft="@drawable/baseline_person_2_24"
-                android:drawablePadding="8dp"
-                android:hint="Full Name"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/usernameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/custom_editing"
-                android:drawableLeft="@drawable/baseline_person_2_24"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                <LinearLayout
+                    android:id="@+id/friendsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- Friend items will be dynamically added here -->
+                </LinearLayout>
+            </ScrollView>
 
-            <Button
-                android:id="@+id/addFriendButton"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/black"
-                android:text="Add Friend"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:cornerRadius="20dp" />
-
-            <TextView
-                android:layout_width="fill_parent"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Response: "
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/responses"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="The response is: "
-                android:textColor="@color/black" />
-
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -104,6 +71,14 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="20dp" />
+    <TextView
+        android:id="@+id/responses"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="The response is: "
+        android:textColor="@color/black" />
+
 
 
 </LinearLayout>
