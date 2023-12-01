@@ -1,11 +1,9 @@
 package manytomany.Friends;
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import manytomany.Persons.Person;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +15,9 @@ public class Friend {
     private int id;
 
     private String name;
-    private String username;
+
+    @Column(name = "person_in_app_id")
+    private Long personInAppId;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
@@ -31,9 +31,8 @@ public class Friend {
     @JsonIgnore
     private Person person;
 
-    public Friend(String name, String username) {
+    public Friend(String name) {
         this.name = name;
-        this.username = username;
     }
 
     public Friend() {
@@ -55,13 +54,7 @@ public class Friend {
         this.name = name;
     }
 
-        public String getUsername() {
-            return username;
-        }
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
 
     public Person getPerson() {
         return person;
