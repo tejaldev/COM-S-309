@@ -29,12 +29,13 @@
         android:layout_weight="1"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/tx1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Conversation will appear here:"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:id="@+id/chatContainer">
+            <!-- Chat messages will be dynamically added here -->
+        </LinearLayout>
 
     </ScrollView>
 
@@ -54,5 +55,15 @@
         android:textSize="18sp"
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF" />
+
+    <!-- TextView for status messages -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusTextView"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:padding="16dp"/>
 
 </LinearLayout>

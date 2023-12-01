@@ -56,7 +56,7 @@ import android.widget.TextView;
 public class camera extends AppCompatActivity {
 
     private static final String TAG = camera.class.getSimpleName();
-    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
+    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/GoogleImages/{SignUpName}";
 
 
     private ProgressDialog pDialog;
@@ -79,6 +79,8 @@ public class camera extends AppCompatActivity {
 
         // Initialize TextureView
         PreviewView previewView = findViewById(R.id.previewTextureView);
+        responses = findViewById(R.id.responsesTextView);
+
 
         capturedImageView = findViewById(R.id.capturedImageView); // Initialize ImageView
 
@@ -215,17 +217,24 @@ public class camera extends AppCompatActivity {
     }
 
     private String bitmapToBase64(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        if (bitmap != null) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        } else {
+            Log.e(TAG, "Bitmap is null");
+            return "";
+        }
     }
+
+
 
     private void uploadImage(String base64Image) {
         try {
             // Create JSON object with the base64-encoded image
             JSONObject params = new JSONObject();
-            params.put("image", base64Image);
+            params.put("params", base64Image); // Use "params" instead of "image"
 
             // Call the post request method with the JSON object
             postRequest(params);
@@ -233,6 +242,7 @@ public class camera extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
     // Your post request method
     private void postRequest(JSONObject params) {
