@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Expense_analyzer"
+            android:exported="false" />
         <activity
             android:name=".homePage"
             android:exported="false" />
