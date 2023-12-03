@@ -63,7 +63,7 @@ public class chatpage extends AppCompatActivity implements WebSocketListener {
             TextView receivedMessage = new TextView(this);
             receivedMessage.setText(message);
             receivedMessage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            receivedMessage.setBackgroundResource(R.drawable.bubble_left); // You may need to create a custom drawable for the left bubble
+           // receivedMessage.setBackgroundResource(R.drawable.bubble_left); // You may need to create a custom drawable for the left bubble
             receivedMessage.setTextColor(Color.BLACK);
 
             // Add the TextView to the chat container
