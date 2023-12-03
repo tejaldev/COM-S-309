@@ -31,6 +31,7 @@ public class profile_page extends AppCompatActivity {
     private String username;
     private ImageView Announcements;
 
+    private Button Camera;
 
 
     private static final String URL_JSON_OBJECT = "http://coms-309-013.class.las.iastate.edu:8080/description/{SignUpName}";
@@ -48,6 +49,7 @@ public class profile_page extends AppCompatActivity {
         //Friend = findViewById(R.id.Friends);
         Calendar = findViewById(R.id.calendar_open);
 
+        Camera = findViewById(R.id.camera_open);
 
         Des_Response = findViewById(R.id.Des_Response);
         Announcements = findViewById(R.id.announcements);
@@ -63,10 +65,10 @@ public class profile_page extends AppCompatActivity {
             profileUsernameEditText.setText(Iusername);
         }
 
-        EditText NameText = findViewById(R.id.Name);
-        if (Iusername != null) {
-            NameText.setText(Iusername);
-        }
+//        EditText NameText = findViewById(R.id.Name);
+//        if (Iusername != null) {
+//            NameText.setText(Iusername);
+//        }
 
 
 
@@ -109,6 +111,13 @@ public class profile_page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openActivity7();
+            }
+        });
+
+        Camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity8();
             }
         });
 
@@ -168,6 +177,11 @@ public class profile_page extends AppCompatActivity {
     }
     public void openActivity7(){
         Intent intent = new Intent(this, Calendar_Page.class);
+        startActivity(intent);
+    }
+
+    public void openActivity8(){
+        Intent intent = new Intent(this, camera.class);
         startActivity(intent);
     }
 
