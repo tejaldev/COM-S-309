@@ -29,6 +29,4 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
     @Query("UPDATE Friend f SET f.personInAppId = (SELECT p.id FROM Person p WHERE p.SignUpName = f.name) WHERE f.name = :friendName")
     void updatePersonInAppIdByFriendName(@Param("friendName") String friendName);
 
-
-
 }

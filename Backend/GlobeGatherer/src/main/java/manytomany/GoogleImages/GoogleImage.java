@@ -12,14 +12,14 @@ public class GoogleImage {
     private int id;
 
     @Lob // Use @Lob annotation for large objects like images
-    private byte[] imageData;
+    private byte[] params;
 
     @ManyToOne
     @JsonIgnore
     private Person person;
 
-    public GoogleImage(byte[] imageData) {
-        this.imageData = imageData;
+    public GoogleImage(byte[] params) {
+        this.params = params;
     }
 
     public GoogleImage() {
@@ -33,12 +33,12 @@ public class GoogleImage {
         this.id = id;
     }
 
-    public byte[] getImageData() {
-        return imageData;
+    public byte[] getParams() {
+        return params;
     }
 
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
+    public void setParams(byte[] imageData) {
+        this.params = imageData;
     }
 
     public Person getPerson() {
