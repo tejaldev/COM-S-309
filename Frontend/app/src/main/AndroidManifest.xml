@@ -25,12 +25,12 @@
         <activity
             android:name=".showToDo"
             android:exported="false" />
-        <activity
-            android:name=".Location"
-            android:exported="false" />
-        <activity
-            android:name=".AR"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Location"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".AR"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".camera"
             android:exported="false" />
