@@ -78,9 +78,9 @@
         <activity
             android:name=".app.AppController"
             android:exported="false" />
-        <activity
+        <!-- <activity
             android:name=".net_utils.Const"
-            android:exported="false" />
+            android:exported="false" /> -->
         <activity
             android:name=".net_utils.LruBitmapCache"
             android:exported="false" /> <!-- key for google maps -->
