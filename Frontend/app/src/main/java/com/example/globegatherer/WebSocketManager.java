@@ -21,7 +21,7 @@ public class WebSocketManager {
     private MyWebSocketClient webSocketClient;
     private WebSocketListener webSocketListener;
 
-    public void WebSocketListener() {
+    public void WebSocketManager() {
         // Default constructor logic, if needed
     }
 
