@@ -78,14 +78,16 @@
         <activity
             android:name=".app.AppController"
             android:exported="false" />
-        <activity
+        <!-- <activity
             android:name=".net_utils.Const"
             android:exported="false"
             tools:node="remove" />
         <activity
             android:name=".net_utils.LruBitmapCache"
             android:exported="false"
-            tools:node="remove" /> <!-- key for google maps -->
+            tools:node="remove" />  -->
+            
+        <!-- key for google maps -->
         <!-- <meta-data -->
         <!-- android:name="com.google.android.geo.API_KEY" -->
         <!-- android:value="AIzaSyCDA4zkRTyQeCinpcn2jKsQiF2HpEgC7b0" /> -->
