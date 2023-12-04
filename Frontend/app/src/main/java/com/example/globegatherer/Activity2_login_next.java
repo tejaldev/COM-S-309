@@ -1,5 +1,6 @@
 package com.example.globegatherer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,7 +69,8 @@ public class Activity2_login_next extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             Log.d("Volley Response", response.toString());
-                            responseTextView.setText(response.toString());
+                            //responseTextView.setText(response.toString());
+                            openActivity();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -81,5 +83,10 @@ public class Activity2_login_next extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void openActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

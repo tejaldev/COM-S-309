@@ -82,8 +82,15 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
             runOnUiThread(() -> {
                 // Extract the line containing /announcement
                 String announcementLine = getAnnouncementLine(message);
-                String s = Message.getText().toString();
-                Message.setText(s + "\n" + announcementLine);
+
+                // Append the new announcement to the existing text in the TextView
+                String currentText = Message.getText().toString();
+                Log.d("WebSocket", "Current Text: " + currentText);
+
+                String newText = currentText + "\n" + announcementLine;
+                Log.d("WebSocket", "New Text: " + newText);
+
+                Message.setText(newText);
             });
         }
     }
@@ -92,11 +99,17 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
         String[] lines = message.split("\n");
         for (String line : lines) {
             if (line.contains("/announcement")) {
-                return line.trim();
+                // Find the index of "/announcement"
+                int startIndex = line.indexOf("/announcement");
+
+                // Get the substring starting from "/announcement" and skip the username part
+                return line.substring(startIndex + "/announcement".length()).trim();
             }
         }
         return ""; // If no line contains /announcement
     }
+
+
 
     @Override
     public void onWebSocketClose(int code, String reason, boolean remote) {
