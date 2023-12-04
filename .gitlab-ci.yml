@@ -1,38 +1,27 @@
-# Example  .gitlab-ci.yml file
 stages:
-  - maventry
-  - androidtry
   - androidbuild
   - androidtest 
-
-maven-build:   #this is a JOB
-  stage: maventry
+  
+android-build:
+  image: afirefly/android-ci:java17
+  stage: androidbuild
   tags:
-    - springboot_tag  					# this is LINK to the shell runner on the remote-server 
-  script:
-    - cd Backend/GlobeGatherer					#change directory to where you have your springboot application
-    - mvn package
-
-android-build: #this is another job
-  image:  gjandres/android-ci:latest      		# this is a directive to DOCKER
-  stage: androidtry
-  tags:
-   - android_tag         					#this is LINK to the docker runner on the remote-server        
-  before_script:
+   - tejal_tag                   # <-- change to your runner's tag
+  before_script:                    # change 'Frontend' to where you have 'gradlew'
     - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./Frontend			#change directory to where you have ‘gradlew’ in your android directory
+    - chmod +x ./Frontend/gradlew
   script:
-    - cd Frontend		
-    - ./gradlew build			#change directory to where you have your android application
-    
+    - cd Frontend                   # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+    - ./gradlew build
+
 android-test:
    image: afirefly/android-ci:java17
    stage: androidtest
    tags:
-    - tanvi_tag                  # <-- change to your runner's tag
+    - yourname_tag                  # <-- change to your runner's tag
    before_script:                   # change 'Frontend' to where you have 'gradlew'
      - export GRADLE_USER_HOME=`pwd`/.gradle
-     - chmod +x ./Frontend
+     - chmod +x ./Frontend/gradlew
    script:
      - cd Frontend                  # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
      - ./gradlew test

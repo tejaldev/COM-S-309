@@ -4,6 +4,11 @@ public class LoginRequest {
     private String SignUpUsername;
     private String SignUpPassword;
 
+    public LoginRequest(String signUpUsername, String signUpPassword) {
+        this.SignUpUsername = signUpUsername;
+        this.SignUpPassword = signUpPassword;
+    }
+
     public String getSignUpUsername() {
         return SignUpUsername;
     }

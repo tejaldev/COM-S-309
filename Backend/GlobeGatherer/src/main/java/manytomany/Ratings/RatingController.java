@@ -1,26 +1,18 @@
 package manytomany.Ratings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
-import manytomany.Profile.Description;
-import manytomany.TravelHistories.TravelHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -98,38 +90,6 @@ public class RatingController {
         ratingRepository.save(rating);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
-    }
-
-
-
-    @ApiOperation(value = "Update ratings by ID", response = Rating.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @PutMapping(path = "/rating/update/{id}")
-    Rating updateRating(@PathVariable int id, @RequestBody Rating request){
-        Rating description = ratingRepository.findById(id);
-        if(description == null)
-            return null;
-        ratingRepository.save(request);
-        return ratingRepository.findById(id);
-    }
-
-
-    @ApiOperation(value = "Delete ratings by ID", response = Rating.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @DeleteMapping(path = "/rating/delete/{id}")
-    String deleteRating(@PathVariable int id){
-        ratingRepository.deleteById(id);
-        return success;
     }
     
 }

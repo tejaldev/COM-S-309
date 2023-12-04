@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     static final String URL_JSON_ARRAY = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
     Button SignUp;
+    Button HomePage;
     Button Profile, Ratings;
     EditText username;
     EditText Password;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         SignUp = findViewById(R.id.signupbutton);
+        HomePage=findViewById(R.id.homePage);
 //        Profile = findViewById(R.id.profile);
 //        Ratings = findViewById(R.id.rate);
 
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
+
+        HomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity3();
+            }
+        });
+
+
 
 //        Profile.setOnClickListener(new View.OnClickListener() {
 //            @Override

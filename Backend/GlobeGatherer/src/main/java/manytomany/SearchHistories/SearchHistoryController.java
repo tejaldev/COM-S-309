@@ -1,25 +1,17 @@
 package manytomany.SearchHistories;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import manytomany.Friends.Friend;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
-import manytomany.Profile.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -100,34 +92,4 @@ public class SearchHistoryController {
         return success;
     }
 
-
-    @ApiOperation(value = "Update Search histories by ID", response = SearchHistory.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @PutMapping(path = "/search/update/{id}")
-    SearchHistory updateRating(@PathVariable int id, @RequestBody SearchHistory request){
-        SearchHistory description = searchHistoryRepository.findById(id);
-        if(description == null)
-            return null;
-        searchHistoryRepository.save(request);
-        return searchHistoryRepository.findById(id);
-    }
-
-
-    @ApiOperation(value = "Delete Search histories by ID", response = SearchHistory.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @DeleteMapping(path = "/search/delete/{id}")
-    String deleteRating(@PathVariable int id){
-        searchHistoryRepository.deleteById(id);
-        return success;
-    }
 }

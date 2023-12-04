@@ -1,8 +1,5 @@
 package manytomany.Profile;
 
-import java.util.List;
-import java.util.Optional;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,13 +9,9 @@ import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  *
@@ -106,34 +99,4 @@ public class DescriptionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
 
-
-    @ApiOperation(value = "Update the description by ID", response = Description.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @PutMapping(path = "/description/update/{id}")
-    Description updateDescription(@PathVariable int id, @RequestBody Description request){
-        Description description = descriptionRepository.findById(id);
-        if(description == null)
-            return null;
-        descriptionRepository.save(request);
-        return descriptionRepository.findById(id);
-    }
-
-
-    @ApiOperation(value = "Delete a description by ID", response = Description.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @DeleteMapping(path = "/description/delete/{id}")
-    String deleteDescription(@PathVariable int id){
-        descriptionRepository.deleteById(id);
-        return success;
-    }
 }

@@ -1,27 +1,21 @@
 package manytomany.Persons;
 
-import java.util.*;
-import javax.persistence.OneToMany;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.*;
-import java.util.Set;
-
-
+import manytomany.Calendars.Calendar;
 import manytomany.Friends.Friend;
+import manytomany.GoogleImages.GoogleImage;
 import manytomany.GoogleMaps.GoogleMap;
 import manytomany.Profile.Description;
 import manytomany.Ratings.Rating;
 import manytomany.SearchHistories.SearchHistory;
+import manytomany.Texting.Message;
 import manytomany.TravelHistories.TravelHistory;
 import manytomany.TravelToDos.TravelToDo;
-import manytomany.Calendars.Calendar;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
+
 
 /**
  * 
@@ -89,7 +83,13 @@ public class Person {
     private Set<GoogleMap> maps;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<GoogleImage> images;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Calendar> cals;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Message> messages;
 
 
 
@@ -234,5 +234,20 @@ public class Person {
     public Set<Calendar> getCals() {
         return cals;
     }
-    
+
+    public void setImages(Set<GoogleImage> images) {
+        this.images = images;
+    }
+
+    public Set<GoogleImage> getImages() {
+        return images;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
 }

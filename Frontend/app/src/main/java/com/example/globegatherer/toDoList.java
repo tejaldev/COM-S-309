@@ -51,7 +51,7 @@ public class toDoList extends AppCompatActivity {
         setContentView(R.layout.activity_to_do_list);
 
         responses2 = findViewById(R.id.responses2);
-        showingList = findViewById(R.id.showingLists);
+//        showingList = findViewById(R.id.showingLists);
         showingListButtons  = findViewById(R.id.showListButton);
         save = findViewById(R.id.saveList);
         Expenses = findViewById(R.id.Expense);
@@ -94,12 +94,20 @@ public class toDoList extends AppCompatActivity {
         });
 
         showingListButtons.setOnClickListener(new View.OnClickListener() {
-            JSONArray parameter= new JSONArray();
+//            JSONArray parameter= new JSONArray();
+//
+//            @Override
+//            public void onClick(View view) {
+//                getRequest(parameter);
+//            }
 
-            @Override
-            public void onClick(View view) {
-                getRequest(parameter);
-            }
+
+                @Override
+                public void onClick(View view) {
+                    openShowToDo();
+                }
+
+
 
 
         });
@@ -112,6 +120,11 @@ public class toDoList extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void openShowToDo(){
+        Intent intent = new Intent(this, showToDo.class);
+        startActivity(intent);
+
+    }
 
     private void postRequest(JSONObject params) {
         pDialog = new ProgressDialog(this);
@@ -159,53 +172,6 @@ public class toDoList extends AppCompatActivity {
     }
 
 
-    private void getRequest(JSONArray parameter){
 
-        // Create a ProgressDialog to show loading while fetching data
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        String Iusername = SharedPrefsUtil.getUsername(this);
-        String url = URL3.replace("{SignUpName}", Iusername);
-
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(
-                Request.Method.GET, url, parameter, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.d(TAG, response.toString());
-                showingList.setText(response.toString());
-                pDialog.hide();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error: " + error.getMessage());
-                showingList.setText("Error: " + error.getMessage());
-                pDialog.hide();
-            }
-        }) {
-            //            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                // Your header logic here
-//                HashMap<String, String> headers = new HashMap<>();
-//                // Add any necessary headers here
-//                // Example: headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-//                // Example: headers.put("Content-Type", "application/json");
-//                return headers;
-//            }
-            {
-                setShouldCache(false); // Disable caching for debugging
-                VolleyLog.DEBUG = true;
-            }
-        };
-
-
-
-        // Adding the request to the request queue
-        Volley.newRequestQueue(this).add(jsonObjReq);
-
-
-    }
 
 }

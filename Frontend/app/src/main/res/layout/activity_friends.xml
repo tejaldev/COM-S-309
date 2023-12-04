@@ -1,107 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/friends"
     android:gravity="center"
-    android:background="@drawable/background"
+    android:orientation="vertical"
     tools:context=".friends">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+
+        android:background="@android:color/transparent"
         app:cardCornerRadius="30dp"
-        app:cardElevation="30dp"
-        android:background="@drawable/custom_editing">
+        app:cardElevation="30dp">
 
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:padding="24dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Friends"
-                android:id="@+id/friends"
-                android:textSize="36sp"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/nameEditText"
-                android:background="@drawable/custom_editing"
-                android:drawableLeft="@drawable/baseline_person_2_24"
-                android:drawablePadding="8dp"
-                android:hint="Full Name"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="40dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/usernameEditText"
-                android:background="@drawable/custom_editing"
-                android:drawableLeft="@drawable/baseline_person_2_24"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="40dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/addFriendButton"
-                android:text="Add Friend"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/black"
-                app:cornerRadius = "20dp"/>
+            android:padding="16dp"
+            tools:context=".showFriend">
 
             <TextView
-                android:layout_width="fill_parent"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textSize="20sp"
-                android:text="Response: " />
+                android:layout_gravity="center"
+                android:text="Friends will be displayed here:"
+                android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="fill_parent"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/friendsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- Friend items will be dynamically added here -->
+                </LinearLayout>
+            </ScrollView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/responses"
-                android:layout_marginTop="10dp"
-                android:text="The response is: "
-                android:textColor="@color/black"/>
-
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/showFriendButton"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:id="@+id/showFriendButton"
-        android:text="Show Friend"
-        android:textSize="18sp"
-        android:textColor="@color/white"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/black"
-        app:cornerRadius = "20dp"/>
+        android:text="Show Friend"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="20dp" />
+    <TextView
+        android:id="@+id/responses"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="The response is: "
+        android:textColor="@color/black" />
 
 
 

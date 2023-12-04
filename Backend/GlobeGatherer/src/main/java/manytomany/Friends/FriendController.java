@@ -1,21 +1,19 @@
 package manytomany.Friends;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import manytomany.Admins.Credential;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Api(value = "Swagger2DemoAdmin", description = "REST APIs related to FRIEND Entity!")
 @RestController
@@ -60,6 +58,24 @@ public class FriendController {
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "Not Found")})
 
+//    @PostMapping("/add/{SignUpName}")
+//    public ResponseEntity<String> addFriendToUser1(@PathVariable String SignUpName, @RequestBody Friend friend) {
+//        // Find the user by SignUpName
+//        Person user = personRepository.findBySignUpName(SignUpName);
+//
+//        if (user == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        friend.setPerson(user);
+//
+//        Friend savedFriend = friendRepository.save(friend);
+//
+//        user.setFriend(savedFriend); // Add the friend to the collection
+//        personRepository.save(user);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(success);
+//    }
+
     @PostMapping("/add/{SignUpName}")
     public ResponseEntity<String> addFriendToUser1(@PathVariable String SignUpName, @RequestBody Friend friend) {
         // Find the user by SignUpName
@@ -69,53 +85,43 @@ public class FriendController {
             return ResponseEntity.notFound().build();
         }
 
-        // Set the user as the owner of this friend
         friend.setPerson(user);
 
-        // Save the friend
         Friend savedFriend = friendRepository.save(friend);
 
-        // Update the user's friend reference
-        user.setFriend(savedFriend); // Add the friend to the collection
+        user.setFriend(savedFriend);
         personRepository.save(user);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
 
 
-    @ApiOperation(value = "Update a Person's Friend by ID", response = Friend.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
+    @Transactional
+    @PostMapping("/add/check/{SignUpName}")
+    public ResponseEntity<String> addFriendToUser2(@PathVariable String SignUpName, @RequestBody Friend friend) {
+        // Find the user by SignUpName
+        Person user = personRepository.findBySignUpName(SignUpName);
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Friend> updateFriend(@PathVariable int id, @Valid @RequestBody Friend request) {
-        Friend friend = friendRepository.findById(id);
-        if (friend == null) {
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
-        // Update the friend object here
-        friendRepository.save(request);
-        return ResponseEntity.ok(request);
-    }
 
-
-    @ApiOperation(value = "Delete a Person's Friend by ID", response = Friend.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteFriend(@PathVariable int id) {
-        Friend friend = friendRepository.findById(id);
-        if (friend == null) {
-            return ResponseEntity.notFound().build();
+        // Check if the friend is already a friend of the current user
+        if (user.getFriends().stream().anyMatch(existingFriend -> existingFriend.getName().equals(friend.getName()))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are already friends with this user.");
         }
-        friendRepository.deleteById(id);
-        return ResponseEntity.ok(success);
+
+        friend.setPerson(user);
+
+        Friend savedFriend = friendRepository.save(friend);
+
+        // Update person_in_app_id for the saved friend
+        friendRepository.updatePersonInAppIdByFriendName(friend.getName());
+
+
+        user.getFriends().add(savedFriend); // Add the friend to the collection
+        personRepository.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Friend added successfully.");
     }
+
 }
