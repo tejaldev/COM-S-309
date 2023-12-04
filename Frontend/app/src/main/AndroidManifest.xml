@@ -107,9 +107,9 @@
 <!--        <activity-->
 <!--            android:name=".WebSocketListener"-->
 <!--            android:exported="false" />-->
-        <activity
-            android:name=".WebSocketManager"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".WebSocketManager"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
