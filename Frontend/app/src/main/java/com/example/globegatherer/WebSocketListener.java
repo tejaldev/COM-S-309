@@ -40,4 +40,6 @@ public interface WebSocketListener {
      * @param ex The exception that describes the error.
      */
     void onWebSocketError(Exception ex);
+
+
 }
