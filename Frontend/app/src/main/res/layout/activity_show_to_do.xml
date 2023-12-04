@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".showFriend">
+    tools:context=".showToDo">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Friends will be displayed here:"
+        android:text="To-Do items will be displayed here:"
         android:textSize="18sp" />
 
     <ScrollView
@@ -22,11 +22,11 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/friendsContainer"
+            android:id="@+id/todosContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!-- Friend items will be dynamically added here -->
+            <!-- ToDo items will be dynamically added here -->
         </LinearLayout>
     </ScrollView>
 

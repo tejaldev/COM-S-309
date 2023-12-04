@@ -103,13 +103,13 @@
         android:backgroundTint="@color/black"
         app:cornerRadius = "20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:id="@+id/showingLists"
-        android:background="@color/white"
-        android:text="To Do List:  "/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:id="@+id/showingLists"-->
+<!--        android:background="@color/white"-->
+<!--        android:text="To Do List:  "/>-->
 
 
 </LinearLayout>

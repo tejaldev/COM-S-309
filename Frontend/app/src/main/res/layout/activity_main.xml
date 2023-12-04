@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/img"
+    android:background="@drawable/login"
     tools:context=".MainActivity">
     <ScrollView
         android:layout_width="match_parent"
@@ -107,15 +107,15 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:padding="8dp"
         android:text="Haven't registered yet? Sign Up"
-        android:textSize="16sp"
         android:textAlignment="center"
-        android:id="@+id/signUpText"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"/>
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <Button
         android:layout_width="wrap_content"

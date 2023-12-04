@@ -1,28 +1,25 @@
 package com.example.globegatherer;
 
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.java_websocket.handshake.ServerHandshake;
-import org.w3c.dom.Text;
 
-public class chatpage extends AppCompatActivity implements WebSocketListener{
+public class chatpage extends AppCompatActivity implements WebSocketListener {
 
     private String BASE_URL = "ws://coms-309-013.class.las.iastate.edu:8080/chat/{SignUpName}";
 
     private Button connectBtn, sendBtn;
     private EditText usernameEtx, msgEtx;
-    private TextView msgTv;
+    private LinearLayout chatContainer;  // Change from TextView to LinearLayout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +27,11 @@ public class chatpage extends AppCompatActivity implements WebSocketListener{
         setContentView(R.layout.activity_chatpage);
 
         /* initialize UI elements */
-        connectBtn = (Button) findViewById(R.id.bt1);
-        sendBtn = (Button) findViewById(R.id.sendButton);
-        usernameEtx = (EditText) findViewById(R.id.et1);
-        msgEtx = (EditText) findViewById(R.id.messageInput);
-        msgTv = (TextView) findViewById(R.id.tx1);
+        connectBtn = findViewById(R.id.bt1);
+        sendBtn = findViewById(R.id.sendButton);
+        usernameEtx = findViewById(R.id.et1);
+        msgEtx = findViewById(R.id.messageInput);
+        chatContainer = findViewById(R.id.chatContainer);  // Change to chatContainer
 
         /* connect button listener */
         connectBtn.setOnClickListener(view -> {
@@ -51,36 +48,37 @@ public class chatpage extends AppCompatActivity implements WebSocketListener{
         /* send button listener */
         sendBtn.setOnClickListener(v -> {
             try {
-
                 // send message
                 WebSocketManager.getInstance().sendMessage(msgEtx.getText().toString());
             } catch (Exception e) {
-                Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                Log.d("ExceptionSendMessage:", e.getMessage());
             }
         });
     }
 
-
     @Override
     public void onWebSocketMessage(String message) {
-        /**
-         * In Android, all UI-related operations must be performed on the main UI thread
-         * to ensure smooth and responsive user interfaces. The 'runOnUiThread' method
-         * is used to post a runnable to the UI thread's message queue, allowing UI updates
-         * to occur safely from a background or non-UI thread.
-         */
         runOnUiThread(() -> {
-            String s = msgTv.getText().toString();
-            msgTv.setText(s + "\n"+message);
+            // Create a new TextView for the received message
+            TextView receivedMessage = new TextView(this);
+            receivedMessage.setText(message);
+            receivedMessage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+           // receivedMessage.setBackgroundResource(R.drawable.bubble_left); // You may need to create a custom drawable for the left bubble
+            receivedMessage.setTextColor(Color.BLACK);
+
+            // Add the TextView to the chat container
+            chatContainer.addView(receivedMessage);
         });
     }
 
     @Override
     public void onWebSocketClose(int code, String reason, boolean remote) {
-        String closedBy = remote ? "server" : "local";
         runOnUiThread(() -> {
-            String s = msgTv.getText().toString();
-            msgTv.setText(s + "---\nconnection closed by " + closedBy + "\nreason: " + reason);
+            // Update the UI accordingly or remove this part if not needed
+            String s = ""; // Initialize with an empty string or retrieve the appropriate text from your layout
+            s += "---\nconnection closed by " + (remote ? "server" : "local") + "\nreason: " + reason;
+            TextView msgTv = findViewById(R.id.statusTextView);  // You might want to use a different TextView for displaying status messages
+            msgTv.setText(s);
         });
     }
 
@@ -90,6 +88,3 @@ public class chatpage extends AppCompatActivity implements WebSocketListener{
     @Override
     public void onWebSocketError(Exception ex) {}
 }
-
-
-
