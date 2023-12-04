@@ -1,10 +1,5 @@
 package manytomany.Admins;
 
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,9 +7,10 @@ import io.swagger.annotations.ApiResponses;
 import manytomany.Persons.Person;
 import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.ResponseEntity;
+import java.util.HashMap;
 
 /**
  *
@@ -76,21 +72,6 @@ public class AdminController {
         return success;
     }
 
-    @ApiOperation(value = "Update an existing Admin by ID", response = Admin.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @PutMapping("/admins/update/{id}")
-    Admin updateAdmin(@PathVariable int id, @RequestBody Admin request){
-        Admin admin = adminRepository.findById(id);
-        if(admin == null)
-            return null;
-        adminRepository.save(request);
-        return adminRepository.findById(id);
-    }
 
 
     @ApiOperation(value = "Ban a Person by SignUpName", response = Admin.class)

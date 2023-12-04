@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,20 +85,15 @@ public class FriendController {
             return ResponseEntity.notFound().build();
         }
 
-        // Check if the friend is already a friend of the current user
-        if (user.getFriends().stream().anyMatch(existingFriend -> existingFriend.getName().equals(friend.getName()))) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are already friends with this user.");
-        }
-
         friend.setPerson(user);
 
         Friend savedFriend = friendRepository.save(friend);
 
-        user.getFriends().add(savedFriend); // Add the friend to the collection
+        user.setFriend(savedFriend);
         personRepository.save(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("Friend added successfully.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(success);
     }
+
 
     @Transactional
     @PostMapping("/add/check/{SignUpName}")
@@ -130,45 +124,4 @@ public class FriendController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Friend added successfully.");
     }
 
-
-
-
-
-
-
-    @ApiOperation(value = "Update a Person's Friend by ID", response = Friend.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Friend> updateFriend(@PathVariable int id, @Valid @RequestBody Friend request) {
-        Friend friend = friendRepository.findById(id);
-        if (friend == null) {
-            return ResponseEntity.notFound().build();
-        }
-        // Update the friend object here
-        friendRepository.save(request);
-        return ResponseEntity.ok(request);
-    }
-
-
-    @ApiOperation(value = "Delete a Person's Friend by ID", response = Friend.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "Not Found")})
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteFriend(@PathVariable int id) {
-        Friend friend = friendRepository.findById(id);
-        if (friend == null) {
-            return ResponseEntity.notFound().build();
-        }
-        friendRepository.deleteById(id);
-        return ResponseEntity.ok(success);
-    }
 }
