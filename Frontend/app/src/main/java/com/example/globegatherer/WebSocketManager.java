@@ -21,14 +21,12 @@ public class WebSocketManager {
     private MyWebSocketClient webSocketClient;
     private WebSocketListener webSocketListener;
 
-    public void WebSocketManager() {
-        // Default constructor logic, if needed
-    }
+
 
     public boolean isSocketOpen() {
         return webSocketClient != null && webSocketClient.isOpen();
     }
-    private WebSocketManager() {}
+    public WebSocketManager() {}
 
     /**
      * Retrieves a synchronized instance of the WebSocketManager, ensuring that
