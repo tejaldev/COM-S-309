@@ -104,9 +104,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCDA4zkRTyQeCinpcn2jKsQiF2HpEgC7b0" />
 
-        <activity
-            android:name=".WebSocketListener"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".WebSocketListener"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".WebSocketManager"
             android:exported="false" />
