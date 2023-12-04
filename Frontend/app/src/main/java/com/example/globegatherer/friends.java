@@ -35,7 +35,7 @@ public class friends extends AppCompatActivity {
     private Button addFriend;
     private static final String TAG = friends.class.getSimpleName();
     private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
-    private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/friends/{SignUpName}";
+    private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
 
     private ProgressDialog pDialog;
@@ -119,11 +119,11 @@ public class friends extends AppCompatActivity {
     private void getRequest(JSONArray parameter) {
         progressBar.setVisibility(View.VISIBLE);
 
-        String Iusername = SharedPrefsUtil.getUsername(this);
-        String url = URL2.replace("{SignUpName}", Iusername);
+//        String Iusername = SharedPrefsUtil.getUsername(this);
+//        String url = URL2.replace("{SignUpName}", Iusername);
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(
-                Request.Method.GET, url, parameter, new Response.Listener<JSONArray>() {
+                Request.Method.GET, URL2, parameter, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
@@ -151,14 +151,14 @@ public class friends extends AppCompatActivity {
 
             for (int i = 0; i < friends.length(); i++) {
                 try {
-                    String friendName = friends.getString(i);
+                    String name = friends.getString(i);
 
                     // Inflate friend item layout
                     View friendItemView = LayoutInflater.from(this).inflate(R.layout.friend_item, null);
 
                     // Set friend name
                     TextView friendTextView = friendItemView.findViewById(R.id.friendName);
-                    friendTextView.setText(friendName);
+                    friendTextView.setText(name);
 
                     // Set click listener for the Add button
                     Button addButton = friendItemView.findViewById(R.id.addButton);
@@ -171,7 +171,7 @@ public class friends extends AppCompatActivity {
                             try {
                                 // Create a JSONObject with the necessary parameters for the POST request
                                 JSONObject params = new JSONObject();
-                                params.put("friendName", friendName);
+                                params.put("name", name);
 
                                 // Call the existing postRequest method with the JSONObject
                                 postRequest(params);
