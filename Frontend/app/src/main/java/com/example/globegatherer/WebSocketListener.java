@@ -41,7 +41,5 @@ public interface WebSocketListener {
      */
     void onWebSocketError(Exception ex);
 
-    WebSocketListener() {
-        // Initialization code, if needed
-    }
+
 }
