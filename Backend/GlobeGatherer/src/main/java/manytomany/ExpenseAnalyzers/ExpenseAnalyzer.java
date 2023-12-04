@@ -1,12 +1,12 @@
 
-package manytomany.ExpenseAnalyzer;
+package manytomany.ExpenseAnalyzers;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import manytomany.Persons.Person;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import manytomany.Persons.Person;
-
+@Entity
 public class ExpenseAnalyzer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
