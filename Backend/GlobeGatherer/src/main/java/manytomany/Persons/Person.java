@@ -1,6 +1,7 @@
 package manytomany.Persons;
 
 import manytomany.Calendars.Calendar;
+import manytomany.ExpenseAnalyzers.ExpenseAnalyzer;
 import manytomany.Friends.Friend;
 import manytomany.GoogleImages.GoogleImage;
 import manytomany.GoogleMaps.GoogleMap;
@@ -87,6 +88,9 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Calendar> cals;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<ExpenseAnalyzer> expen;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Message> messages;
@@ -249,5 +253,13 @@ public class Person {
 
     public List<Message> getMessages() {
         return messages;
+    }
+
+    public void setExpen(Set<ExpenseAnalyzer> expen) {
+        this.expen = expen;
+    }
+
+    public Set<ExpenseAnalyzer> getExpen() {
+        return expen;
     }
 }

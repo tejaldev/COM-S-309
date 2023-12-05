@@ -1,10 +1,9 @@
 package manytomany.Calendars;
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import manytomany.Persons.Person;
+
+import javax.persistence.*;
 
 @Entity
 public class Calendar {
