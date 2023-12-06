@@ -43,7 +43,7 @@ public class TravelToDoControllerTest {
                 .contentType(ContentType.JSON)
                 .body(todo)
                 .when()
-                .post("/TravelToDo");
+                .post("/TravelToDo/Ella");
 
         // Print the response body for debugging
         System.out.println("Response body: " + response.getBody().asString());

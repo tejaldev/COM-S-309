@@ -16,6 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -42,7 +43,7 @@ public class GoogleMapControllerTest {
                 .contentType(ContentType.JSON)
                 .body(map)
                 .when()
-                .post("/GoogleMaps");
+                .post("/GoogleMaps/Ella");
 
         // Print the response body for debugging
         System.out.println("Response body: " + response.getBody().asString());
@@ -51,9 +52,12 @@ public class GoogleMapControllerTest {
         int statusCode = response.getStatusCode();
         assertEquals(201, statusCode);
 
-        // Extract "message" from the response and compare with expected value
-        String message = response.jsonPath().getString("message");
-        assertEquals("success", message);
+        String destination = response.jsonPath().getString("destinationName");
+        int id = response.jsonPath().getInt("id");
+
+        // Assert the response fields
+        assertEquals("France", destination);
+        assertTrue(id > 0);
     }
 
     @Test

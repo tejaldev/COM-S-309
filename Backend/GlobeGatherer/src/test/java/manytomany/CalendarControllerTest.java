@@ -14,6 +14,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
@@ -48,9 +49,16 @@ public class CalendarControllerTest {
         int statusCode = response.getStatusCode();
         assertEquals(201, statusCode);
 
-        // Extract "message" from the response and compare with expected value
-        String message = response.jsonPath().getString("message");
-        assertEquals("success", message);
+        String destination = response.jsonPath().getString("destination");
+        String estimatedCost = response.jsonPath().getString("startDate");
+        String selectedCostItem = response.jsonPath().getString("endDate");
+        int id = response.jsonPath().getInt("id");
+
+        // Assert the response fields
+        assertEquals("France", destination);
+        assertEquals("Jan 1", estimatedCost);
+        assertEquals("Jan 20", selectedCostItem);
+        assertTrue(id > 0);
     }
 
     @Test
@@ -70,7 +78,7 @@ public class CalendarControllerTest {
     public void getAllCalendarTest() {
         given()
                 .when()
-                .get("/call/all")
+                .get("/cal/all")
                 .then()
                 .statusCode(200) // Assuming a successful response
                 .body("$", hasSize(greaterThanOrEqualTo(0)));
