@@ -232,14 +232,14 @@ public class ban_user extends AppCompatActivity {
                     String username = users.getString(i);
 
                     // Inflate user item layout
-                    View userItemView = LayoutInflater.from(this).inflate(R.layout.friend_item, null);
+                    View userItemView = LayoutInflater.from(this).inflate(R.layout.ban_item, null);
 
                     // Set username
-                    TextView userTextView = userItemView.findViewById(R.id.friendName);
+                    TextView userTextView = userItemView.findViewById(R.id.userName);
                     userTextView.setText(username);
 
                     // Set click listener for the Ban button
-                    Button banButton = userItemView.findViewById(R.id.addButton);
+                    Button banButton = userItemView.findViewById(R.id.banButton);
                     banButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
