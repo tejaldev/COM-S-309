@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- camera part -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Add this permission -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Add this permission -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -24,20 +24,25 @@
         android:theme="@style/Theme.GlobeGatherer"
         tools:targetApi="31">
         <activity
+            android:name=".album"
+            android:exported="false" />
+        <activity
             android:name=".Expense_analyzer"
             android:exported="false" />
         <activity
             android:name=".showToDo"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Location"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".AR"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Location" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".AR" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".camera"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Expense_analyzer"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".homePage"
             android:exported="false" />
@@ -89,15 +94,16 @@
         <activity
             android:name=".app.AppController"
             android:exported="false" />
-        <!-- <activity
+        <!--
+ <activity
             android:name=".net_utils.Const"
             android:exported="false"
             tools:node="remove" />
         <activity
             android:name=".net_utils.LruBitmapCache"
             android:exported="false"
-            tools:node="remove" />  -->
-            
+            tools:node="remove" />
+        -->
         <!-- key for google maps -->
         <!-- <meta-data -->
         <!-- android:name="com.google.android.geo.API_KEY" -->
@@ -106,14 +112,12 @@
         <!-- key for google places -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCDA4zkRTyQeCinpcn2jKsQiF2HpEgC7b0" />
-
-<!--        <activity-->
-<!--            android:name=".WebSocketListener"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".WebSocketManager"-->
-<!--            android:exported="false" />-->
+            android:value="AIzaSyCDA4zkRTyQeCinpcn2jKsQiF2HpEgC7b0" /> <!-- <activity -->
+        <!-- android:name=".WebSocketListener" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".WebSocketManager" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

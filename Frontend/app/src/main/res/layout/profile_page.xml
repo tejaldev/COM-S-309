@@ -144,64 +144,72 @@
 
 <!--    </androidx.cardview.widget.CardView>-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card_view1"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp"
-        android:background="@drawable/custom_editing">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/card_view2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/card_view1"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:cardCornerRadius="30dp"-->
+<!--        app:cardElevation="20dp"-->
+<!--        android:background="@drawable/custom_editing">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center">
-
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ratings"
-            android:id="@+id/ratings"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/black"
-            android:textAlignment="center" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calendar"
-                android:id="@+id/calendar_open"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:textAlignment="center" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Camera"
-                android:id="@+id/camera_open"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:textAlignment="center" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="5dp"-->
+<!--            android:gravity="center">-->
 
 
 
 
-        </LinearLayout>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Rating"-->
+<!--            android:id="@+id/ratings"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:backgroundTint="@color/black"-->
+<!--            android:textAlignment="center" />-->
+<!--            <Button-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Planner"-->
+<!--                android:id="@+id/calendar_open"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:textAlignment="center" />-->
 
-    </androidx.cardview.widget.CardView>
+<!--            <Button-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Camera"-->
+<!--                android:id="@+id/camera_open"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:textAlignment="center" />-->
+<!--            <Button-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Money"-->
+<!--                android:id="@+id/expense_open"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:textAlignment="center" />-->
+
+
+
+
+<!--        </LinearLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card_view2"
+        android:layout_below="@+id/card_view1"
         android:layout_margin="10dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
@@ -335,4 +343,11 @@
 <!--        android:layout_alignParentBottom="true"-->
 <!--        app:menu="@menu/bottom_navigation_menu" />-->
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation1_menu" />
 </RelativeLayout>

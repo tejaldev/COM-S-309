@@ -21,6 +21,9 @@ import java.util.List;
 public class Expense_analyzer extends AppCompatActivity {
 
     private Spinner costItemsSpinner;
+
+
+
     private ArrayAdapter<String> costItemsAdapter;
 
     @Override

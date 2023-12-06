@@ -31,6 +31,8 @@ public class profile_page extends AppCompatActivity {
     private String username;
     private ImageView Announcements;
 
+    private Button Expense;
+
     private Button Camera;
 
 
@@ -45,11 +47,12 @@ public class profile_page extends AppCompatActivity {
         Edit = findViewById(R.id.edit);
         description = findViewById(R.id.Description);
         logout = findViewById(R.id.logout);
-        rate = findViewById(R.id.ratings);
+//        rate = findViewById(R.id.ratings);
         //Friend = findViewById(R.id.Friends);
-        Calendar = findViewById(R.id.calendar_open);
-
-        Camera = findViewById(R.id.camera_open);
+//        Calendar = findViewById(R.id.calendar_open);
+//
+//        Camera = findViewById(R.id.camera_open);
+//        Expense = findViewById(R.id.expense_open);
 
         Des_Response = findViewById(R.id.Des_Response);
         Announcements = findViewById(R.id.announcements);
@@ -70,6 +73,36 @@ public class profile_page extends AppCompatActivity {
 //            NameText.setText(Iusername);
 //        }
 
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        // Set up a listener to handle item selection
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_ratings) {
+                    openRatings();
+                    return true;
+                } else if (itemId == R.id.menu_calendar) {
+                    openActivity7();
+                    return true;
+                } else if (itemId == R.id.menu_camera) {
+                    openCamera();
+                    return true;
+                }else if (itemId == R.id.menu_expense) {
+                    openActivity9();
+                    return true;
+                }
+//                }else if (itemId == R.id.menu_images) {
+//                    openActivity10();
+//                    return true;
+//                }
+//                }else if (itemId == R.id.menu_profile) {
+//                    openProfile();
+//                    return true;
+//                }
+                return false;
+            }
+        });
 
 
         Edit.setOnClickListener(new View.OnClickListener() {
@@ -86,12 +119,12 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
-        rate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRatings();
-            }
-        });
+//        rate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openRatings();
+//            }
+//        });
 //
 //        Friend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -107,19 +140,25 @@ public class profile_page extends AppCompatActivity {
             }
         });
 
-        Calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity7();
-            }
-        });
+//        Calendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity7();
+//            }
+//        });
 
-        Camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity8();
-            }
-        });
+//        Camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity8();
+//            }
+//        });
+//        Expense.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity9();
+//            }
+//        });
 
         username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
@@ -181,6 +220,21 @@ public class profile_page extends AppCompatActivity {
     }
 
     public void openActivity8(){
+        Intent intent = new Intent(this, camera.class);
+        startActivity(intent);
+    }
+
+    public void openActivity9(){
+        Intent intent = new Intent(this, Expense_analyzer.class);
+        startActivity(intent);
+    }
+
+//    public void openActivity10(){
+//        Intent intent = new Intent(this, album.class);
+//        startActivity(intent);
+//    }
+
+    public void openCamera(){
         Intent intent = new Intent(this, camera.class);
         startActivity(intent);
     }
