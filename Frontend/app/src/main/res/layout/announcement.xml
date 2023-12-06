@@ -77,6 +77,15 @@
                 android:backgroundTint="@color/black"
                 android:textAlignment="center"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/announcement_button"
+                android:text="Announce"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:textAlignment="center"/>
+
             <TextView
                 android:id="@+id/announce"
                 android:layout_width="fill_parent"

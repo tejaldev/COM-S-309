@@ -83,8 +83,11 @@ public class Expense_analyzer extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        String url = "http://coms-309-013.class.las.iastate.edu:8080/expense/{SignUpName}"; // Replace with your actual endpoint
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String Url = url.replace("{SignUpName}", Iusername);
         // Example: Make a POST request using NetworkManager
-        NetworkManager.getInstance(this).sendPostRequest(postData, "your_post_endpoint", new Response.Listener<JSONObject>() {
+        NetworkManager.getInstance(this).sendPostRequest(postData, Url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 // Handle the response (e.g., update UI)
@@ -103,7 +106,10 @@ public class Expense_analyzer extends AppCompatActivity {
 
     private void showExpense() {
         // Example: Make a GET request using NetworkManager
-        NetworkManager.getInstance(this).sendGetRequest("your_get_endpoint", new Response.Listener<JSONArray>() {
+        String url = "http://coms-309-013.class.las.iastate.edu:8080/expense/{SignUpName}"; // Replace with your actual endpoint
+        String Iusername = SharedPrefsUtil.getUsername(this);
+        String Url = url.replace("{SignUpName}", Iusername);
+        NetworkManager.getInstance(this).sendGetRequest(Url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 // Handle the response (e.g., update UI)

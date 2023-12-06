@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -15,6 +16,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.action.ViewActions.click;
+import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class ExpenseAnalyzerTest {
@@ -30,6 +35,8 @@ public class ExpenseAnalyzerTest {
         // Select an item in the spinner
         onView(withId(R.id.costItemsSpinner)).perform(ViewActions.click());
         onView(withText("Food")).perform(ViewActions.click());
+//        onData(allOf(is(instanceOf(String.class)), is("Food"))).perform(click());
+
 
         // Type text into the estimated cost edit text
         onView(withId(R.id.estimatedCost)).perform(typeText("100"), ViewActions.closeSoftKeyboard());
@@ -39,7 +46,7 @@ public class ExpenseAnalyzerTest {
 
         // Check if the response TextView is displayed and contains the expected text
         onView(withId(R.id.responses2)).check(matches(isDisplayed()));
-        onView(withId(R.id.responses2)).check(matches(withText("The response is: "))); // You might need to adjust this based on the actual response you expect
+        onView(withId(R.id.responses2)).check(matches(withText(startsWith("The response is: ")))); // You might need to adjust this based on the actual response you expect
     }
 
     @Test
@@ -50,7 +57,7 @@ public class ExpenseAnalyzerTest {
         //check with backend on what will be returned.
         // Check if the showing lists TextView is displayed and contains the expected text
         onView(withId(R.id.showingLists)).check(matches(isDisplayed()));
-        onView(withId(R.id.showingLists)).check(matches(withText("Expenses:"))); // You might need to adjust this based on the actual response you expect
+        onView(withId(R.id.showingLists)).check(matches(withText(startsWith("Expenses:")))); // You might need to adjust this based on the actual response you expect
     }
 }
 
