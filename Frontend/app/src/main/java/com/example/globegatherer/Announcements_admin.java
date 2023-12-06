@@ -220,6 +220,7 @@ public class Announcements_admin extends AppCompatActivity implements WebSocketL
         });
     }
 
+    
     @Override
     public void onWebSocketError(Exception ex) {
         // Handle WebSocket error
