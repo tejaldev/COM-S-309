@@ -166,7 +166,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ratings"
+            android:text="Rating"
             android:id="@+id/ratings"
             android:layout_gravity="center"
             android:backgroundTint="@color/black"
@@ -174,7 +174,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calendar"
+                android:text="Planner"
                 android:id="@+id/calendar_open"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
@@ -185,6 +185,14 @@
                 android:layout_height="wrap_content"
                 android:text="Camera"
                 android:id="@+id/camera_open"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:textAlignment="center" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Money"
+                android:id="@+id/expense_open"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:textAlignment="center" />

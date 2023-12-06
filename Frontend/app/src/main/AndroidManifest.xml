@@ -36,6 +36,9 @@
             android:name=".camera"
             android:exported="false" />
         <activity
+            android:name=".Expense_analyzer"
+            android:exported="false" />
+        <activity
             android:name=".homePage"
             android:exported="false" />
         <activity

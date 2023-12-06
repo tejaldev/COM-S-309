@@ -31,6 +31,8 @@ public class profile_page extends AppCompatActivity {
     private String username;
     private ImageView Announcements;
 
+    private Button Expense;
+
     private Button Camera;
 
 
@@ -50,6 +52,7 @@ public class profile_page extends AppCompatActivity {
         Calendar = findViewById(R.id.calendar_open);
 
         Camera = findViewById(R.id.camera_open);
+        Expense = findViewById(R.id.expense_open);
 
         Des_Response = findViewById(R.id.Des_Response);
         Announcements = findViewById(R.id.announcements);
@@ -120,6 +123,12 @@ public class profile_page extends AppCompatActivity {
                 openActivity8();
             }
         });
+        Expense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity9();
+            }
+        });
 
         username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
@@ -182,6 +191,11 @@ public class profile_page extends AppCompatActivity {
 
     public void openActivity8(){
         Intent intent = new Intent(this, camera.class);
+        startActivity(intent);
+    }
+
+    public void openActivity9(){
+        Intent intent = new Intent(this, Expense_analyzer.class);
         startActivity(intent);
     }
 

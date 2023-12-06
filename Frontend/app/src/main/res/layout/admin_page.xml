@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Admin_Page"
     android:paddingTop="24dp"
-    android:background="@drawable/img"
+    android:background="@drawable/background"
     android:layout_gravity="center"
     android:orientation="vertical">
 
