@@ -9,9 +9,9 @@ import manytomany.Persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,30 +98,66 @@ public class FriendController {
     @Transactional
     @PostMapping("/add/check/{SignUpName}")
     public ResponseEntity<String> addFriendToUser2(@PathVariable String SignUpName, @RequestBody Friend friend) {
-        // Find the user by SignUpName
-        Person user = personRepository.findBySignUpName(SignUpName);
+        Friend us = new Friend(SignUpName);
+        String SignUpName2 = us.getName();
+        try {
+            Person user = personRepository.findBySignUpName(SignUpName);
+            Person user2 = personRepository.findBySignUpName(friend.getName());
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Check if the friend is already a friend of the current user
+            if (user.getFriends().stream().anyMatch(existingFriend -> existingFriend.getName().equals(friend.getName()))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are already friends with this user.");
+            }
+
+            friend.setPerson(user);
+            Friend savedFriend = friendRepository.save(friend);
+
+            // Update person_in_app_id for the saved friend
+            friendRepository.updatePersonInAppIdByFriendName(friend.getName());
+
+
+            user.getFriends().add(savedFriend); // Add the friend to the collection
+            personRepository.save(user);
+
+            addFriendToUser(friend.getName(), new Friend(SignUpName));
+
+            return ResponseEntity.status(HttpStatus.CREATED).body("Friend added successfully.");
+        } catch (Exception e) {
+            // Handle exceptions and return a custom error message
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request.");
         }
+    }
+    @Transactional
+    public void addFriendToUser(String userName, Friend friend) {
+        try {
+            Person user = personRepository.findBySignUpName(userName);
 
-        // Check if the friend is already a friend of the current user
-        if (user.getFriends().stream().anyMatch(existingFriend -> existingFriend.getName().equals(friend.getName()))) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are already friends with this user.");
+            if (user == null) {
+                // Handle appropriately (throw an exception or log an error)
+                return;
+            }
+
+            // Check if the friend is already a friend of the current user
+            if (user.getFriends().stream().anyMatch(existingFriend -> existingFriend.getName().equals(friend.getName()))) {
+                // Handle appropriately (throw an exception or log an error)
+                return;
+            }
+
+            friend.setPerson(user);
+            Friend savedFriend = friendRepository.save(friend);
+
+            // Update person_in_app_id for the saved friend
+            friendRepository.updatePersonInAppIdByFriendName(friend.getName());
+
+            user.getFriends().add(savedFriend);
+            personRepository.save(user);
+        } catch (Exception e) {
+            // Handle exceptions (throw an exception or log an error)
         }
-
-        friend.setPerson(user);
-
-        Friend savedFriend = friendRepository.save(friend);
-
-        // Update person_in_app_id for the saved friend
-        friendRepository.updatePersonInAppIdByFriendName(friend.getName());
-
-
-        user.getFriends().add(savedFriend); // Add the friend to the collection
-        personRepository.save(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("Friend added successfully.");
     }
 
 }

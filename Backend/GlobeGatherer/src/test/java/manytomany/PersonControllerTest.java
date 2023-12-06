@@ -3,7 +3,7 @@ package manytomany;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import manytomany.Persons.LoginRequest;
+import manytomany.Persons.Person;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,39 +30,15 @@ public class PersonControllerTest {
     }
 
 
-//    @Test
-//    public void createPersonTest() {
-//        // Define user and travel history details
-//        Person person = new Person("John1", "John1", "123456", "john@gmail.com", "771676726");
-//
-//        // Send request and receive response
-//        Response response = given()
-//                .contentType(ContentType.JSON)
-//                .body(person)
-//                .when()
-//                .post("/persons/add");
-//
-//        // Print the response body for debugging
-//        System.out.println("Response body: " + response.getBody().asString());
-//
-//        // Check status code
-//        int statusCode = response.getStatusCode();
-//        assertEquals(200, statusCode);
-//
-//        // Extract "message" from the response and compare with expected value
-//        String message = response.jsonPath().getString("message");
-//        assertEquals("success", message);
-//    }
-
     @Test
-    public void loginTest() {
+    public void createPersonTest() {
         // Define user and travel history details
-        LoginRequest loginRequest = new LoginRequest("John", "12345");
+        Person person = new Person("John1", "John1", "123456", "john@gmail.com", "771676726");
 
         // Send request and receive response
         Response response = given()
                 .contentType(ContentType.JSON)
-                .body(loginRequest)
+                .body(person)
                 .when()
                 .post("/persons/add");
 
@@ -77,6 +53,30 @@ public class PersonControllerTest {
         String message = response.jsonPath().getString("message");
         assertEquals("success", message);
     }
+
+//    @Test
+//    public void loginTest() {
+//        // Define user and travel history details
+//        LoginRequest loginRequest = new LoginRequest("John", "12345");
+//
+//        // Send request and receive response
+//        Response response = given()
+//                .contentType(ContentType.JSON)
+//                .body(loginRequest)
+//                .when()
+//                .post("/login");
+//
+//        // Print the response body for debugging
+//        System.out.println("Response body: " + response.getBody().asString());
+//
+//        // Check status code
+//        int statusCode = response.getStatusCode();
+//        assertEquals(200, statusCode);
+//
+//        // Extract "message" from the response and compare with expected value
+//        String message = response.jsonPath().getString("message");
+//        assertEquals("Welcome", message);
+//    }
 
 
 

@@ -3,7 +3,6 @@ package manytomany;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import manytomany.Calendars.Calendar;
 import manytomany.ExpenseAnalyzers.ExpenseAnalyzer;
 import org.junit.Before;
 import org.junit.Test;

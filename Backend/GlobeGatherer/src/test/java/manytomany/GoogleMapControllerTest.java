@@ -3,8 +3,6 @@ package manytomany;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import manytomany.Calendars.Calendar;
-import manytomany.ExpenseAnalyzers.ExpenseAnalyzer;
 import manytomany.GoogleMaps.GoogleMap;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +33,7 @@ public class GoogleMapControllerTest {
     @Test
     public void createGoogleMapDescriptionTest() {
         // Define google map event
-       GoogleMap map = new GoogleMap("France");
+        GoogleMap map = new GoogleMap("France");
 
 
         // Send request and receive response

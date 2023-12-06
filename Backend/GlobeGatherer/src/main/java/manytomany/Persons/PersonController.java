@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 
+ *
  * @author Vivek Bengre
- * 
+ *
  */
 
 @Api(value = "Swagger2DemoAdmin", description = "REST APIs related to PERSON Entity!")
@@ -95,6 +95,20 @@ public class PersonController {
 
 
 
+    @ApiOperation(value = "Search a Person by ID", response = Person.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not Found")})
+
+    @GetMapping(path = "/persons/{id}")
+    Person getPersonById( @PathVariable int id){
+
+        return personRepository.findById(id);
+    }
+
+
     @ApiOperation(value = "Add Person to the app", response = Person.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
@@ -126,12 +140,9 @@ public class PersonController {
         // Check if user exists and if password matches
         Person user = personRepository.findBySignUpUsername(signUpUsername);
 
-        if (user != null && user.getSignUpPassword() != null && user.getSignUpPassword().equals(password)) {
-            String welcomeMessage = "Welcome " + user.getSignUpName();
+
             return ResponseEntity.ok(login);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login credentials");
-        }
+
     }
 
 
@@ -145,10 +156,4 @@ public class PersonController {
         }
     }
 
-
-    @DeleteMapping(path = "/persons/delete/{id}")
-    String deletePerson(@PathVariable int id){
-        personRepository.deleteById(id);
-        return success;
-    }
 }

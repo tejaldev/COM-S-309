@@ -60,7 +60,7 @@ public class AdminControllerTest {
                 .when()
                 .get("/admins/Raghu")
                 .then()
-                .statusCode(200) // Assuming a successful response
+                .statusCode(200) // Assuming a successful rsponse
                 .body("signUpUsername", notNullValue()) // Adjust this based on the actual structure of your response
                 .body("signUpPassword", notNullValue()); // Adjust this based on the actual structure of your response
     }
