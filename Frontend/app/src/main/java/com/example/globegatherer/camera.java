@@ -245,10 +245,14 @@ public class camera extends AppCompatActivity {
 
 
     // Your post request method
+    // Your post request method
     private void postRequest(JSONObject params) {
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        if (!isFinishing() && !isDestroyed()) {
+            pDialog = new ProgressDialog(this);
+            pDialog.setMessage("Loading...");
+            pDialog.show();
+        }
+
         String Iusername = SharedPrefsUtil.getUsername(this);
         String url = URL.replace("{SignUpName}", Iusername);
 
@@ -258,14 +262,14 @@ public class camera extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
                 responses.setText(response.toString());
-                pDialog.hide();
+                dismissProgressDialog(); // Dismiss the dialog when the response is received
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error: " + error.getMessage());
                 responses.setText("Error: " + error.getMessage());
-                pDialog.hide();
+                dismissProgressDialog(); // Dismiss the dialog in case of an error
             }
         }) {
             {
@@ -277,4 +281,12 @@ public class camera extends AppCompatActivity {
         // Adding the request to the request queue
         Volley.newRequestQueue(this).add(jsonObjReq);
     }
+
+    // Method to dismiss the ProgressDialog safely
+    private void dismissProgressDialog() {
+        if (pDialog != null && pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
+    }
+
 }
