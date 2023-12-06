@@ -81,7 +81,7 @@ public class showFriend extends AppCompatActivity {
                     String friendName = friends.getString(i);
 
                     // Inflate friend item layout
-                    View friendItemView = LayoutInflater.from(this).inflate(R.layout.friend_item, null);
+                    View friendItemView = LayoutInflater.from(this).inflate(R.layout.showfriend_item, null);
 
                     // Set friend name
                     TextView friendTextView = friendItemView.findViewById(R.id.friendName);
@@ -98,4 +98,6 @@ public class showFriend extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         }
     }
+
+
 }
