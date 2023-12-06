@@ -40,7 +40,7 @@ public class toDoList extends AppCompatActivity {
     private TextView showingList;
 
     private Button showingListButtons;
-    private Button Expenses;
+//    private Button Expenses;
 
     private EditText nameEditTextDestinations;
     private EditText countryEditTexts;
@@ -54,7 +54,7 @@ public class toDoList extends AppCompatActivity {
 //        showingList = findViewById(R.id.showingLists);
         showingListButtons  = findViewById(R.id.showListButton);
         save = findViewById(R.id.saveList);
-        Expenses = findViewById(R.id.Expense);
+//        Expenses = findViewById(R.id.Expense);
 
         nameEditTextDestinations = findViewById(R.id.nameEditTextDestination);
         countryEditTexts = findViewById(R.id.countryEditText);
@@ -86,12 +86,12 @@ public class toDoList extends AppCompatActivity {
             }
         });
 
-        Expenses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity();
-            }
-        });
+//        Expenses.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openActivity();
+//            }
+//        });
 
         showingListButtons.setOnClickListener(new View.OnClickListener() {
 //            JSONArray parameter= new JSONArray();

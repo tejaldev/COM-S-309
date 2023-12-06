@@ -34,7 +34,7 @@ public class friends extends AppCompatActivity {
 
     private Button addFriend;
     private static final String TAG = friends.class.getSimpleName();
-    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/{SignUpName}";
+    private static final String URL = "http://coms-309-013.class.las.iastate.edu:8080/friends/add/check/{SignUpName}";
     private static final String URL2 = "http://coms-309-013.class.las.iastate.edu:8080/persons/all";
 
 
@@ -43,7 +43,7 @@ public class friends extends AppCompatActivity {
     private TextView responses;
 
     private Button showFriends;
-
+    private Button myFriends;
 
     private EditText nameEditText;
     private EditText usernameEditText;
@@ -63,7 +63,7 @@ public class friends extends AppCompatActivity {
         friendsContainer = findViewById(R.id.friendsContainer);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.textView);
-
+        myFriends= findViewById(R.id.friendSpecific);
 
 //        nameEditText = findViewById(R.id.nameEditText);
 //        usernameEditText = findViewById(R.id.usernameEditText);
@@ -108,6 +108,13 @@ public class friends extends AppCompatActivity {
 
         });
 
+        myFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity();
+            }
+        });
+
     }
 
 //    private void openShowFriends(){
@@ -116,6 +123,10 @@ public class friends extends AppCompatActivity {
 //
 //    }
 
+    private void openActivity() {
+        Intent intent = new Intent(this, showFriend.class);
+        startActivity(intent);
+    }
     private void getRequest(JSONArray parameter) {
         progressBar.setVisibility(View.VISIBLE);
 

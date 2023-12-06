@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_ratings"
+        android:icon="@drawable/baseline_star_24"
+        android:title="Ratings" />
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="Calendar" />
+    <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/baseline_photo_camera_24"
+        android:title="Camera" />
+
+    <item
+        android:id="@+id/menu_expense"
+        android:icon="@drawable/baseline_attach_money_24"
+        android:title="Expense" />
+
+<!--    <item-->
+<!--        android:id="@+id/menu_images"-->
+<!--        android:icon="@drawable/baseline_photo_album_24"-->
+<!--        android:title="Albums" />-->
+
+    <!--    <item-->
+    <!--        android:id="@+id/menu_discover"-->
+    <!--        android:icon="@drawable/ic_history"-->
+    <!--        android:title="Discover" />-->
+
+
+    <!--    <item-->
+    <!--        android:id="@+id/menu_profile"-->
+    <!--        android:icon="@drawable/ic_friends"-->
+    <!--        android:title="Profile" />-->
+</menu>
