@@ -9,7 +9,6 @@ import androidx.test.filters.LargeTest;
 
 import com.example.globegatherer.Activity2_login_next;
 
-import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -19,6 +18,11 @@ public class Activity2_SignUp_Test {
     @Rule
     public ActivityScenarioRule<Activity2_login_next> activityRule =
             new ActivityScenarioRule<>(Activity2_login_next.class);
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule2 =
+            new ActivityScenarioRule<>(MainActivity.class);
+
 
     @Test
     public void testSignUpButton() throws InterruptedException {
@@ -35,17 +39,23 @@ public class Activity2_SignUp_Test {
                 .perform(ViewActions.typeText("1234567890"), ViewActions.closeSoftKeyboard());
         Espresso.onView(ViewMatchers.withId(R.id.SignUpButton)).perform(ViewActions.click());
 
-        // Assuming your backend responds with a success message
-//        Espresso.onView(ViewMatchers.withId(R.id.Response))
-//                .check(ViewAssertions.matches(ViewMatchers.withText("{\"message\":\"success\"}")));
 
+        // Wait for 5 seconds for the view to appear
         Thread.sleep(5000);
 
-        Espresso.onView(ViewMatchers.withId(R.id.SignUpButton))
+
+        // Assuming your backend opens the main activity after successful sign-up
+        // Verify that the main activity is launched
+        Espresso.onView(ViewMatchers.withId(R.id.loginButton))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        // Add assertions to verify the user's existence in the backend database
-        // You may want to make a request to the backend to check the user's data
-        // and assert that it matches the data you used for registration.
-        // Note: Be careful about asserting against live data to avoid privacy and security issues.
+
+        // Add appropriate synchronization methods instead of Thread.sleep()
+        // For example, you can use Espresso's IdlingResource or waitForIdleSync().
+        // This ensures that the test waits until the UI is idle before proceeding.
+        // IdlingResource idlingResource = /* create IdlingResource */;
+        // Espresso.registerIdlingResources(idlingResource);
+        // Espresso.unregisterIdlingResources(idlingResource);
+
+        // Add assertions to further verify the state of the main activity if needed
     }
 }

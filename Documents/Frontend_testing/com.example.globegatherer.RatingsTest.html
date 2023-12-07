@@ -28,7 +28,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">1</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -40,7 +40,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.101s</div>
+<div class="counter">1.190s</div>
 <p>duration</p>
 </div>
 </td>
@@ -49,8 +49,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">0%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -60,103 +60,28 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
-</li>
-<li>
-<a href="#tab1">Tests</a>
+<a href="#tab0">Tests</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testRatingSubmission"></a>
-<h3 class="failures">testRatingSubmission</h3>
-<span class="code">
-<pre>androidx.test.espresso.PerformException: Error performing 'single click - At Coordinates: 504, 75 and precision: 16, 16' on view 'Animations or transitions are enabled on the target device.
-For more info check: https://developer.android.com/training/testing/espresso/setup#set-up-environment
-
-view.getId() is &lt;2131231193/com.example.globegatherer:id/ratingbar&gt;'.
-at androidx.test.espresso.PerformException$Builder.build(PerformException.java:1)
-at androidx.test.espresso.base.PerformExceptionHandler.handleSafely(PerformExceptionHandler.java:8)
-at androidx.test.espresso.base.PerformExceptionHandler.handleSafely(PerformExceptionHandler.java:9)
-at androidx.test.espresso.base.DefaultFailureHandler$TypedFailureHandler.handle(DefaultFailureHandler.java:4)
-at androidx.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:5)
-at androidx.test.espresso.ViewInteraction.waitForAndHandleInteractionResults(ViewInteraction.java:8)
-at androidx.test.espresso.ViewInteraction.desugaredPerform(ViewInteraction.java:11)
-at androidx.test.espresso.ViewInteraction.perform(ViewInteraction.java:8)
-at com.example.globegatherer.RatingsTest.testRatingSubmission(RatingsTest.java:30)
-... 32 trimmed
-Caused by: androidx.test.espresso.PerformException: Error performing 'Send down motion event' on view 'unknown'.
-at androidx.test.espresso.PerformException$Builder.build(PerformException.java:1)
-at androidx.test.espresso.action.MotionEvents.sendDown(MotionEvents.java:27)
-at androidx.test.espresso.action.Tap.sendSingleTap(Tap.java:4)
-at androidx.test.espresso.action.Tap.-$$Nest$smsendSingleTap(Unknown Source:0)
-at androidx.test.espresso.action.Tap$1.sendTap(Tap.java:3)
-at androidx.test.espresso.action.GeneralClickAction.perform(GeneralClickAction.java:6)
-at androidx.test.espresso.ViewInteraction$SingleExecutionViewAction.perform(ViewInteraction.java:2)
-at androidx.test.espresso.ViewInteraction.doPerform(ViewInteraction.java:25)
-at androidx.test.espresso.ViewInteraction.-$$Nest$mdoPerform(Unknown Source:0)
-at androidx.test.espresso.ViewInteraction$1.call(ViewInteraction.java:7)
-at androidx.test.espresso.ViewInteraction$1.call(ViewInteraction.java:1)
-at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-at android.os.Handler.handleCallback(Handler.java:938)
-at android.os.Handler.dispatchMessage(Handler.java:99)
-at android.os.Looper.loop(Looper.java:246)
-at android.app.ActivityThread.main(ActivityThread.java:8633)
-at java.lang.reflect.Method.invoke(Native Method)
-at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:602)
-at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1130)
-Caused by: androidx.test.espresso.InjectEventSecurityException: Check if Espresso is clicking outside the app (system dialog, navigation bar if edge-to-edge is enabled, etc.).
-at androidx.test.espresso.base.InputManagerEventInjectionStrategy.innerInjectMotionEvent(InputManagerEventInjectionStrategy.java:17)
-at androidx.test.espresso.base.InputManagerEventInjectionStrategy.innerInjectMotionEvent(InputManagerEventInjectionStrategy.java:15)
-at androidx.test.espresso.base.InputManagerEventInjectionStrategy.injectMotionEvent(InputManagerEventInjectionStrategy.java:1)
-at androidx.test.espresso.base.EventInjector.injectMotionEvent(EventInjector.java:1)
-at androidx.test.espresso.base.UiControllerImpl$3.call(UiControllerImpl.java:1)
-at androidx.test.espresso.base.UiControllerImpl$3.call(UiControllerImpl.java:2)
-at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
-at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
-at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
-at java.lang.Thread.run(Thread.java:923)
-Caused by: java.lang.SecurityException: Injecting to another application requires INJECT_EVENTS permission
-at android.os.Parcel.createExceptionOrNull(Parcel.java:2385)
-at android.os.Parcel.createException(Parcel.java:2369)
-at android.os.Parcel.readException(Parcel.java:2352)
-at android.os.Parcel.readException(Parcel.java:2294)
-at android.hardware.input.IInputManager$Stub$Proxy.injectInputEvent(IInputManager.java:1638)
-at android.hardware.input.InputManager.injectInputEvent(InputManager.java:1390)
-at java.lang.reflect.Method.invoke(Native Method)
-at androidx.test.espresso.base.InputManagerEventInjectionStrategy.innerInjectMotionEvent(InputManagerEventInjectionStrategy.java:6)
-... 11 more
-Caused by: android.os.RemoteException: Remote stack trace:
-at com.android.server.input.InputManagerService.injectInputEventInternal(InputManagerService.java:1462)
-at com.android.server.input.InputManagerService.injectInputEvent(InputManagerService.java:1411)
-at android.hardware.input.IInputManager$Stub.onTransact(IInputManager.java:727)
-at android.os.Binder.execTransactInternal(Binder.java:1190)
-at android.os.Binder.execTransact(Binder.java:1159)</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
 <tr>
 <th>Test</th>
-<th>SM-A525F - 11</th>
+<th>Pixel_7_Pro_API_34(AVD) - 14</th>
 </tr>
 </thead>
 <tr>
 <td>testRatingSubmission</td>
-<td class="failures">failed (2.101s)</td>
+<td class="success">passed (1.190s)</td>
 </tr>
 </table>
 </div>
 </div>
 <div id="footer">
 <p>Generated by 
-<a href="http://www.gradle.org">Gradle 8.0</a> at Dec 5, 2023, 9:53:03 PM</p>
+<a href="http://www.gradle.org">Gradle 8.0</a> at Dec 6, 2023, 11:14:41 PM</p>
 </div>
 </div>
 </body>

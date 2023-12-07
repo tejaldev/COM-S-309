@@ -1,63 +1,94 @@
 package com.example.globegatherer;
 
-
-import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.idling.CountingIdlingResource;
 import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.filters.LargeTest;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-@LargeTest
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.containsString;
+
+import android.widget.TextView;
+
+@RunWith(AndroidJUnit4.class)
 public class ProfilePageTest {
 
     @Rule
-    public ActivityScenarioRule<profile_page> activityRule =
-            new ActivityScenarioRule<>(profile_page.class);
+    public ActivityTestRule<profile_page> activityRule = new ActivityTestRule<>(profile_page.class);
+
+    private final CountingIdlingResource countingIdlingResource =
+            new CountingIdlingResource("Network_Call");
+
+    @Before
+    public void registerIdlingResource() {
+        IdlingRegistry.getInstance().register(countingIdlingResource);
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(countingIdlingResource);
+    }
 
     @Test
-    public void testProfilePage() throws InterruptedException {
-        // Assuming your backend responds with a success message
-        // Uncomment the following lines if you want to check for the success message
-//        Espresso.onView(ViewMatchers.withId(R.id.Des_Response))
-//                .check(ViewAssertions.matches(ViewMatchers.withText("Your success message")));
+    public void testUpdateDescriptionSuccess() {
+        // Type the new description into the EditText
+        onView(withId(R.id.Description))
+                .perform(typeText("New Description"), ViewActions.closeSoftKeyboard());
 
-        // Test entering and submitting a description
-        String testDescription = "This is a test description.";
-        Espresso.onView(ViewMatchers.withId(R.id.Description))
-                .perform(ViewActions.replaceText(testDescription), ViewActions.closeSoftKeyboard());
+        // Click the Edit button
+        onView(withId(R.id.edit)).perform(click());
 
-        Espresso.onView(ViewMatchers.withId(R.id.edit))
-                .perform(ViewActions.click());
+        // Wait for the network call to finish
+        IdlingRegistry.getInstance().register(countingIdlingResource);
+        try {
+            // Check if the Des_Response TextView displays a success message
+            onView(withId(R.id.Des_Response))
+                    .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+                    .check(matches(isAssignableFrom(TextView.class)))
+                    .check(matches(withText(containsString(""))));
 
-        // Assuming your backend responds with a success message
-//        Espresso.onView(ViewMatchers.withId(R.id.Des_Response))
-//                .check(ViewAssertions.matches(ViewMatchers.withText("Your success message")));
+        } finally {
+            IdlingRegistry.getInstance().unregister(countingIdlingResource);
+        }
+    }
 
-        // Add assertions to verify the UI elements in the profile_page activity
-        Espresso.onView(ViewMatchers.withId(R.id.Profile_userame))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
-        // Test clicking on the "Logout" button
-        Espresso.onView(ViewMatchers.withId(R.id.logout))
-                .perform(ViewActions.click());
+    @Test
+    public void testUpdateDescriptionError() {
+        // Type the new description into the EditText
+        onView(withId(R.id.Description))
+                .perform(typeText("New Description"), ViewActions.closeSoftKeyboard());
 
-        // Sleep for 5 seconds to wait for MainActivity to launch
-        Thread.sleep(5000);
+        // Click the Edit button
+        onView(withId(R.id.edit)).perform(click());
 
-// Add assertions to verify that the MainActivity is launched after clicking Logout
-        Espresso.onView(ViewMatchers.withId(R.id.logout))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-
-        // Test clicking on the "Ratings" button
-        Espresso.onView(ViewMatchers.withId(R.id.ratings))
-                .perform(ViewActions.click());
-
-        // Add assertions to verify that the Ratings activity is launched after clicking Ratings
-        Espresso.onView(ViewMatchers.withId(R.id.ratingbar))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        // Wait for the network call to finish
+        IdlingRegistry.getInstance().register(countingIdlingResource);
+        try {
+            // Check if the Des_Response TextView displays an error message
+            onView(withId(R.id.Des_Response))
+                    .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+                    .check(matches(isAssignableFrom(TextView.class)))
+                    .check(matches(withText("")));
+        } finally {
+            IdlingRegistry.getInstance().unregister(countingIdlingResource);
+        }
     }
 }

@@ -40,7 +40,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">5.893s</div>
+<div class="counter">5.951s</div>
 <p>duration</p>
 </div>
 </td>
@@ -69,42 +69,43 @@
 <div id="tab0" class="tab">
 <h2>Failed tests</h2>
 <div class="test">
-<a name="testBanUser"></a>
-<h3 class="failures">testBanUser</h3>
+<a name="testGetUsers"></a>
+<h3 class="failures">testGetUsers</h3>
 <span class="code">
-<pre>androidx.test.espresso.base.AssertionErrorHandler$AssertionFailedWithCauseError: 'an instance of android.widget.TextView and view.getText() with or without transformation to match: is &quot;User with ID testUsername deleted successfully.&quot;' doesn't match the selected view.
-Expected: an instance of android.widget.TextView and view.getText() with or without transformation to match: is &quot;User with ID testUsername deleted successfully.&quot;
-Got: view.getText() was &quot;&quot; transformed text was &quot;&quot;
-View Details: MaterialTextView{id=2131231345, res-name=user_ban, visibility=GONE, width=1002, height=54, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, layout-params=android.widget.LinearLayout$LayoutParams@YYYYYY, tag=null, root-is-layout-requested=false, has-input-connection=false, x=13.0, y=627.0, text=, input-type=0, ime-target=false, has-links=false}
+<pre>androidx.test.espresso.base.AssertionErrorHandler$AssertionFailedWithCauseError: 'view has effective visibility &lt;VISIBLE&gt;' doesn't match the selected view.
+Expected: view has effective visibility &lt;VISIBLE&gt;
+Got: view.getVisibility() was &lt;GONE&gt;
+View Details: ProgressBar{id=2131231188, res-name=progressBar, visibility=GONE, width=168, height=168, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, layout-params=android.widget.LinearLayout$LayoutParams@YYYYYY, tag=null, root-is-layout-requested=false, has-input-connection=false, x=601.0, y=622.0}
 
 at dalvik.system.VMStack.getThreadStackTrace(Native Method)
-at java.lang.Thread.getStackTrace(Thread.java:1736)
+at java.lang.Thread.getStackTrace(Thread.java:1841)
 at androidx.test.espresso.base.AssertionErrorHandler.handleSafely(AssertionErrorHandler.java:3)
 at androidx.test.espresso.base.AssertionErrorHandler.handleSafely(AssertionErrorHandler.java:1)
 at androidx.test.espresso.base.DefaultFailureHandler$TypedFailureHandler.handle(DefaultFailureHandler.java:4)
 at androidx.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:5)
 at androidx.test.espresso.ViewInteraction.waitForAndHandleInteractionResults(ViewInteraction.java:5)
 at androidx.test.espresso.ViewInteraction.check(ViewInteraction.java:12)
-at com.example.globegatherer.BanUserActivityTest.testBanUser(BanUserActivityTest.java:42)
+at com.example.globegatherer.BanUserActivityTest.testGetUsers(BanUserActivityTest.java:55)
 ... 33 trimmed
-Caused by: junit.framework.AssertionFailedError: 'an instance of android.widget.TextView and view.getText() with or without transformation to match: is &quot;User with ID testUsername deleted successfully.&quot;' doesn't match the selected view.
-Expected: an instance of android.widget.TextView and view.getText() with or without transformation to match: is &quot;User with ID testUsername deleted successfully.&quot;
-Got: view.getText() was &quot;&quot; transformed text was &quot;&quot;
-View Details: MaterialTextView{id=2131231345, res-name=user_ban, visibility=GONE, width=1002, height=54, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, layout-params=android.widget.LinearLayout$LayoutParams@YYYYYY, tag=null, root-is-layout-requested=false, has-input-connection=false, x=13.0, y=627.0, text=, input-type=0, ime-target=false, has-links=false}
+Caused by: junit.framework.AssertionFailedError: 'view has effective visibility &lt;VISIBLE&gt;' doesn't match the selected view.
+Expected: view has effective visibility &lt;VISIBLE&gt;
+Got: view.getVisibility() was &lt;GONE&gt;
+View Details: ProgressBar{id=2131231188, res-name=progressBar, visibility=GONE, width=168, height=168, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, layout-params=android.widget.LinearLayout$LayoutParams@YYYYYY, tag=null, root-is-layout-requested=false, has-input-connection=false, x=601.0, y=622.0}
 
 at androidx.test.espresso.matcher.ViewMatchers.assertThat(ViewMatchers.java:16)
 at androidx.test.espresso.assertion.ViewAssertions$MatchesViewAssertion.check(ViewAssertions.java:7)
 at androidx.test.espresso.ViewInteraction$SingleExecutionViewAssertion.check(ViewInteraction.java:2)
 at androidx.test.espresso.ViewInteraction$2.call(ViewInteraction.java:14)
 at androidx.test.espresso.ViewInteraction$2.call(ViewInteraction.java:1)
-at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-at android.os.Handler.handleCallback(Handler.java:938)
+at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at android.os.Handler.handleCallback(Handler.java:958)
 at android.os.Handler.dispatchMessage(Handler.java:99)
-at android.os.Looper.loop(Looper.java:246)
-at android.app.ActivityThread.main(ActivityThread.java:8633)
+at android.os.Looper.loopOnce(Looper.java:205)
+at android.os.Looper.loop(Looper.java:294)
+at android.app.ActivityThread.main(ActivityThread.java:8177)
 at java.lang.reflect.Method.invoke(Native Method)
-at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:602)
-at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1130)</pre>
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)</pre>
 </span>
 </div>
 </div>
@@ -114,23 +115,23 @@ at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1130)</pre>
 <thead>
 <tr>
 <th>Test</th>
-<th>SM-A525F - 11</th>
+<th>Pixel_7_Pro_API_34(AVD) - 14</th>
 </tr>
 </thead>
 <tr>
 <td>testBanUser</td>
-<td class="failures">failed (2.901s)</td>
+<td class="success">passed (2.368s)</td>
 </tr>
 <tr>
-<td>testExitButton</td>
-<td class="success">passed (2.992s)</td>
+<td>testGetUsers</td>
+<td class="failures">failed (3.583s)</td>
 </tr>
 </table>
 </div>
 </div>
 <div id="footer">
 <p>Generated by 
-<a href="http://www.gradle.org">Gradle 8.0</a> at Dec 5, 2023, 9:53:03 PM</p>
+<a href="http://www.gradle.org">Gradle 8.0</a> at Dec 6, 2023, 11:14:41 PM</p>
 </div>
 </div>
 </body>
